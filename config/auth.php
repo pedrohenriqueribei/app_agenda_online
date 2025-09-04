@@ -36,9 +36,9 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        'profissional' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'profissionais',
         ],
     ],
 
@@ -60,9 +60,9 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'profissionais' => [
             'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\User::class),
+            'model' => env('AUTH_MODEL', App\Models\Profissional::class),
         ],
 
         // 'users' => [
