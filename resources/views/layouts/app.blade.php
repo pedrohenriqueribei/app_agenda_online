@@ -19,8 +19,10 @@
     <body class="font-sans antialiased">
          @include('partials.navbar')
 
-        <div class="container mt-4">
-            @yield('content')
+        <div class="bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+                @yield('content')
+            </div>
         </div>
 
         @include('partials.footer')

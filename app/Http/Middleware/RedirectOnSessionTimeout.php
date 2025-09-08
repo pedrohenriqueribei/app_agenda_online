@@ -24,7 +24,7 @@ class RedirectOnSessionTimeout
             }
 
             // Redireciona para login
-            return redirect()->route('login')
+            return redirect()->route('conta.profissional.login')
                 ->with('error', 'Sua sessão expirou. Faça login novamente.');
         }
         

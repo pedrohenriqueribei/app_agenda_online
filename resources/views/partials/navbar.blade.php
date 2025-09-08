@@ -4,7 +4,7 @@
             
             <!-- Logo -->
             <div class="flex items-center space-x-2">
-                <a href="/" class="flex items-center space-x-2">
+                <a href="/home" class="flex items-center space-x-2">
                     <!-- Logo responsiva -->
                     <img src="{{ asset('storage/logo.png') }}" 
                          alt="Logo" 
@@ -19,7 +19,7 @@
 
             <!-- Links -->
             <div class="hidden md:flex space-x-4">
-                <a href="/" class="text-blue-700 hover:text-blue-900 font-medium">Início</a>
+                <a href="/home" class="text-blue-700 hover:text-blue-900 font-medium">Início</a>
                 <a href="/sobre" class="text-blue-700 hover:text-blue-900 font-medium">Sobre</a>
                 <a href="/contato" class="text-blue-700 hover:text-blue-900 font-medium">Contato</a>
             </div>

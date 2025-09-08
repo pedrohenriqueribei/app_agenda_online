@@ -20,7 +20,7 @@ class Profissional extends Authenticatable
         'cpf',
         'telefone',
         'email',
-        'data_nasc',
+        'data_nascimento',
         'foto',
         'password'
     ];

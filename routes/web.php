@@ -35,7 +35,7 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 
-Route::prefix('conta/profissional')->name('conta.profissional')->group(function() {
+Route::prefix('conta/profissional')->name('conta.profissional.')->group(function() {
     Route::get('login', [ProfissionalLoginController::class, 'form'])->name('login');
     Route::post('login', [ProfissionalLoginController::class, 'login'])->name('login.submit');
     Route::get('logout', [ProfissionalLoginController::class, 'logout'])->name('logout');
