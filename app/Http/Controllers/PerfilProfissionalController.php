@@ -4,9 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Models\Profissional;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Routing\Controller;
 
 class PerfilProfissionalController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            $profissional = $request->route('profissional');
+
+            if ($profissional && Auth::guard('profissional')->id() !== $profissional->id) {
+                abort(403, 'Acesso não autorizado.');
+            }
+
+            return $next($request);
+        })->only(['show', 'edit', 'update', 'destroy', ]); 
+    }
     /**
      * Display a listing of the resource.
      */
