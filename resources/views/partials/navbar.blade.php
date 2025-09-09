@@ -24,12 +24,30 @@
                 <a href="/contato" class="text-blue-700 hover:text-blue-900 font-medium">Contato</a>
             </div>
 
+            @guest
             <!-- Botão de login -->
             <div class="hidden md:flex">
                 <a href="/login" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">
                     Entrar
                 </a>
             </div>
+            @endguest
+
+            @auth('profissional')
+            <div class="hidden md:flex">
+                @if(auth()->guard('profissional')->user()->foto)
+                    <a href="{{ route('perfil.profissional.show',['profissional' => auth()->guard('profissional')->user()->id ]) }}">
+                        <div class="w-10 h-10 overflow-hidden rounded-md shadow-sm transition-transform duration-300 ease-in-out hover:scale-105 hover:brightness-110">
+                            <img src="{{ asset('storage/' . auth()->guard('profissional')->user()->foto) }}" alt="Foto da Mãe" class="w-full h-full object-cover">
+                        </div>
+                    </a>
+                @endif
+                <strong>{{ auth()->guard('profissional')->user()->nome }}</strong>
+                <button class="bg-cyan-400 text-white font-[Poppins] duration-500 px-6 py-2 mx-4 hover:bg-cyan-500 rounded">
+                    <a href="{{ route('perfil.profissional.logout') }}">Logout</a>
+                </button> 
+            </div>
+            @endauth
         </div>
     </div>
 </nav>

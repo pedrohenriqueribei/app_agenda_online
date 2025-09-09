@@ -21,21 +21,7 @@ Route::prefix('admin')->group(function () {
     Route::view('/users', 'admin.users')->name('admin.users');
 });
 
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-require __DIR__.'/auth.php';
-
-
-Route::prefix('conta/profissional')->name('conta.profissional.')->group(function() {
+Route::prefix('conta/profissional')->name('perfil.profissional.')->group(function() {
     Route::get('login', [ProfissionalLoginController::class, 'form'])->name('login');
     Route::post('login', [ProfissionalLoginController::class, 'login'])->name('login.submit');
     Route::get('logout', [ProfissionalLoginController::class, 'logout'])->name('logout');
@@ -44,6 +30,9 @@ Route::prefix('conta/profissional')->name('conta.profissional.')->group(function
 
     //area autenticada
     Route::middleware(['auth', 'session.timeout'])->group(function () {
-        Route::get('/', [PerfilProfissionalController::class, 'show'])->name('show');
+        Route::get('/{profissional}', [PerfilProfissionalController::class, 'show'])->name('show');
+        Route::get('edit/{profissional}', [PerfilProfissionalController::class, 'edit'])->name('edit');
+        Route::put('update/{profissional}', [PerfilProfissionalController::class, 'update'])->name('update');
+        Route::delete('destroy/{profissional}', [PerfilProfissionalController::class, 'destroy'])->name('destroy');
     });
 });

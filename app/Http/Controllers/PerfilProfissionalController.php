@@ -26,7 +26,7 @@ class PerfilProfissionalController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store (Request $request)
     {
         //
     }
@@ -34,15 +34,16 @@ class PerfilProfissionalController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Profissional $profissional)
+    public function show (Profissional $profissional)
     {
         //
+        return view ('perfil.profissional.show', ['profissional' => $profissional]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Profissional $profissional)
+    public function edit (Profissional $profissional)
     {
         //
     }

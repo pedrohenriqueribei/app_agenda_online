@@ -9,4 +9,6 @@
         <x-card title="Agendamentos" value="45" icon="📅" />
         <x-card title="Notificações" value="8" icon="🔔" />
     </div>
+
+    
 @endsection
