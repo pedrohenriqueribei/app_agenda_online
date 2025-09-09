@@ -74,6 +74,6 @@ class ProfissionalLoginController extends Controller
         //salva
         $profissional->save();
 
-        return redirect()->route('conta.profissional.login');
+        return redirect()->route('perfil.profissional.login');
     }
 }

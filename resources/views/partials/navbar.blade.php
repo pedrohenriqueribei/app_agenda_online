@@ -27,7 +27,7 @@
             @guest
             <!-- Botão de login -->
             <div class="hidden md:flex">
-                <a href="/login" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">
+                <a href="{{ route('perfil.profissional.login') }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">
                     Entrar
                 </a>
             </div>
