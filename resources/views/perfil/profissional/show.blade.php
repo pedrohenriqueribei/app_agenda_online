@@ -30,16 +30,22 @@
                 <strong>Especialidade:</strong> {{ $profissional->especialidade ?? 'Não informado' }}
             </div>
 
-            <div class="d-flex gap-2">
-                <a href="{{ route('perfil.profissional.edit', $profissional->id) }}" class="btn btn-warning mb-4">
+            <div class="flex flex-wrap gap-2">
+                <a href="{{ route('perfil.profissional.edit', $profissional->id) }}" class="btn btn-warning bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded">
                     Editar
-                </a><br>
+                </a>
+
                 <form action="{{ route('perfil.profissional.destroy', $profissional->id) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir?')">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Excluir</button>
+                    <button type="submit" class="btn btn-danger bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">
+                        Excluir
+                    </button>
                 </form>
-               
+
+                <a href="{{ route('perfil.profissional.agendamento.semanal', ['profissional' => $profissional]) }}" class="btn btn-primary bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
+                    Agendamento Semanal
+                </a>
             </div>
         </div>
     </div>

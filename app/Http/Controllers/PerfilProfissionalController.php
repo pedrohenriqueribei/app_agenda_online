@@ -6,6 +6,7 @@ use App\Models\Profissional;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Routing\Controller;
+use Illuminate\View\View;
 
 class PerfilProfissionalController extends Controller
 {
@@ -20,7 +21,7 @@ class PerfilProfissionalController extends Controller
             }
 
             return $next($request);
-        })->only(['show', 'edit', 'update', 'destroy', ]); 
+        })->only(['show', 'edit', 'update', 'destroy', 'agendamentoSemanal',]); 
     }
     /**
      * Display a listing of the resource.
@@ -49,7 +50,7 @@ class PerfilProfissionalController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show (Profissional $profissional)
+    public function show (Profissional $profissional) : View
     {
         //
         return view ('perfil.profissional.show', ['profissional' => $profissional]);
@@ -77,5 +78,11 @@ class PerfilProfissionalController extends Controller
     public function destroy(Profissional $profissional)
     {
         //
+    }
+
+    //agendamento semanal
+    public function agendamentoSemanal(Profissional $profissional) : View
+    {
+        return view('perfil.profissional.agendamento_semanal', ['profissional' => $profissional]);
     }
 }

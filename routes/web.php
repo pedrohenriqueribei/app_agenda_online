@@ -34,5 +34,7 @@ Route::prefix('conta/profissional')->name('perfil.profissional.')->group(functio
         Route::get('edit/{profissional}', [PerfilProfissionalController::class, 'edit'])->name('edit');
         Route::put('update/{profissional}', [PerfilProfissionalController::class, 'update'])->name('update');
         Route::delete('destroy/{profissional}', [PerfilProfissionalController::class, 'destroy'])->name('destroy');
+
+        Route::get('/{profissional}/agendamento_semanal', [PerfilProfissionalController::class, 'agendamentoSemanal'])->name('agendamento.semanal');
     });
 });
