@@ -55,6 +55,13 @@
                     class="mt-1 block w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500">
             </div>
 
+            <!-- Especialidade -->
+            <div>
+                <label for="especialidade" class="block text-sm font-medium text-gray-700">Especialidade</label>
+                <input type="text" name="especialidade" id="especialidade" value="{{ old('especialidade') }}"
+                    class="mt-1 block w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500">
+            </div>
+
             <!-- Foto -->
             <div>
                 <label for="foto" class="block text-sm font-medium text-gray-700">Foto</label>
@@ -67,18 +74,21 @@
             </div>
 
             <!-- Senha -->
-            <div>
-                <label for="password" class="block text-sm font-medium text-gray-700">Senha</label>
-                <input type="password" name="password" id="password" required
-                    class="mt-1 block w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500">
-            </div>
+            
+                <legend class="text-lg font-semibold mb-2">Definir senha</legend>
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700">Senha</label>
+                    <input type="password" name="password" id="password" required
+                        class="mt-1 block w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                </div>
 
-            <!-- Confirmação de Senha -->
-            <div>
-                <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Confirmar Senha</label>
-                <input type="password" name="password_confirmation" id="password_confirmation" required
-                    class="mt-1 block w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500">
-            </div>
+                <!-- Confirmação de Senha -->
+                <div>
+                    <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Confirmar Senha</label>
+                    <input type="password" name="password_confirmation" id="password_confirmation" required
+                        class="mt-1 block w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                </div>
+            
         </div>
 
         <!-- Botão -->

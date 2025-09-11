@@ -22,7 +22,8 @@ class Profissional extends Authenticatable
         'email',
         'data_nascimento',
         'foto',
-        'password'
+        'password',
+        'especialidade'
     ];
 
     protected $hidden = [

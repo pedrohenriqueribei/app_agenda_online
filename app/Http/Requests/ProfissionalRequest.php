@@ -30,7 +30,7 @@ class ProfissionalRequest extends FormRequest
             'data_nasc'   => 'nullable|date|before:today',
             'foto'        => 'nullable|image|max:2048', // até 2MB
             'password'    => 'required|string|min:8|confirmed',
-
+            'especialidade'=> 'required|string|max:255',
         ];
     }
 
