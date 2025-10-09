@@ -36,9 +36,17 @@ return [
     */
 
     'guards' => [
+        'administrador' => [
+            'driver' => 'session',
+            'provider' => 'administradores',
+        ],
         'profissional' => [
             'driver' => 'session',
             'provider' => 'profissionais',
+        ],
+        'gerente' => [
+            'driver' => 'session',
+            'provider' => 'gerentes',
         ],
     ],
 

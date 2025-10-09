@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\EstadoCivil;
+use App\Enums\Sexo;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -38,6 +39,12 @@ class Administrador extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected $casts = [
+        'sexo' => Sexo::class,
+        'estado_civil' => EstadoCivil::class
+    ];
+
+
     //idade
     public function getIdadeAttribute()
     {
@@ -47,6 +54,11 @@ class Administrador extends Authenticatable
     //enum estado civil
     public function getEstadoCivilEnumAttribute() {
         return EstadoCivil::from($this->attributes['estado_civil'])->label();
+    }
+
+    //enum sexo
+    public function getSexoEnumAttribute() {
+        return Sexo::from($this->attributes['sexo'])->label();
     }
 
     //criptografar a senha

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('foto')->nullable(); // caminho da imagem
             $table->string('especialidade')->nullable();
             $table->string('estado_civil')->nullable();
-            $table->enum('sexo', ['M', 'F'])->nullable();
+            $table->enum('sexo', ['M', 'F', 'O', 'N'])->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->string('password');

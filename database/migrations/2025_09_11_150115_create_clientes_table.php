@@ -20,7 +20,7 @@ return new class extends Migration
             $table->date('data_nascimento')->nullable();
             $table->string('estado_civil')->nullable();
             $table->string('foto')->nullable();
-            $table->enum('sexo', ['M', 'F'])->nullable();
+            $table->enum('sexo', ['M', 'F', 'O', 'N'])->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

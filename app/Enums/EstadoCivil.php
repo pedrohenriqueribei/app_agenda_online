@@ -10,6 +10,8 @@ enum EstadoCivil : string
     case DIVORCIADO = 'divorciado';
     case VIUVO = 'viuvo';
     case UNIAO_ESTAVEL = 'uniao_estavel';
+    case Outro = 'Outro';
+
 
     public function label(): string {
         return match($this) {
@@ -18,6 +20,8 @@ enum EstadoCivil : string
             self::DIVORCIADO => 'Divorciado(a)',
             self::VIUVO => 'Viúvo(a)',
             self::UNIAO_ESTAVEL => 'União Estável',
+            self::Outro => 'Outro',
+
         };
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdministradorController;
 use App\Http\Controllers\PerfilProfissionalController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfissionalLoginController;
@@ -16,10 +17,13 @@ Route::get('principal', function() {
 
 Route::view('/home', 'pages.home')->name('home');
 
-Route::prefix('admin')->group(function () {
-    Route::get('/create', );
-    Route::view('/dashboard', 'admin.dashboard')->name('admin.dashboard');
-    Route::view('/users', 'admin.users')->name('admin.users');
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/create', [AdministradorController::class, 'create'])->name('create');
+    Route::post('/store', [AdministradorController::class, 'store'])->name('store');
+    Route::get('/login', [AdministradorController::class, 'login'])->name('login');
+    Route::post('/autenticar', [AdministradorController::class, 'autenticar'])->name('login.submit');
+    Route::view('/dashboard', 'admin.dashboard')->name('dashboard');
+    Route::view('/users', 'admin.users')->name('users');
 });
 
 Route::prefix('conta/profissional')->name('perfil.profissional.')->group(function() {
