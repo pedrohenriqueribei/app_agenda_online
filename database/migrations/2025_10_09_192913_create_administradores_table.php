@@ -11,20 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('profissionais', function (Blueprint $table) {
+        Schema::create('administradores', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
-            $table->string('cpf', 20)->unique();
+            $table->string('cpf', 14)->nullable();
             $table->string('email')->unique();
+            $table->string('telefone',15)->nullable();
             $table->date('data_nascimento')->nullable();
-            $table->string('telefone')->nullable();
-            $table->string('foto')->nullable(); // caminho da imagem
-            $table->string('especialidade')->nullable();
             $table->string('estado_civil')->nullable();
+            $table->string('foto')->nullable();
             $table->enum('sexo', ['M', 'F'])->nullable();
+            $table->string('cargo')->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->rememberToken();
             $table->string('password');
+            $table->rememberToken();
             $table->softDeletes(); // para SoftDeletes
             $table->timestamps();
         });
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('profissionais');
+        Schema::dropIfExists('administradores');
     }
 };
