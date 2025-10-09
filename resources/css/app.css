@@ -10,6 +10,10 @@
     @apply bg-blue-500 text-white hover:bg-blue-600;
 }
 
+.btn-success {
+    @apply bg-green-500 text-white hover:bg-green-600;
+}
+
 .btn-secondary {
     @apply bg-gray-200 text-gray-800 hover:bg-gray-300;
 }
@@ -18,8 +22,16 @@
     @apply bg-yellow-200 text-yellow-800 hover:bg-yellow-300;
 }
 
+.btn-orange {
+    @apply bg-orange-400 text-white hover:bg-orange-500;
+}
+
 .btn-danger {
     @apply bg-red-500 text-white hover:bg-red-600;
+}
+
+.btn-dark {
+    @apply bg-gray-800 text-gray-200 hover:bg-gray-600;
 }
 
 .titulo_1 {

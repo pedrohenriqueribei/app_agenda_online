@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notifiable;
 
 class Profissional extends Authenticatable
 {
-    ///guardar registro
+    //guardar registro
     use SoftDeletes;
     //serve para login/senha/reset de senha
     use Notifiable;

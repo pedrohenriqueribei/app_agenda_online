@@ -17,6 +17,7 @@ Route::get('principal', function() {
 Route::view('/home', 'pages.home')->name('home');
 
 Route::prefix('admin')->group(function () {
+    Route::get('/create', );
     Route::view('/dashboard', 'admin.dashboard')->name('admin.dashboard');
     Route::view('/users', 'admin.users')->name('admin.users');
 });
