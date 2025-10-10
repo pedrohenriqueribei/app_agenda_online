@@ -68,9 +68,20 @@ return [
     */
 
     'providers' => [
+        'administradores' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Administrador::class,
+        ],
+
         'profissionais' => [
             'driver' => 'eloquent',
             'model' => App\Models\Profissional::class,
+        ],
+
+
+        'gerentes' => [
+            'driver' => 'eloquent',
+            'model' => ,
         ],
 
         // 'users' => [

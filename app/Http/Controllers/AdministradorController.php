@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AdministradorRequest;
 use App\Models\Administrador;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdministradorController extends Controller
 {
@@ -53,6 +54,14 @@ class AdministradorController extends Controller
     //autenticar no sistema
     public function autenticar(){
 
+    }
+
+    //logout
+    public function logout(Request $request){
+        Auth::guard('administrador')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('home');
     }
 
     /**

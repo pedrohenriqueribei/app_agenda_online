@@ -22,6 +22,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('/store', [AdministradorController::class, 'store'])->name('store');
     Route::get('/login', [AdministradorController::class, 'login'])->name('login');
     Route::post('/autenticar', [AdministradorController::class, 'autenticar'])->name('login.submit');
+    Route::get('/logout', [AdministradorController::class, 'logout'])->name('logout');
     Route::view('/dashboard', 'admin.dashboard')->name('dashboard');
     Route::view('/users', 'admin.users')->name('users');
 });
