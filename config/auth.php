@@ -81,13 +81,9 @@ return [
 
         'gerentes' => [
             'driver' => 'eloquent',
-            'model' => ,
+            'model' => App\Models\Gerente::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
     ],
 
     /*
