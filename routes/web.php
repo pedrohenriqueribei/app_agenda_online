@@ -23,8 +23,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/login', [AdministradorController::class, 'login'])->name('login');
     Route::post('/autenticar', [AdministradorController::class, 'autenticar'])->name('login.submit');
     Route::get('/logout', [AdministradorController::class, 'logout'])->name('logout');
-    Route::view('/dashboard', 'admin.dashboard')->name('dashboard');
-    Route::view('/users', 'admin.users')->name('users');
+    
+    //área autenticada
+    Route::middleware('auth:administrador')->group(function (){
+        Route::get('show/{administrador}', [AdministradorController::class, 'show'])->name('show');
+        Route::get('/dashboard', [AdministradorController::class, 'dashboard'])->name('dashboard');
+    });
 });
 
 Route::prefix('conta/profissional')->name('perfil.profissional.')->group(function() {

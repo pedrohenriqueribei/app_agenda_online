@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AdministradorRequest;
+use App\Http\Requests\LoginRequest;
 use App\Models\Administrador;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -52,7 +53,27 @@ class AdministradorController extends Controller
     }
 
     //autenticar no sistema
-    public function autenticar(){
+    public function autenticar(LoginRequest $request){
+
+        $credenciais = $request->only('email', 'password');
+
+        if(Auth::guard('administrador')->attempt($credenciais)) {
+            $request->session()->regenerate();
+            $administrador = Auth::guard('administrador')->user();
+
+            return redirect()->intended(route('admin.show', ['administrador' => $administrador]))->with('success', 'Usuário logado com sucesso!!!');
+        }
+
+        return back()->withErrors([
+            'email' => 'Email ou senha inválidos'
+        ])->withInput();
+
+    }
+
+    //dashboard
+    public function dashboard(){
+        $administrador = Auth::guard('administrador')->user();
+        return view('admin.dashboard', compact('administrador'));
 
     }
 
@@ -69,7 +90,8 @@ class AdministradorController extends Controller
      */
     public function show(Administrador $administrador)
     {
-        //
+        //view
+        return view('admin.show', ['administrador' => $administrador]);
     }
 
     /**
