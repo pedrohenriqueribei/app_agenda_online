@@ -36,6 +36,11 @@ class Gerente extends Model
         'password', 'remember_token',
     ];
 
+    protected $casts = [
+        'sexo' => Sexo::class,
+        'estado_civil' => EstadoCivil::class
+    ];
+
     //idade
     public function getIdadeAttribute()
     {

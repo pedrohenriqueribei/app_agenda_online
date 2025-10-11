@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\EstadoCivil;
+use App\Enums\Sexo;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -36,6 +37,11 @@ class Cliente extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected $casts = [
+        'sexo' => Sexo::class,
+        'estado_civil' => EstadoCivil::class
+    ];
+
     /**
      * Define o relacionamento de um para um com o Endereco.
      */
@@ -53,6 +59,11 @@ class Cliente extends Authenticatable
     //enum estado civil
     public function getEstadoCivilEnumAttribute() {
         return EstadoCivil::from($this->attributes['estado_civil'])->label();
+    }
+
+    //enum
+    public function getSexoEnumAttribute() {
+        return Sexo::from($this->attributes['sexo'])->label();
     }
 
     //criptografar a senha
