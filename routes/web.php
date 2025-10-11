@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdministradorController;
+use App\Http\Controllers\ClinicaController;
 use App\Http\Controllers\PerfilProfissionalController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfissionalLoginController;
@@ -28,6 +29,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware('auth:administrador')->group(function (){
         Route::get('show/{administrador}', [AdministradorController::class, 'show'])->name('show');
         Route::get('/dashboard', [AdministradorController::class, 'dashboard'])->name('dashboard');
+
+        //clinicas
+        Route::prefix('/clinica')->name('clinica.')->group(function () {
+            Route::get('/', [ClinicaController::class, 'index'])->name('index');
+            
+        });
     });
 });
 
