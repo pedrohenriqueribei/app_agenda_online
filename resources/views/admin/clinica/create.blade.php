@@ -47,6 +47,13 @@
         </div>
 
         <div>
+            <label for="cep" class="block text-sm font-medium text-gray-700">CEP</label>
+            <input type="text" name="cep" id="cep" value="{{ old('cep') }}"
+                   class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+            <span class="text-red-600 text-1xl">{{ $errors->has('cep') ? $errors->first('cep') : '' }}</span>
+        </div>
+
+        <div>
             <label for="endereco" class="block text-sm font-medium text-gray-700">Endereço</label>
             <input type="text" name="endereco" id="endereco" value="{{ old('endereco') }}"
                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
@@ -77,13 +84,6 @@
         </div>
 
         <div>
-            <label for="cep" class="block text-sm font-medium text-gray-700">CEP</label>
-            <input type="text" name="cep" id="cep" value="{{ old('cep') }}"
-                   class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-            <span class="text-red-600 text-1xl">{{ $errors->has('cep') ? $errors->first('cep') : '' }}</span>
-        </div>
-
-        <div>
             <label for="logo" class="block text-sm font-medium text-gray-700">Logo da Clínica</label>
             <input type="file" name="logo" id="logo"
                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
@@ -100,3 +100,26 @@
 </div>
 @endsection
                
+@push('scripts')
+<script>
+document.getElementById('cep').addEventListener('blur', function () {
+    const cep = this.value.replace(/\D/g, '');
+
+    if (cep.length === 8) {
+        fetch(`https://viacep.com.br/ws/${cep}/json/`)
+            .then(response => response.json())
+            .then(data => {
+                if (!data.erro) {
+                    document.getElementById('endereco').value = data.logradouro || '';
+                    document.getElementById('bairro').value = data.bairro || '';
+                    document.getElementById('cidade').value = data.localidade || '';
+                    document.getElementById('estado').value = data.uf || '';
+                } else {
+                    alert('CEP não encontrado.');
+                }
+            })
+            .catch(() => alert('Erro ao buscar o CEP.'));
+    }
+});
+</script>
+@endpush
