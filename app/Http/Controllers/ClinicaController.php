@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ClinicaRequest;
 use App\Models\Clinica;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,9 @@ class ClinicaController extends Controller
      */
     public function index()
     {
-        //
+        //buscar todas as clinicas
+        $clinicas = Clinica::all();
+        return view('admin.clinica.index', ['clinicas' => $clinicas]);
     }
 
     /**
@@ -21,14 +24,24 @@ class ClinicaController extends Controller
     public function create()
     {
         //
+        return view('admin.clinica.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ClinicaRequest $request)
     {
-        //
+        //pega os dados
+        $data = $request->validated();
+
+        if ($request->hasFile('logo')) {
+            $data['logo'] = $request->file('logo')->store('clinicas/logo', 'public');
+        }
+
+        $clinica = Clinica::create($data);
+
+        return redirect()->route('admin.clinica.index')->with('success', 'Clínica cadastrada com sucesso!!');
     }
 
     /**
@@ -37,6 +50,7 @@ class ClinicaController extends Controller
     public function show(Clinica $clinica)
     {
         //
+        return view('admin.clinica.show', ['clinica' => $clinica]);
     }
 
     /**
@@ -45,14 +59,24 @@ class ClinicaController extends Controller
     public function edit(Clinica $clinica)
     {
         //
+        return view('admin.clinica.edit', ['clinica' => $clinica]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Clinica $clinica)
+    public function update(ClinicaRequest $request, Clinica $clinica)
     {
         //
+        $data = $request->validated();
+
+        if ($request->hasFile('logo')) {
+            $data['logo'] = $request->file('logo')->store('clinicas/logo', 'public');
+        }
+
+        $clinica->update($data);
+
+        return redirect()->route('admin.clinica.index')->with('success', 'Clínica atualizada com sucesso!!');
     }
 
     /**
@@ -61,5 +85,8 @@ class ClinicaController extends Controller
     public function destroy(Clinica $clinica)
     {
         //
+        $clinica->delete();
+
+        return redirect()->route('admin.clinica.index')->with('success', 'Clínica excluída com sucesso!!');
     }
 }

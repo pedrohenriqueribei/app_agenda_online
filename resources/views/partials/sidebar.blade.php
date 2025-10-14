@@ -4,7 +4,7 @@
         @auth('administrador')
         <a href="{{ route('admin.dashboard') }}" class="block px-6 py-2 rounded hover:bg-blue-100">📊 Dashboard</a>
         <a href="" class="block px-6 py-2 rounded hover:bg-blue-100">👥 Usuários</a>
-        <a href="{{ route('admin.clinica.index') }}" class="block px-6 py-2 rounded hover:bg-blue-100"> Clínicas</a>
+        <a href="{{ route('admin.clinica.index') }}" class="block px-6 py-2 rounded hover:bg-blue-100">🏥 Clínicas</a>
         <a href="{{ route('admin.show', ['administrador' => $administrador]) }}" class="flex items-center px-6 py-2 space-x-3 rounded hover:bg-blue-100">
             @if ($administrador->foto)
                 <img src="{{ asset('storage/' . $administrador->foto) }}" alt="Foto de {{ $administrador->primeiro_nome }}"

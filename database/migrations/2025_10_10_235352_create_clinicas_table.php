@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('bairro')->nullable();
             $table->string('cidade')->nullable();
             $table->string('estado', 2)->nullable(); // Ex: SP, RJ
-            $table->string('cep', 9)->nullable();
+            $table->string('cep', 10)->nullable();
             $table->string('responsavel')->nullable();
             $table->string('logo')->nullable(); // caminho da imagem
             $table->softDeletes(); // permite exclusão lógica

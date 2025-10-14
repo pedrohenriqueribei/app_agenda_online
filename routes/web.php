@@ -33,7 +33,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
         //clinicas
         Route::prefix('/clinica')->name('clinica.')->group(function () {
             Route::get('/', [ClinicaController::class, 'index'])->name('index');
-            
+            Route::get('/create', [ClinicaController::class, 'create'])->name('create');
+            Route::post('/store', [ClinicaController::class, 'store'])->name('store');
+            Route::get('/show/{clinica}', [ClinicaController::class, 'show'])->name('show');
+            Route::get('/edit/{clinica}', [ClinicaController::class, 'edit'])->name('edit');
+            Route::put('/update', [ClinicaController::class, 'update'])->name('update');
+            Route::delete('/delete/{clinica}', [ClinicaController::class, 'destroy'])->name('destroy');
         });
     });
 });
