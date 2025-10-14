@@ -37,7 +37,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/store', [ClinicaController::class, 'store'])->name('store');
             Route::get('/show/{clinica}', [ClinicaController::class, 'show'])->name('show');
             Route::get('/edit/{clinica}', [ClinicaController::class, 'edit'])->name('edit');
-            Route::put('/update', [ClinicaController::class, 'update'])->name('update');
+            Route::put('/update/{clinica}', [ClinicaController::class, 'update'])->name('update');
             Route::delete('/delete/{clinica}', [ClinicaController::class, 'destroy'])->name('destroy');
         });
     });

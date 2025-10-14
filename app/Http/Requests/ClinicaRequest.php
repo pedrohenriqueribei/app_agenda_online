@@ -24,7 +24,7 @@ class ClinicaRequest extends FormRequest
         return [
             //
             'nome' => 'required|string|max:255',
-            'cnpj' => 'nullable|string|size:18|unique:clinicas,cnpj,' . $this->route('clinica'),
+            'cnpj' => 'nullable|string|size:18|unique:clinicas,cnpj,' . ($this->clinica?->id ?? 'null'),
             'email' => 'nullable|email|max:255',
             'telefone' => 'nullable|string|max:15',
             'endereco' => 'nullable|string|max:255',
