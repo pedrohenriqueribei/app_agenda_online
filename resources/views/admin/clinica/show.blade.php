@@ -41,6 +41,7 @@
 <div class="container mx-auto mt-6 px-4">
     <div class="bg-white shadow-md rounded-lg p-6">
         <div class="flex flex-col md:flex-row gap-8 items-start justify-between">
+            <h2 class="titulo_2">Profissionais</h2>
             
         </div>
     </div>

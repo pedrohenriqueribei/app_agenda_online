@@ -38,3 +38,7 @@
     @apply text-center font-[Poppins] text-3xl sm:text-4xl md:text-5xl font-bold text-blue-800 tracking-tight mt-10 mb-5;
 }
 
+.titulo_2 {
+    @apply text-center font-[Poppins] text-2xl sm:text-4xl md:text-3xl font-bold text-blue-700 tracking-tight mt-10 mb-5;
+}
+
