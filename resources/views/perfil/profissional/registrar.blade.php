@@ -18,8 +18,12 @@
     <form action="{{ route('perfil.profissional.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
         @csrf
 
-        @component('perfil.profissional._component.create_edit', ['profissional' => $profissional])
-        @endcomponent
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            @component('components.profissional.create_edit', ['profissional' => $profissional])
+            @endcomponent
+        
+        </div>
 
         <!-- Botão -->
         <div class="flex justify-center">

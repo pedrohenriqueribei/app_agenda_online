@@ -31,6 +31,14 @@
                     </div>
 
                     <div>
+                        <strong class="text-gray-700">Data de Nascimento:</strong> {{ $profissional->data_nascimento_formatado ?? 'Não informado' }}
+                    </div>
+
+                    <div>
+                        <strong class="text-gray-700">Idade:</strong> {{ $profissional->idade ?? 'Não informado' }} anos
+                    </div>
+
+                    <div>
                         <strong class="text-gray-700">Especialidade:</strong> {{ $profissional->especialidade ?? 'Não informado' }}
                     </div>
                 </div>
@@ -50,7 +58,7 @@
 
             <!-- Ações -->
             <div class="flex flex-wrap gap-2 mt-8">
-                <a href="{{ route('perfil.profissional.edit', $profissional->id) }}"
+                <a href="{{ route('admin.profissional.edit', $profissional->id) }}"
                    class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded">
                     Editar
                 </a>
