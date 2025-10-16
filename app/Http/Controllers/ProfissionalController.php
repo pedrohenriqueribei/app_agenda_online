@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfissionalRequest;
+use App\Models\Clinica;
 use App\Models\Profissional;
 use App\Services\ProfissionalService;
 use Illuminate\Http\Request;
@@ -31,8 +32,10 @@ class ProfissionalController extends Controller
      */
     public function create()
     {
-        //
-        return view('admin.profissional.create');
+        //clinicas
+        $clinicas = Clinica::all();
+        
+        return view('admin.profissional.create', ['clinicas' => $clinicas]);
     }
 
     /**

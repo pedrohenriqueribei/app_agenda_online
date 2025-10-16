@@ -31,6 +31,9 @@ class ProfissionalRequest extends FormRequest
             'foto'        => 'nullable|image|max:2048', // até 2MB
             'password'    => 'required|string|min:8|confirmed',
             'especialidade'=> 'required|string|max:255',
+            'clinicas' => ['nullable', 'array'],
+            'clinicas.*' => ['exists:clinicas,id'],
+
         ];
     }
 

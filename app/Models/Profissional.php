@@ -39,6 +39,12 @@ class Profissional extends Authenticatable
         'estado_civil' => EstadoCivil::class
     ];
 
+    //clinicas
+    public function clinicas()
+    {
+        return $this->belongsToMany(Clinica::class, 'clinica_profissional');
+    }
+
     //idade
     public function getIdadeAttribute()
     {

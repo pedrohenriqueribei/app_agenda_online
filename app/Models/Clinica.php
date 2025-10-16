@@ -30,4 +30,10 @@ class Clinica extends Model
         'deleted_at' => 'datetime',
     ];
 
+    //profissionais
+    public function profissionais()
+    {
+        return $this->belongsToMany(Profissional::class, 'clinica_profissional');
+    }
+
 }
