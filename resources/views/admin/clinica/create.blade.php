@@ -107,18 +107,26 @@ document.getElementById('cep').addEventListener('blur', function () {
 
     if (cep.length === 8) {
         fetch(`https://viacep.com.br/ws/${cep}/json/`)
-            .then(response => response.json())
-            .then(data => {
-                if (!data.erro) {
-                    document.getElementById('endereco').value = data.logradouro || '';
-                    document.getElementById('bairro').value = data.bairro || '';
-                    document.getElementById('cidade').value = data.localidade || '';
-                    document.getElementById('estado').value = data.uf || '';
-                } else {
-                    alert('CEP não encontrado.');
-                }
-            })
-            .catch(() => alert('Erro ao buscar o CEP.'));
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Resposta inválida do servidor');
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (!data.erro) {
+            document.getElementById('endereco').value = data.logradouro || '';
+            document.getElementById('bairro').value = data.bairro || '';
+            document.getElementById('cidade').value = data.localidade || '';
+            document.getElementById('estado').value = data.uf || '';
+        } else {
+            alert('CEP não encontrado.');
+        }
+    })
+    .catch((error) => {
+        console.error('Erro ao buscar o CEP:', error);
+        alert('Erro ao buscar o CEP. Verifique sua conexão ou tente novamente.');
+    });
     }
 });
 </script>

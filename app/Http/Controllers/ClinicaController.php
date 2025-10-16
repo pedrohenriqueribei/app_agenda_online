@@ -49,7 +49,9 @@ class ClinicaController extends Controller
      */
     public function show(Clinica $clinica)
     {
-        //
+        //profissionais
+        $clinica->load('profissionais'); // eager loading
+
         return view('admin.clinica.show', ['clinica' => $clinica]);
     }
 

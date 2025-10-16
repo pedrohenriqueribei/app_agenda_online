@@ -40,17 +40,47 @@
 
 <div class="container mx-auto mt-6 px-4">
     <div class="bg-white shadow-md rounded-lg p-6">
-        <div class="flex flex-col md:flex-row gap-8 items-start justify-between">
-            <h2 class="titulo_2">Profissionais</h2>
+        <!-- Cabeçalho -->
+        <div class="flex flex-col md:flex-row items-center justify-between mb-6">
+            <h2 class="text-2xl font-semibold text-gray-800">Profissionais vinculados</h2>
 
-            <div class="flex justify-between items-center mb-4">
-                
-                <a href="{{ route('admin.profissional.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
-                    + Cadastrar Profissional
-                </a>
-            </div>
-            
+            <a href="{{ route('admin.profissional.create') }}"
+               class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                + Cadastrar Profissional
+            </a>
         </div>
+
+        <!-- Conteúdo -->
+        @if($clinica->profissionais->isEmpty())
+            <p class="text-gray-600 text-center">Nenhum profissional vinculado a esta clínica.</p>
+        @else
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200 border border-gray-300 rounded-lg">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-sm font-medium text-gray-700">Nome</th>
+                            <th class="px-6 py-3 text-left text-sm font-medium text-gray-700">Especialidade</th>
+                            <th class="px-6 py-3 text-left text-sm font-medium text-gray-700">Telefone</th>
+                            <th class="px-6 py-3 text-left text-sm font-medium text-gray-700">E-mail</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-100">
+                        @foreach($clinica->profissionais as $profissional)
+                            <tr>
+                                <td class="px-6 py-4 text-sm text-gray-900">
+                                    <a href="#" class="link">
+                                        {{ $profissional->nome }}
+                                    </a>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-900">{{ $profissional->especialidade }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-900">{{ $profissional->telefone }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-900">{{ $profissional->email }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        @endif
     </div>
 </div>
 
