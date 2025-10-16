@@ -42,6 +42,31 @@
     <div class="bg-white shadow-md rounded-lg p-6">
         <div class="flex flex-col md:flex-row gap-8 items-start justify-between">
             <h2 class="titulo_2">Profissionais</h2>
+
+            <div class="flex justify-between items-center mb-4">
+                
+                <a href="{{ route('admin.profissional.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+                    + Cadastrar Profissional
+                </a>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<div class="container mx-auto mt-6 px-4">
+    <div class="bg-white shadow-md rounded-lg p-6">
+        <div class="flex flex-col md:flex-row gap-8 items-start justify-between">
+            <h2 class="titulo_2">Gerentes</h2>
+            
+        </div>
+    </div>
+</div>
+
+<div class="container mx-auto mt-6 px-4">
+    <div class="bg-white shadow-md rounded-lg p-6">
+        <div class="flex flex-col md:flex-row gap-8 items-start justify-between">
+            <h2 class="titulo_2">Agendamentos</h2>
             
         </div>
     </div>
