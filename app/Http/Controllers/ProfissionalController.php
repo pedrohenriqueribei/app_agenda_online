@@ -67,8 +67,9 @@ class ProfissionalController extends Controller
      */
     public function edit(Profissional $profissional)
     {
-        //
-        return view ('admin.profissional.edit', compact('profissional'));
+        //clinicas
+        $clinicas = Clinica::all();
+        return view ('admin.profissional.edit', compact('profissional', 'clinicas'));
     }
 
     /**
