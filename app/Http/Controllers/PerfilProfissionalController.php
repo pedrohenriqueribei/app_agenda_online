@@ -52,7 +52,9 @@ class PerfilProfissionalController extends Controller
      */
     public function show (Profissional $profissional) : View
     {
-        //
+        //clinicas
+        $profissional->load('clinicas');
+        
         return view ('perfil.profissional.show', ['profissional' => $profissional]);
     }
 

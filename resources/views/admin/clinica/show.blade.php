@@ -68,7 +68,7 @@
                         @foreach($clinica->profissionais as $profissional)
                             <tr>
                                 <td class="px-6 py-4 text-sm text-gray-900">
-                                    <a href="#" class="link">
+                                    <a href="{{ route('admin.profissional.show', ['profissional' => $profissional]) }}" class="link">
                                         {{ $profissional->nome }}
                                     </a>
                                 </td>

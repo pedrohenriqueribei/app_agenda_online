@@ -49,6 +49,38 @@
             </div>
         </div>
     </div>
+
+    <!-- Clínicas vinculadas -->
+    <div class="mt-10">
+        <h4 class="text-lg font-semibold text-gray-800 mb-4">Clínicas vinculadas</h4>
+
+        @if($profissional->clinicas->isEmpty())
+            <p class="text-gray-600">Nenhuma clínica vinculada a este profissional.</p>
+        @else
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white border border-gray-200 rounded-lg">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Nome</th>
+                            <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">CNPJ</th>
+                            <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Telefone</th>
+                            <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Cidade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($profissional->clinicas as $clinica)
+                            <tr class="border-t">
+                                <td class="px-4 py-2 text-sm text-gray-800">{{ $clinica->nome }}</td>
+                                <td class="px-4 py-2 text-sm text-gray-800">{{ $clinica->cnpj }}</td>
+                                <td class="px-4 py-2 text-sm text-gray-800">{{ $clinica->telefone }}</td>
+                                <td class="px-4 py-2 text-sm text-gray-800">{{ $clinica->cidade }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        @endif
+    </div>
 </div>
 @endsection
 

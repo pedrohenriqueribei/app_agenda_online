@@ -56,8 +56,10 @@ class ProfissionalController extends Controller
      */
     public function show(Profissional $profissional)
     {
-        //
-        return view('admin.profissional.show', compact($profissional));
+        //clinicas
+        $profissional->load('clinicas');
+        
+        return view('admin.profissional.show', compact('profissional'));
     }
 
     /**
@@ -66,7 +68,7 @@ class ProfissionalController extends Controller
     public function edit(Profissional $profissional)
     {
         //
-        return view ('admin.profissional.edit', compact($profissional));
+        return view ('admin.profissional.edit', compact('profissional'));
     }
 
     /**
@@ -77,7 +79,7 @@ class ProfissionalController extends Controller
         //atualizar
         $this->profissionalService->atualizar($profissional, $request->validated(), $request->file('foto'));
 
-        return redirect()->route('admin.profissional.show', compact($profissional))
+        return redirect()->route('admin.profissional.show', compact('profissional'))
                      ->with('success', 'Profissional atualizado com sucesso!');
     }
 
