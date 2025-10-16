@@ -58,7 +58,7 @@ class ProfissionalController extends Controller
     {
         //clinicas
         $profissional->load('clinicas');
-        
+
         return view('admin.profissional.show', compact('profissional'));
     }
 
@@ -74,7 +74,7 @@ class ProfissionalController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Profissional $profissional)
+    public function update(ProfissionalRequest $request, Profissional $profissional)
     {
         //atualizar
         $this->profissionalService->atualizar($profissional, $request->validated(), $request->file('foto'));

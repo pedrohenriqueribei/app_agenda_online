@@ -39,9 +39,13 @@ class ProfissionalService
      */
     public function atualizar(Profissional $profissional, array $dados, ?UploadedFile $foto = null): Profissional
     {
-        // Extrai os IDs das clínicas, se existirem
-        $clinicas = $dados['clinicas'] ?? [];
-        unset($dados['clinicas']); // Remove para evitar erro no update()
+        
+        //somente administrador altera as clinicas
+        if(auth()->guard('administrador')->check()){
+            // Extrai os IDs das clínicas, se existirem
+            $clinicas = $dados['clinicas'] ?? [];
+            unset($dados['clinicas']); // Remove para evitar erro no update()
+        }
 
         // Atualiza a foto, se enviada
         if ($foto) {
@@ -57,8 +61,10 @@ class ProfissionalService
         $profissional->update($dados);
 
         // Atualiza o vínculo com as clínicas
-        $profissional->clinicas()->sync($clinicas);
-
+        if(auth()->guard('administrador')->check()){
+            $profissional->clinicas()->sync($clinicas);
+        }
+        
         return $profissional;
     }
 

@@ -79,7 +79,7 @@ class Gerente extends Model
     }
 
     //data de nascimento formatado
-    public function getDtNascimentoFormatadoAttribute() {
+    public function getDataNascimentoFormatadoAttribute() {
         return Carbon::parse($this->data_nascimento)->format('d/m/Y');
     }
 }

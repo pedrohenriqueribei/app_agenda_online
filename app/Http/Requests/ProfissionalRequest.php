@@ -3,48 +3,64 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ProfissionalRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
-        return true; // Permite que qualquer usuário use essa request
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
-        return [
-            //regras
-            'nome'        => 'required|string|max:255',
-            'cpf'         => 'required|string|size:14|unique:profissionais,cpf',
-            'telefone'    => 'nullable|string|max:20',
-            'email'       => 'required|email|max:255|unique:profissionais,email',
-            'data_nasc'   => 'nullable|date|before:today',
-            'foto'        => 'nullable|image|max:2048', // até 2MB
-            'password'    => 'required|string|min:8|confirmed',
-            'especialidade'=> 'required|string|max:255',
-            'clinicas' => ['nullable', 'array'],
-            'clinicas.*' => ['exists:clinicas,id'],
+        $profissionalId = $this->route('profissional')?->id;
 
+        return [
+            'nome'           => ['required', 'string', 'max:255'],
+            'cpf'            => [
+                'required',
+                'string',
+                'size:14',
+                Rule::unique('profissionais', 'cpf')->ignore($profissionalId),
+            ],
+            'telefone'       => ['nullable', 'string', 'max:20'],
+            'email'          => [
+                'required',
+                'email',
+                'max:255',
+                Rule::unique('profissionais', 'email')->ignore($profissionalId),
+            ],
+            'data_nascimento'=> ['nullable', 'date', 'before:today'],
+            'foto'           => ['nullable', 'image', 'max:2048'],
+            'password'       => $profissionalId ? ['nullable', 'string', 'min:8', 'confirmed'] : ['required', 'string', 'min:8', 'confirmed'],
+            'especialidade'  => ['required', 'string', 'max:255'],
+            'clinicas'       => ['nullable', 'array'],
+            'clinicas.*'     => ['exists:clinicas,id'],
         ];
     }
 
-    //mensagens
     public function messages(): array
     {
         return [
+            'nome.required' => 'O nome é obrigatório.',
+            'cpf.required' => 'O CPF é obrigatório.',
             'cpf.size' => 'O CPF deve conter 14 caracteres (incluindo pontos e traço).',
-            'password.confirmed' => 'A confirmação da senha não corresponde.',
+            'cpf.unique' => 'Este CPF já está cadastrado.',
+            'email.required' => 'O e-mail é obrigatório.',
+            'email.email' => 'Informe um e-mail válido.',
+            'email.unique' => 'Este e-mail já está cadastrado.',
+            'telefone.max' => 'O telefone deve ter no máximo 20 caracteres.',
+            'data_nascimento.date' => 'A data de nascimento deve ser uma data válida.',
+            'data_nascimento.before' => 'A data de nascimento deve ser anterior a hoje.',
             'foto.image' => 'O arquivo enviado deve ser uma imagem.',
+            'foto.max' => 'A imagem não pode ter mais que 2MB.',
+            'password.required' => 'A senha é obrigatória.',
+            'password.min' => 'A senha deve ter no mínimo 8 caracteres.',
+            'password.confirmed' => 'A confirmação da senha não corresponde.',
+            'especialidade.required' => 'A especialidade é obrigatória.',
+            'clinicas.array' => 'O campo de clínicas deve ser uma lista.',
+            'clinicas.*.exists' => 'Uma ou mais clínicas selecionadas são inválidas.',
         ];
     }
-
 }

@@ -23,7 +23,7 @@
                 <input type="text" name="cnpj" id="cnpj" value="{{ old('cnpj', $clinica->cnpj) }}"
                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                 <span class="text-red-600 text-1xl">{{ $errors->has('cnpj') ? $errors->first('cnpj') : '' }}</span>
-                    </div>
+            </div>
 
             <div>
                 <label for="email" class="block text-sm font-medium text-gray-700">E-mail</label>

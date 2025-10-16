@@ -63,7 +63,7 @@ Route::prefix('conta/profissional')->name('perfil.profissional.')->group(functio
     Route::post('registrar', [ProfissionalLoginController::class, 'store'])->name('store');
 
     //area autenticada
-    Route::middleware(['auth', 'session.timeout'])->group(function () {
+    Route::middleware('auth:profissional')->group(function () {
         Route::get('/{profissional}', [PerfilProfissionalController::class, 'show'])->name('show');
         Route::get('edit/{profissional}', [PerfilProfissionalController::class, 'edit'])->name('edit');
         Route::put('update/{profissional}', [PerfilProfissionalController::class, 'update'])->name('update');

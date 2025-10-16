@@ -27,6 +27,14 @@
             </div>
 
             <div class="mb-3">
+                <strong>Data de Nascimento:</strong> {{ $profissional->data_nascimento_formatado ?? 'Não informado' }}
+            </div>
+
+            <div class="mb-3">
+                <strong>Idade:</strong> {{ $profissional->idade }} anos
+            </div>
+
+            <div class="mb-3">
                 <strong>Especialidade:</strong> {{ $profissional->especialidade ?? 'Não informado' }}
             </div>
 
