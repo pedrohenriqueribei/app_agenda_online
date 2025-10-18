@@ -4,11 +4,9 @@ use App\Http\Controllers\AdministradorController;
 use App\Http\Controllers\ClinicaController;
 use App\Http\Controllers\GerenteController;
 use App\Http\Controllers\PerfilProfissionalController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfissionalController;
 use App\Http\Controllers\ProfissionalLoginController;
 use Illuminate\Support\Facades\Route;
-use PHPUnit\Framework\Attributes\Group;
 
 Route::get('/', function () {
     return redirect()->route('home');
@@ -59,10 +57,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/','index')->name('index');
             Route::get('/create', 'create')->name('create');
             Route::post('/store', 'store')->name('store');
-            Route::get('/show/{profissional}', 'show')->name('show');
-            Route::get('/edit/{profissional}', 'edit')->name('edit');
-            Route::put('/update/{profissional}', 'update')->name('update');
-            Route::delete('/delete/{profissional}', 'destroy')->name('destroy');
+            Route::get('/show/{gerente}', 'show')->name('show');
+            Route::get('/edit/{gerente}', 'edit')->name('edit');
+            Route::put('/update/{gerente}', 'update')->name('update');
+            Route::delete('/delete/{gerente}', 'destroy')->name('destroy');
         });
     });
 });
