@@ -44,7 +44,7 @@ class GerenteController extends Controller
 
         Gerente::create($data);
 
-        return redirect()->route('admin.clinica.show', ['clinica' => $data['clinica']])->with('success', 'Gerente criado com sucesso!');
+        return redirect()->route('admin.clinica.show', ['clinica' => $data['clinica_id']])->with('success', 'Gerente criado com sucesso!');
 
     }
 
