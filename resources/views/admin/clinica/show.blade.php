@@ -86,10 +86,47 @@
 
 <div class="container mx-auto mt-6 px-4">
     <div class="bg-white shadow-md rounded-lg p-6">
-        <div class="flex flex-col md:flex-row gap-8 items-start justify-between">
-            <h2 class="titulo_2">Gerentes</h2>
-            
+        <!-- Cabeçalho -->
+        <div class="flex flex-col md:flex-row items-center justify-between mb-6">
+            <h2 class="text-2xl font-semibold text-gray-800">Gerentes vinculados</h2>
+
+            <a href="{{ route('admin.gerente.create') }}"
+               class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                + Cadastrar Gerente
+            </a>
         </div>
+
+        <!-- Conteúdo -->
+        @if($clinica->gerentes->isEmpty())
+            <p class="text-gray-600 text-center">Nenhum gerente vinculado a esta clínica.</p>
+        @else
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200 border border-gray-300 rounded-lg">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-sm font-medium text-gray-700">Nome</th>
+                            <th class="px-6 py-3 text-left text-sm font-medium text-gray-700">Setor</th>
+                            <th class="px-6 py-3 text-left text-sm font-medium text-gray-700">Telefone</th>
+                            <th class="px-6 py-3 text-left text-sm font-medium text-gray-700">E-mail</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-100">
+                        @foreach($clinica->gerentes as $gerente)
+                            <tr>
+                                <td class="px-6 py-4 text-sm text-gray-900">
+                                    <a href="{{ route('admin.gerente.show', ['gerente' => $gerente]) }}" class="link">
+                                        {{ $gerente->nome }}
+                                    </a>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-900">{{ $gerente->setor ?? '—' }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-900">{{ $gerente->telefone ?? '—' }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-900">{{ $gerente->email }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        @endif
     </div>
 </div>
 

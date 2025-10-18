@@ -36,4 +36,10 @@ class Clinica extends Model
         return $this->belongsToMany(Profissional::class, 'clinica_profissional');
     }
 
+    //gerentes
+    public function gerentes()
+    {
+        return $this->hasMany(Gerente::class);
+    }
+
 }

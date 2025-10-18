@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\GerenteStoreRequest;
+use App\Models\Clinica;
 use App\Models\Gerente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class GerenteController extends Controller
 {
@@ -20,15 +23,29 @@ class GerenteController extends Controller
      */
     public function create()
     {
-        //
+        //clinicas
+        $clinicas = Clinica::all();
+
+        return view('admin.gerente.create', ['clinicas' => $clinicas]);
+
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(GerenteStoreRequest $request)
     {
         //
+        $data = $request->validated();
+
+        if ($request->hasFile('foto')) {
+            $data['foto'] = $request->file('foto')->store('gerentes/fotos', 'public');
+        }
+
+        Gerente::create($data);
+
+        return redirect()->route('admin.clinica.show', ['clinica' => $data['clinica']])->with('success', 'Gerente criado com sucesso!');
+
     }
 
     /**

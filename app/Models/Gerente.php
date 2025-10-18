@@ -29,6 +29,7 @@ class Gerente extends Model
         'setor',
         'estado_civil',
         'sexo',
+        'clinica_id',
 
     ];
 
@@ -40,6 +41,12 @@ class Gerente extends Model
         'sexo' => Sexo::class,
         'estado_civil' => EstadoCivil::class
     ];
+
+    //clinica
+    public function clinica()
+    {
+        return $this->belongsTo(Clinica::class);
+    }
 
     //idade
     public function getIdadeAttribute()

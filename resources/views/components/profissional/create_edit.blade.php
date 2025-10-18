@@ -1,4 +1,8 @@
+@php
+    use App\Enums\Sexo;
+    use App\Enums\EstadoCivil;
 
+@endphp
 
     <!-- Nome -->
     <div>
@@ -39,6 +43,36 @@
             value="{{ old('data_nascimento') ?? (isset($profissional) && $profissional->data_nascimento ? \Carbon\Carbon::parse($profissional->data_nascimento)->format('Y-m-d') : '') }}"
             class="mt-1 block w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500">
         <span class="text-red-600 text-1xl">{{ $errors->has('data_nascimento') ? $errors->first('data_nascimento') : '' }}</span>
+    </div>
+
+    <!-- Estado Civil -->
+    <div>
+        <label for="estado_civil" class="block text-sm font-medium text-gray-700">Estado Civil</label>
+        <select name="estado_civil" id="estado_civil"
+            class="mt-1 block w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500">
+            <option value="">Selecione</option>
+            @foreach (EstadoCivil::cases() as $estado)
+                <option value="{{ $estado->value }}" {{ old('estado_civil') === $estado->value ? 'selected' : '' }}>
+                    {{ $estado->label() }}
+                </option>
+            @endforeach
+        </select>
+        <span class="text-red-600 text-1xl">{{ $errors->first('estado_civil') }}</span>
+    </div>
+
+    <!-- Sexo -->
+    <div>
+        <label for="sexo" class="block text-sm font-medium text-gray-700">Sexo</label>
+        <select name="sexo" id="sexo"
+            class="mt-1 block w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500">
+            <option value="">Selecione</option>
+            @foreach (Sexo::cases() as $option)
+                <option value="{{ $option->value }}" {{ old('sexo') === $option->value ? 'selected' : '' }}>
+                    {{ $option->label() }}
+                </option>
+            @endforeach
+        </select>
+        <span class="text-red-600 text-1xl">{{ $errors->first('sexo') }}</span>
     </div>
 
     <!-- Especialidade -->
