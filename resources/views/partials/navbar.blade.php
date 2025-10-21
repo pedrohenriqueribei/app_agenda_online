@@ -42,9 +42,25 @@
                         </div>
                     </a>
                 @endif
-                <strong>{{ auth()->guard('profissional')->user()->nome }}</strong>
+                <strong>{{ auth()->guard('profissional')->user()->primeiro_nome }}</strong>
                 <button class="bg-cyan-400 text-white font-[Poppins] duration-500 px-6 py-2 mx-4 hover:bg-cyan-500 rounded">
                     <a href="{{ route('perfil.profissional.logout') }}">Logout</a>
+                </button> 
+            </div>
+            @endauth
+
+            @auth('gerente')
+            <div class="hidden md:flex">
+                @if(auth()->guard('gerente')->user()->foto)
+                    <a href="{{ route('perfil.gerente.show',['gerente' => auth()->guard('gerente')->user()->id ]) }}">
+                        <div class="w-10 h-10 overflow-hidden rounded-md shadow-sm transition-transform duration-300 ease-in-out hover:scale-105 hover:brightness-110">
+                            <img src="{{ asset('storage/' . auth()->guard('gerente')->user()->foto) }}" alt="Foto da Mãe" class="w-full h-full object-cover">
+                        </div>
+                    </a>
+                @endif
+                <strong>{{ auth()->guard('gerente')->user()->primeiro_nome }}</strong>
+                <button class="bg-cyan-400 text-white font-[Poppins] duration-500 px-6 py-2 mx-4 hover:bg-cyan-500 rounded">
+                    <a href="{{ route('perfil.gerente.logout') }}">Logout</a>
                 </button> 
             </div>
             @endauth

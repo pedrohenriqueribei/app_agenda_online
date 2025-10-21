@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\EstadoCivil;
+use App\Enums\Sexo;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Enum;
 
 class GerenteStoreRequest extends FormRequest
 {
@@ -30,8 +33,8 @@ class GerenteStoreRequest extends FormRequest
             'telefone' => 'nullable|string|max:20',
             'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             'setor' => 'nullable|string|max:255',
-            'estado_civil' => 'nullable|string|max:255',
-            'sexo' => 'nullable|in:M,F,O,N',
+            'estado_civil' => ['required', new Enum(EstadoCivil::class)],
+            'sexo' => ['required', new Enum(Sexo::class)],
             'password' => 'required|string|min:8|confirmed',
             'clinica_id' => 'required|exists:clinicas,id',
 

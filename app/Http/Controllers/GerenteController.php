@@ -11,6 +11,16 @@ use Illuminate\Support\Facades\Hash;
 
 class GerenteController extends Controller
 {
+    //injeção de dependência
+    protected GerenteService $gerenteService;
+
+    /**
+     * Contrutor
+     */
+    public function __construct(GerenteService $gerenteService){
+        $this->gerenteService = $gerenteService;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -34,12 +44,12 @@ class GerenteController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(GerenteStoreRequest $request, GerenteService $gerenteService)
+    public function store(GerenteStoreRequest $request)
     {
         //
         $dados = $request->validated();
 
-        $gerente = $gerenteService->cadastrar($dados);
+        $gerente = $this->gerenteService->cadastrar($dados);
 
         return redirect()->route('admin.clinica.show', [
             'clinica' => $dados['clinica_id']

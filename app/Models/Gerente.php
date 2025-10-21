@@ -5,12 +5,13 @@ namespace App\Models;
 use App\Enums\EstadoCivil;
 use App\Enums\Sexo;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Gerente extends Model
+
+class Gerente extends Authenticatable
 {
     //
     use SoftDeletes;

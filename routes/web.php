@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdministradorController;
 use App\Http\Controllers\ClinicaController;
 use App\Http\Controllers\GerenteController;
+use App\Http\Controllers\PerfilGerenteController;
 use App\Http\Controllers\PerfilProfissionalController;
 use App\Http\Controllers\ProfissionalController;
 use App\Http\Controllers\ProfissionalLoginController;
@@ -84,6 +85,16 @@ Route::prefix('conta/profissional')->name('perfil.profissional.')->group(functio
 });
 
 //rotas para gerentes
-Route::prefix('conta/gerente')->name('perfil.profissional.')->group(function (){
-    Route::get('login', []);
+Route::prefix('conta/gerente')->name('perfil.gerente.')->group(function (){
+    Route::get('login', [PerfilGerenteController::class, 'form'])->name('login');
+    Route::post('login', [PerfilGerenteController::class, 'login'])->name('login.submit');
+    Route::get('logout', [ProfissionalLoginController::class, 'logout'])->name('logout');
+
+    //área autenticada
+    Route::middleware('auth:gerente')->group(function (){
+        Route::get('/{gerente}', [PerfilGerenteController::class, 'show'])->name('show');
+        Route::get('edit/{gerente}', [PerfilGerenteController::class, 'edit'])->name('edit');
+        Route::put('update/{gerente}', [PerfilGerenteController::class, 'update'])->name('update');
+        Route::delete('destroy/{gerente}', [PerfilGerenteController::class, 'destroy'])->name('destroy');
+    });
 });
