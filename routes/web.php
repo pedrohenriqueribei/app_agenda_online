@@ -88,7 +88,7 @@ Route::prefix('conta/profissional')->name('perfil.profissional.')->group(functio
 Route::prefix('conta/gerente')->name('perfil.gerente.')->group(function (){
     Route::get('login', [PerfilGerenteController::class, 'form'])->name('login');
     Route::post('login', [PerfilGerenteController::class, 'login'])->name('login.submit');
-    Route::get('logout', [ProfissionalLoginController::class, 'logout'])->name('logout');
+    Route::get('logout', [PerfilGerenteController::class, 'logout'])->name('logout');
 
     //área autenticada
     Route::middleware('auth:gerente')->group(function (){
