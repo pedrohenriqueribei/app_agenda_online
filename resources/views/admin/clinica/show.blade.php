@@ -42,7 +42,7 @@
     <div class="bg-white shadow-md rounded-lg p-6">
         <!-- Cabeçalho -->
         <div class="flex flex-col md:flex-row items-center justify-between mb-6">
-            <h2 class="text-2xl font-semibold text-gray-800">Profissionais vinculados</h2>
+            <h2 class="titulo_2">Profissionais vinculados</h2>
 
             <a href="{{ route('admin.profissional.create') }}"
                class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
@@ -88,7 +88,7 @@
     <div class="bg-white shadow-md rounded-lg p-6">
         <!-- Cabeçalho -->
         <div class="flex flex-col md:flex-row items-center justify-between mb-6">
-            <h2 class="text-2xl font-semibold text-gray-800">Gerentes vinculados</h2>
+            <h2 class="titulo_2">Gerentes vinculados</h2>
 
             <a href="{{ route('admin.gerente.create') }}"
                class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
