@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\GerenteStoreRequest;
 use App\Models\Clinica;
 use App\Models\Gerente;
+use App\Services\GerenteService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -33,18 +34,16 @@ class GerenteController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(GerenteStoreRequest $request)
+    public function store(GerenteStoreRequest $request, GerenteService $gerenteService)
     {
         //
-        $data = $request->validated();
+        $dados = $request->validated();
 
-        if ($request->hasFile('foto')) {
-            $data['foto'] = $request->file('foto')->store('gerentes/fotos', 'public');
-        }
+        $gerente = $gerenteService->cadastrar($dados);
 
-        Gerente::create($data);
-
-        return redirect()->route('admin.clinica.show', ['clinica' => $data['clinica_id']])->with('success', 'Gerente criado com sucesso!');
+        return redirect()->route('admin.clinica.show', [
+            'clinica' => $dados['clinica_id']
+        ])->with('success', "Gerente "+ $gerente->nome +" cadastrado com sucesso!");
 
     }
 

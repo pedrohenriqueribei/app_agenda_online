@@ -82,3 +82,8 @@ Route::prefix('conta/profissional')->name('perfil.profissional.')->group(functio
         Route::get('/{profissional}/agendamento_semanal', [PerfilProfissionalController::class, 'agendamentoSemanal'])->name('agendamento.semanal');
     });
 });
+
+//rotas para gerentes
+Route::prefix('conta/gerente')->name('perfil.profissional.')->group(function (){
+    Route::get('login', []);
+});

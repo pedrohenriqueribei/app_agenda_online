@@ -69,9 +69,9 @@
                     </p>
                 </div>
                 <div class="relative mt-8 flex items-center gap-x-4 justify-self-end">
-                    <a href="{{ route('perfil.profissional.registrar') }}" class="btn btn-orange">Quero me
+                    <a href="#" class="btn btn-orange">Quero me
                         registrar</a>
-                    <a href="{{ route('perfil.profissional.login') }}" class="btn btn-dark">Login</a>
+                    <a href="{{ route('perfil.gerente.login') }}" class="btn btn-dark">Login</a>
                 </div>
             </article>
         </div>
