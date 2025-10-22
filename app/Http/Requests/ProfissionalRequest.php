@@ -2,8 +2,11 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\EstadoCivil;
+use App\Enums\Sexo;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Enum;
 
 class ProfissionalRequest extends FormRequest
 {
@@ -35,6 +38,8 @@ class ProfissionalRequest extends FormRequest
             'foto'           => ['nullable', 'image', 'max:2048'],
             'password'       => $profissionalId ? ['nullable', 'string', 'min:8', 'confirmed'] : ['required', 'string', 'min:8', 'confirmed'],
             'especialidade'  => ['required', 'string', 'max:255'],
+            'estado_civil' => ['required', new Enum(EstadoCivil::class)],
+            'sexo' => ['required', new Enum(Sexo::class)],
             'clinicas'       => ['nullable', 'array'],
             'clinicas.*'     => ['exists:clinicas,id'],
         ];

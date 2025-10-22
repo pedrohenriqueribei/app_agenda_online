@@ -46,34 +46,38 @@
     </div>
 
     <!-- Estado Civil -->
-    <div>
-        <label for="estado_civil" class="block text-sm font-medium text-gray-700">Estado Civil</label>
-        <select name="estado_civil" id="estado_civil"
-            class="mt-1 block w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500">
-            <option value="">Selecione</option>
-            @foreach (EstadoCivil::cases() as $estado)
-                <option value="{{ $estado->value }}" {{ old('estado_civil') === $estado->value ? 'selected' : '' }}>
-                    {{ $estado->label() }}
-                </option>
-            @endforeach
-        </select>
-        <span class="text-red-600 text-1xl">{{ $errors->first('estado_civil') }}</span>
-    </div>
+        <div>
+            <label for="estado_civil" class="block text-sm font-medium text-gray-700">Estado Civil</label>
+            <select name="estado_civil" id="estado_civil" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                <option value="">Selecione</option>
+                @foreach(App\Enums\EstadoCivil::cases() as $estado)
+                    <option value="{{ $estado->value }}"
+                        {{ old('estado_civil', $profissional->estado_civil?->value ?? $profissional->estado_civil) === $estado->value ? 'selected' : '' }}>
+                        {{ $estado->label() }}
+                    </option>
+                @endforeach
+            </select>
+            @error('estado_civil')
+                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+            @enderror
+        </div>
 
-    <!-- Sexo -->
-    <div>
-        <label for="sexo" class="block text-sm font-medium text-gray-700">Sexo</label>
-        <select name="sexo" id="sexo"
-            class="mt-1 block w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500">
-            <option value="">Selecione</option>
-            @foreach (Sexo::cases() as $option)
-                <option value="{{ $option->value }}" {{ old('sexo') === $option->value ? 'selected' : '' }}>
-                    {{ $option->label() }}
-                </option>
-            @endforeach
-        </select>
-        <span class="text-red-600 text-1xl">{{ $errors->first('sexo') }}</span>
-    </div>
+        <!-- Sexo -->
+        <div>
+            <label for="sexo" class="block text-sm font-medium text-gray-700">Sexo</label>
+            <select name="sexo" id="sexo" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                <option value="">Selecione</option>
+                @foreach(App\Enums\Sexo::cases() as $sexo)
+                    <option value="{{ $sexo->value }}" {{ old('sexo', $profissional->sexo?->value ?? $profissional->sexo) === $sexo->value ? 'selected' : '' }}>
+                        {{ $sexo->label() }}
+                    </option>
+                @endforeach
+            </select>
+
+            @error('sexo')
+                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+            @enderror
+        </div>
 
     <!-- Especialidade -->
     <div>

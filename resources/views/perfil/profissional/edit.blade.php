@@ -23,6 +23,10 @@
                 Atualizar
             </button>
         </div>
+
+        <div class="flex justify-left">
+            <a href="{{ route('perfil.profissional.show', ['profissional' => $profissional]) }}" class="btn btn-secondary">Cancelar</a>
+        </div>
     </form>
 </div>
 
