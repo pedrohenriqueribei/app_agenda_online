@@ -115,10 +115,12 @@ document.getElementById('cep').addEventListener('blur', function () {
     })
     .then(data => {
         if (!data.erro) {
-            document.getElementById('endereco').value = data.logradouro || '';
+            document.getElementById('logradouro').value = data.logradouro || '';
+            document.getElementById('complemento').value = data.complemento || '';
             document.getElementById('bairro').value = data.bairro || '';
             document.getElementById('cidade').value = data.localidade || '';
             document.getElementById('estado').value = data.uf || '';
+            document.getElementById('pais').value = data.pais || 'Brasil';
         } else {
             alert('CEP não encontrado.');
         }

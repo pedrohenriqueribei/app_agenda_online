@@ -40,7 +40,7 @@
                         class="mt-3 text-lg/6 font-semibold text-gray-900 group-hover:text-gray-600 dark:text-white dark:group-hover:text-gray-300">
                         <a href="#">
                             <span class="absolute inset-0"></span>
-                            Perfil de cliente
+                            Perfil de Usuário
                         </a>
                     </h3>
                     <p class="mt-5 line-clamp-3 text-sm/6 text-gray-600 dark:text-gray-400">
@@ -48,9 +48,9 @@
                     </p>
                 </div>
                 <div class="relative mt-8 flex items-center gap-x-4 justify-self-end">
-                    <a href="{{ route('perfil.profissional.registrar') }}" class="btn btn-success">Quero me
+                    <a href="{{ route('usuario.create') }}" class="btn btn-success">Quero me
                         registrar</a>
-                    <a href="{{ route('perfil.profissional.login') }}" class="btn btn-dark">Login</a>
+                    <a href="{{ route('usuario.login') }}" class="btn btn-dark">Login</a>
                 </div>
             </article>
 

@@ -14,6 +14,7 @@ class Endereco extends Model
         'complemento',
         'numero',
         'cidade',
+        'bairro',
         'estado',
         'cep',
         'pais'
@@ -22,10 +23,11 @@ class Endereco extends Model
     use HasFactory;
 
     /**
-     * Define o relacionamento inverso com o Cliente.
+     * Define o relacionamento inverso com o Usuário.
      */
-    public function cliente(): BelongsTo
+    public function usuario()
     {
-        return $this->belongsTo(Cliente::class);
+        return $this->belongsTo(Usuario::class);
     }
+
 }

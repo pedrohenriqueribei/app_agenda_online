@@ -7,6 +7,7 @@ use App\Http\Controllers\PerfilGerenteController;
 use App\Http\Controllers\PerfilProfissionalController;
 use App\Http\Controllers\ProfissionalController;
 use App\Http\Controllers\ProfissionalLoginController;
+use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -96,5 +97,22 @@ Route::prefix('conta/gerente')->name('perfil.gerente.')->group(function (){
         Route::get('edit/{gerente}', [PerfilGerenteController::class, 'edit'])->name('edit');
         Route::put('update/{gerente}', [PerfilGerenteController::class, 'update'])->name('update');
         Route::delete('destroy/{gerente}', [PerfilGerenteController::class, 'destroy'])->name('destroy');
+    });
+});
+
+//rotas para clientes
+Route::prefix('usuario')->name('usuario.')->group(function(){
+    Route::get('registrar', [UsuarioController::class, 'create'])->name('create');
+    Route::post('registrar', [UsuarioController::class, 'store'])->name('store');
+    Route::get('login', [UsuarioController::class, 'form'])->name('login');
+    Route::post('login', [UsuarioController::class, 'login'])->name('login.submit');
+    Route::get('logout', [UsuarioController::class, 'logout'])->name('logout');
+
+    //área autendicada
+    Route::middleware('auth:usuario')->group(function(){
+        Route::get('/{usuario}', [UsuarioController::class, 'show'])->name('show');
+        Route::get('edit/{usuario}', [UsuarioController::class, 'edit'])->name('edit');
+        Route::put('update/{usuario}', [UsuarioController::class, 'update'])->name('update');
+        Route::delete('destroy/{usuario}', [UsuarioController::class, 'destroy'])->name('destroy');
     });
 });

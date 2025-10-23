@@ -48,9 +48,9 @@ return [
             'driver' => 'session',
             'provider' => 'gerentes',
         ],
-        'cliente' => [
+        'usuario' => [
             'driver' => 'session',
-            'provider' => 'clientes',
+            'provider' => 'usuarios',
         ],
     ],
 
@@ -88,9 +88,9 @@ return [
             'model' => App\Models\Gerente::class,
         ],
 
-        'clientes' => [
+        'usuarios' => [
             'driver' => 'eloquent',
-            'model'=> \App\Models\Cliente::class,
+            'model'=> \App\Models\Usuario::class,
         ],
     ],
 
