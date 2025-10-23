@@ -20,7 +20,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-            @component('components.profissional.create_edit', ['profissional' => $profissional])
+            @component('components.profissional.create_edit', ['profissional' => null])
             @endcomponent
         
         </div>

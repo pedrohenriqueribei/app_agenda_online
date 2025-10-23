@@ -52,7 +52,7 @@
                 <option value="">Selecione</option>
                 @foreach(App\Enums\EstadoCivil::cases() as $estado)
                     <option value="{{ $estado->value }}"
-                        {{ old('estado_civil', $profissional->estado_civil?->value ?? $profissional->estado_civil) === $estado->value ? 'selected' : '' }}>
+                        {{ old('estado_civil', optional($profissional)->estado_civil?->value ?? optional($profissional)->estado_civil) === $estado->value ? 'selected' : '' }}>
                         {{ $estado->label() }}
                     </option>
                 @endforeach
@@ -68,7 +68,7 @@
             <select name="sexo" id="sexo" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                 <option value="">Selecione</option>
                 @foreach(App\Enums\Sexo::cases() as $sexo)
-                    <option value="{{ $sexo->value }}" {{ old('sexo', $profissional->sexo?->value ?? $profissional->sexo) === $sexo->value ? 'selected' : '' }}>
+                    <option value="{{ $sexo->value }}" {{ old('sexo', optional($profissional)->sexo?->value ?? optional($profissional)->sexo) === $sexo->value ? 'selected' : '' }}>
                         {{ $sexo->label() }}
                     </option>
                 @endforeach
