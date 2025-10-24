@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdministradorController;
+use App\Http\Controllers\AdminUsuarioController;
 use App\Http\Controllers\ClinicaController;
 use App\Http\Controllers\GerenteController;
 use App\Http\Controllers\PerfilGerenteController;
@@ -63,6 +64,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/edit/{gerente}', 'edit')->name('edit');
             Route::put('/update/{gerente}', 'update')->name('update');
             Route::delete('/delete/{gerente}', 'destroy')->name('destroy');
+        });
+
+        Route::prefix('/usuario')->name('usuario.')->group(function(){
+            Route::get('/', [AdminUsuarioController::class, 'index'])->name('index');
+            Route::get('/show/{usuario}', [AdminUsuarioController::class, 'show'])->name('show');
+             Route::get('/edit/{usuario}',  [AdminUsuarioController::class, 'edit'])->name('edit');
+            Route::put('/update/{usuario}',  [AdminUsuarioController::class, 'update'])->name('update');
+            Route::delete('/delete/{usuario}',  [AdminUsuarioController::class, 'destroy'])->name('destroy');
         });
     });
 });
