@@ -90,7 +90,7 @@ Route::prefix('conta/profissional')->name('perfil.profissional.')->group(functio
         Route::put('update/{profissional}', [PerfilProfissionalController::class, 'update'])->name('update');
         Route::delete('destroy/{profissional}', [PerfilProfissionalController::class, 'destroy'])->name('destroy');
 
-        Route::get('/{profissional}/agendamento_semanal', [PerfilProfissionalController::class, 'agendamentoSemanal'])->name('agendamento.semanal');
+        Route::get('/agendamento/semanal', [PerfilProfissionalController::class, 'agendamentoSemanal'])->name('agendamento.semanal');
     });
 });
 

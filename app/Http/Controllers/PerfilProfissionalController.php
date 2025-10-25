@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProfissionalRequest;
 use App\Models\Profissional;
 use App\Services\ProfissionalService;
+use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Routing\Controller;
@@ -95,8 +97,23 @@ class PerfilProfissionalController extends Controller
     }
 
     //agendamento semanal
-    public function agendamentoSemanal(Profissional $profissional) : View
+    public function agendamentoSemanal (Request $request) : View
     {
-        return view('perfil.profissional.agendamento_semanal', ['profissional' => $profissional]);
+
+        $profissional = auth('profissional')->user();
+
+        $referencia = $request->query('semana')
+            ? Carbon::parse($request->query('semana'))
+            : now();
+
+        $inicioSemana = $referencia->copy()->startOfWeek();
+        $fimSemana = $referencia->copy()->endOfWeek();
+
+        $diasSemana = collect(CarbonPeriod::create($inicioSemana, $fimSemana))->map(fn($dia) => $dia->format('l'));
+
+        $agendamentos = []; // Aqui você deve buscar os agendamentos por dia
+
+        return view('perfil.profissional.agendamento_semanal', compact('profissional','agendamentos', 'inicioSemana', 'fimSemana'));
+
     }
 }

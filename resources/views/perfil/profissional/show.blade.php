@@ -6,7 +6,7 @@
 <div class="container mt-4">
     <div class="card shadow-sm">
         <div class="card-header bg-primary text-white">
-            <h4>Perfil do Profissional</h4>
+            <h2 class="titulo_2">Perfil do Profissional</h2>
         </div>
         <div class="card-body">
             
@@ -59,9 +59,6 @@
                     </button>
                 </form>
 
-                <a href="{{ route('perfil.profissional.agendamento.semanal', ['profissional' => $profissional]) }}" class="btn btn-primary bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
-                    Agendamento Semanal
-                </a>
             </div>
         </div>
     </div>
