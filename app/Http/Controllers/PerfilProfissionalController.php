@@ -114,7 +114,7 @@ class PerfilProfissionalController extends Controller
 
         $agendamentos = []; // Aqui você deve buscar os agendamentos por dia
 
-        return view('perfil.profissional.agendamento_semanal', compact('profissional','agendamentos', 'inicioSemana', 'fimSemana'));
+        return view('perfil.profissional.agendamento.semana', compact('profissional','agendamentos', 'inicioSemana', 'fimSemana'));
 
     }
 
@@ -124,22 +124,22 @@ class PerfilProfissionalController extends Controller
     public function agendaDia(Request $request, $dia = null)
     {
         // Se não houver data na URL, usa hoje
-        $data = $dia ? Carbon::parse($dia) : Carbon::today();
+        $dia = $dia ? Carbon::parse($dia) : Carbon::today();
 
         // Obtém o profissional autenticado
         $profissional = auth('profissional')->user();
 
         
         $agendamentosDoDia = Agendamento::where('profissional_id', $profissional->id)
-        ->whereDate('data', $data)
+        ->whereDate('data', $dia)
         ->orderBy('hora_inicio')
         ->get();
         //Busca os agendamentos do profissional para o dia específico
         
         
-        return view('perfil.profissional.agendamento_dia', [
+        return view('perfil.profissional.agendamento.dia', [
             'profissional' => $profissional,
-            'data' => $data,
+            'dia' => $dia,
             'agendamentosDoDia' => $agendamentosDoDia,
         ]);
     }
@@ -177,7 +177,7 @@ class PerfilProfissionalController extends Controller
             $agendamentos[$dataKey][] = $agendamento;
         }
         
-        return view('perfil.profissional.agendamento_mes', [
+        return view('perfil.profissional.agendamento.mes', [
             'profissional' => $profissional,
             'mesAtual' => $mesAtual,
             'diasDoMes' => $diasDoMes,

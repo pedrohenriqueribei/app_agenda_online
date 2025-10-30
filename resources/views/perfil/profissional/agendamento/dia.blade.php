@@ -21,7 +21,27 @@
 <div class="max-w-5xl mx-auto px-4 py-6">
     <h1 class="titulo_1">📋 Lista de Agendamentos</h1>
 
+    <div class="flex items-center justify-between mb-6">
+        <div class="flex items-center gap-4">
+            <a href="{{ route('perfil.profissional.agenda.dia', ['dia' => $dia->copy()->subDay()->format('Y-m-d')]) }}"
+            class="inline-flex items-center px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">
+                <x-heroicon-o-arrow-left class="w-4 h-4"/> Dia anterior
+            </a>
+
+            <span class="text-lg font-semibold text-gray-800">
+                {{ $dia->translatedFormat('d \d\e F \d\e Y') }}
+            </span>
+
+            <a href="{{ route('perfil.profissional.agenda.dia', ['dia' => $dia->copy()->addDay()->format('Y-m-d')]) }}"
+            class="inline-flex items-center px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">
+                Próximo dia <x-heroicon-o-arrow-right class="w-4 h-4"/>
+            </a>
+        </div>
+    </div>
+
+    
     <ul class="space-y-4">
+        
         @foreach ($agendamentosDoDia as $agendamento)
             @php
                 $badge = statusBadge($agendamento->status);
@@ -75,5 +95,24 @@
             </li>
         @endforeach
     </ul>
+
+    <br>
+    <div class="flex items-center justify-between mb-6">
+        <div class="flex items-center gap-4">
+            <a href="{{ route('perfil.profissional.agenda.dia', ['dia' => $dia->copy()->subDay()->format('Y-m-d')]) }}"
+            class="inline-flex items-center px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">
+                <x-heroicon-o-arrow-left class="w-4 h-4"/> Dia anterior
+            </a>
+
+            <span class="text-lg font-semibold text-gray-800">
+                {{ $dia->translatedFormat('d \d\e F \d\e Y') }}
+            </span>
+
+            <a href="{{ route('perfil.profissional.agenda.dia', ['dia' => $dia->copy()->addDay()->format('Y-m-d')]) }}"
+            class="inline-flex items-center px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">
+                Próximo dia <x-heroicon-o-arrow-right class="w-4 h-4"/>
+            </a>
+        </div>
+    </div>
 </div>
 @endsection
