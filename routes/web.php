@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdministradorController;
 use App\Http\Controllers\AdminUsuarioController;
+use App\Http\Controllers\AgendamentoController;
 use App\Http\Controllers\ClinicaController;
 use App\Http\Controllers\GerenteController;
 use App\Http\Controllers\PerfilGerenteController;
@@ -84,13 +85,25 @@ Route::prefix('conta/profissional')->name('perfil.profissional.')->group(functio
     Route::post('registrar', [ProfissionalLoginController::class, 'store'])->name('store');
 
     //area autenticada
-    Route::middleware('auth:profissional')->group(function () {
+    Route::middleware(['auth:profissional', 'profissional.auth'])->group(function () {
         Route::get('/{profissional}', [PerfilProfissionalController::class, 'show'])->name('show');
         Route::get('edit/{profissional}', [PerfilProfissionalController::class, 'edit'])->name('edit');
         Route::put('update/{profissional}', [PerfilProfissionalController::class, 'update'])->name('update');
         Route::delete('destroy/{profissional}', [PerfilProfissionalController::class, 'destroy'])->name('destroy');
 
-        Route::get('/agendamento/semanal', [PerfilProfissionalController::class, 'agendamentoSemanal'])->name('agendamento.semanal');
+        Route::get('agenda/dia/{dia?}', [PerfilProfissionalController::class, 'agendaDia'])->name('agenda.dia');
+        Route::get('agenda/semanal', [PerfilProfissionalController::class, 'agendaSemana'])->name('agenda.semana');
+        Route::get('agenda/mes/{mes?}', [PerfilProfissionalController::class, 'agendaMes'])->name('agenda.mes');
+        
+        //agendamentos
+        Route::prefix('/agendamento')->name('agendamento.')->controller(AgendamentoController::class)->group(function (){
+            Route::get('/', 'index')->name('index');
+            Route::post('/', 'store')->name('store');
+            Route::put('/{agendamento}', 'update')->name('update');
+            Route::delete('/{agendamento}', 'destroy')->name('destroy');
+            Route::get('configurar-disponibilidade', 'configurarDisponibilidade')->name('configurar.disponibilidade');
+            Route::post('definir-disponibilidade', 'definirDisponibilidade')->name('definir.disponibilidade');
+        });
     });
 });
 

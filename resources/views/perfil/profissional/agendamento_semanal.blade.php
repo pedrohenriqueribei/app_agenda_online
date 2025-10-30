@@ -12,11 +12,11 @@
         </span>
 
         <div class="space-x-2">
-            <a href="{{ route('perfil.profissional.agendamento.semanal', ['semana' => $inicioSemana->copy()->subWeek()->format('Y-m-d')]) }}"
+            <a href="{{ route('perfil.profissional.agenda.semana', ['semana' => $inicioSemana->copy()->subWeek()->format('Y-m-d')]) }}"
                class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 py-1 rounded">
                 ← Semana anterior
             </a>
-            <a href="{{ route('perfil.profissional.agendamento.semanal', ['semana' => $inicioSemana->copy()->addWeek()->format('Y-m-d')]) }}"
+            <a href="{{ route('perfil.profissional.agenda.semana', ['semana' => $inicioSemana->copy()->addWeek()->format('Y-m-d')]) }}"
                class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 py-1 rounded">
                 Próxima semana →
             </a>
@@ -26,7 +26,12 @@
     @foreach (\App\Enums\DiaSemana::todos() as $dia)
         <div class="mb-6">
             <div class="bg-blue-600 text-white px-4 py-2 rounded-t-md">
-                <h3 class="text-lg font-semibold">{{ $dia->value }}</h3>
+                @php
+                    $dataDoDia = $inicioSemana->copy()->addDays($loop->index);
+                @endphp
+                <h3 class="text-lg font-semibold">
+                    {{ $dia->value }}, {{ $dataDoDia->format('d/m') }}
+                </h3>
             </div>
             <div class="bg-white shadow-md rounded-b-md p-4">
                 @php
@@ -55,11 +60,11 @@
     @endforeach
 
     <div class="space-x-2">
-        <a href="{{ route('perfil.profissional.agendamento.semanal', ['semana' => $inicioSemana->copy()->subWeek()->format('Y-m-d')]) }}"
+        <a href="{{ route('perfil.profissional.agenda.semana', ['semana' => $inicioSemana->copy()->subWeek()->format('Y-m-d')]) }}"
             class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 py-1 rounded">
             ← Semana anterior
         </a>
-        <a href="{{ route('perfil.profissional.agendamento.semanal', ['semana' => $inicioSemana->copy()->addWeek()->format('Y-m-d')]) }}"
+        <a href="{{ route('perfil.profissional.agenda.semana', ['semana' => $inicioSemana->copy()->addWeek()->format('Y-m-d')]) }}"
             class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 py-1 rounded">
             Próxima semana →
         </a>

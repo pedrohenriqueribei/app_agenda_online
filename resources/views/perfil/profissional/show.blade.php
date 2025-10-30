@@ -31,15 +31,15 @@
             </div>
 
             <div class="mb-3">
-                <strong>Idade:</strong> {{ $profissional->idade }} anos
+                <strong>Idade:</strong> {{ $profissional->idade ?? 'Não informado'}}
             </div>
 
             <div class="mb-3">
-                <strong>Sexo:</strong> {{ $profissional->sexo->label() ?? 'Não informado' }}
+                <strong>Sexo:</strong> {{ $profissional->sexo?->label() ?? 'Não informado' }}
             </div>
 
             <div class="mb-3">
-                <strong>Estado Civil:</strong> {{ $profissional->estado_civil->label() ?? 'Não informado' }}
+                <strong>Estado Civil:</strong> {{ $profissional->estado_civil?->label() ?? 'Não informado' }}
             </div>
 
             <div class="mb-3">

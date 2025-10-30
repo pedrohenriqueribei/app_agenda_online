@@ -38,13 +38,13 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label for="password" class="block text-sm font-medium text-gray-700">Senha</label>
-                        <input type="password" name="password" id="password" required
+                        <input type="password" name="password" id="password" 
                             class="mt-1 block w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500">
                     </div>
 
                     <div>
                         <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Confirmar Senha</label>
-                        <input type="password" name="password_confirmation" id="password_confirmation" required
+                        <input type="password" name="password_confirmation" id="password_confirmation" 
                             class="mt-1 block w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500">
                         <span class="text-red-600 text-1xl">{{ $errors->first('password') }}</span>
                     </div>

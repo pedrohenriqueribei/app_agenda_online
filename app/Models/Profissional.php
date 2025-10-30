@@ -38,7 +38,8 @@ class Profissional extends Authenticatable
 
     protected $casts = [
         'sexo' => Sexo::class,
-        'estado_civil' => EstadoCivil::class
+        'estado_civil' => EstadoCivil::class,
+        'data_nascimento' => 'date',
     ];
 
     //clinicas
@@ -50,7 +51,10 @@ class Profissional extends Authenticatable
     //idade
     public function getIdadeAttribute()
     {
-        return Carbon::parse($this->data_nascimento)->age;
+        return $this->data_nascimento
+            ? Carbon::parse($this->data_nascimento)->age . ' anos'
+            : 'Não informado';
+
     }
 
     //enum estado civil

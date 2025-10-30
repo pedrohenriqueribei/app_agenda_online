@@ -14,7 +14,7 @@
         <!-- NOME -->
         <div>
             <label for="nome" class="block text-sm font-medium text-gray-700">Nome completo</label>
-            <input type="text" name="nome" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
+            <input type="text" name="nome" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" >
         </div>
 
         <!-- CPF -->
@@ -26,7 +26,7 @@
         <!-- EMAIL -->
         <div>
             <label for="email" class="block text-sm font-medium text-gray-700">E-mail</label>
-            <input type="email" name="email" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
+            <input type="email" name="email" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" >
         </div>
 
         <!-- TELEFONE -->
@@ -76,13 +76,13 @@
         <!-- SENHA -->
         <div>
             <label for="password" class="block text-sm font-medium text-gray-700">Senha</label>
-            <input type="password" name="password" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
+            <input type="password" name="password" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" >
         </div>
 
         <!-- CONFIRMAÇÃO DE SENHA -->
         <div>
             <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Confirmação de Senha</label>
-            <input type="password" name="password_confirmation" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
+            <input type="password" name="password_confirmation" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" >
         </div>
 
         <div class="pt-4">

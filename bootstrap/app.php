@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\ProfissionalAutenticado;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -14,6 +15,8 @@ return Application::configure(basePath: dirname(__DIR__))
         //registrando o meu middleware
         $middleware->alias([
             'session.timeout' => \App\Http\Middleware\RedirectOnSessionTimeout::class,
+            'profissional.auth' => ProfissionalAutenticado::class,
+
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

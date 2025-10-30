@@ -40,7 +40,8 @@ class Gerente extends Authenticatable
 
     protected $casts = [
         'sexo' => Sexo::class,
-        'estado_civil' => EstadoCivil::class
+        'estado_civil' => EstadoCivil::class,
+        'data_nascimento' => 'date',
     ];
 
     //clinica

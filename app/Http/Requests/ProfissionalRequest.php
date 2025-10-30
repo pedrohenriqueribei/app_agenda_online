@@ -38,8 +38,8 @@ class ProfissionalRequest extends FormRequest
             'foto'           => ['nullable', 'image', 'max:2048'],
             'password'       => $profissionalId ? ['nullable', 'string', 'min:8', 'confirmed'] : ['required', 'string', 'min:8', 'confirmed'],
             'especialidade'  => ['required', 'string', 'max:255'],
-            'estado_civil' => ['required', new Enum(EstadoCivil::class)],
-            'sexo' => ['required', new Enum(Sexo::class)],
+            'estado_civil' =>   ['required', new Enum(EstadoCivil::class)],
+            'sexo' =>           ['required', new Enum(Sexo::class)],
             'clinicas'       => ['nullable', 'array'],
             'clinicas.*'     => ['exists:clinicas,id'],
         ];
