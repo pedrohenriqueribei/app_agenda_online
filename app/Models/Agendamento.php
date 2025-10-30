@@ -43,4 +43,29 @@ class Agendamento extends Model
     {
         return $this->belongsTo(Usuario::class, 'usuario_id');
     }
+
+    public function getDataFormatadaAttribute(): string
+    {
+        return $this->data ? $this->data->format('d/m/Y') : '—';
+    }
+
+    public function getHoraInicioFormatadaAttribute(): string
+    {
+        return $this->hora_inicio ? $this->hora_inicio->format('H:i') : '—';
+    }
+
+    public function getHoraFimFormatadaAttribute(): string
+    {
+        return $this->hora_fim ? $this->hora_fim->format('H:i') : '—';
+    }
+
+    public function intervaloHorario(): string
+    {
+        if ($this->hora_inicio && $this->hora_fim) {
+            return $this->hora_inicio->format('H:i') . ' - ' . $this->hora_fim->format('H:i');
+        }
+
+        return '—';
+    }
+
 }

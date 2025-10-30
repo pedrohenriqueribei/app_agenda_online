@@ -55,7 +55,8 @@ class AgendamentoController extends Controller
      */
     public function show(Agendamento $agendamento)
     {
-        //
+        //visualizar
+        return view('perfil.profissional.agendamento.show', compact('agendamento'));
     }
 
     /**
@@ -83,6 +84,20 @@ class AgendamentoController extends Controller
         return redirect()->route('perfil.profissional.agenda.dia')->with('success', 'Agendamento atualizado!');
 
         
+    }
+
+    //form alterar
+    public function alterarForm (Agendamento $agendamento)
+    {
+        return view ('perfil.profissional.agendamento.alterar', compact('agendamento'));
+    }
+
+    //modificar o agendamento
+    public function alterar(AgendamentoRequest $request, Agendamento $agendamento)
+    {
+        $this->autorizar($agendamento);
+
+
     }
 
     /**

@@ -40,7 +40,7 @@
                 this.resultados = [];
             }
         }" class="relative">
-            <label for="usuario" class="block text-sm font-medium text-gray-700">Buscar Usuário</label>
+            <label for="usuario" class="block text-sm font-medium text-gray-700">Buscar Paciente</label>
             <input type="text"
                    id="usuario"
                    x-model="termo"

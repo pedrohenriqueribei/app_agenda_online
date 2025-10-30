@@ -32,17 +32,19 @@
                     <!-- Cliente -->
                     <div class="flex items-center gap-2 shrink-0">
                         <x-heroicon-o-user class="w-5 h-5 text-gray-500" />
-                        <p class="font-medium text-gray-700 whitespace-nowrap">{{ $agendamento->paciente?->nome }}</p>
+                        <a href="{{ route('perfil.profissional.agendamento.show', ['agendamento' => $agendamento])}}">
+                            <p class="font-medium text-gray-700 whitespace-nowrap">{{ $agendamento->paciente?->nome }}</p>
+                        </a>
                     </div>
 
                     <!-- Status -->
                     <div class="flex items-center gap-2 shrink-0">
-                        <div class="flex items-center gap-1 px-3 py-1 rounded-full {{ $badge['bg'] }}">
+                        <span class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full {{ $badge['bg'] }} pr-10">
                             <x-heroicon-o-{{ $badge['icon'] }} class="w-4 h-4 {{ $badge['text'] }}" />
-                            <span class="text-sm font-semibold {{ $badge['text'] }}">
+                            <span class="text-sm font-semibold {{ $badge['text'] }} pt-10">
                                 {{ $agendamento->status->label() }}
                             </span>
-                        </div>
+                        </span>
                     </div>
 
                     <!-- Modalidade -->

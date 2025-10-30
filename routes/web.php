@@ -112,7 +112,10 @@ Route::prefix('conta/profissional')->name('perfil.profissional.')->group(functio
             Route::get('configurar-disponibilidade', 'configurarDisponibilidade')->name('configurar.disponibilidade');
             Route::post('definir-disponibilidade', 'definirDisponibilidade')->name('definir.disponibilidade');
             Route::get('/edit/{agendamento}', 'edit')->name('edit');
-            Route::put('/store/{agendamento}', 'update')->name('update');
+            Route::put('/update/{agendamento}', 'update')->name('update');
+            Route::get('/show/{agendamento}', 'show')->name('show');
+            Route::get('/alterar/{agendamento}', 'alterarForm')->name('alterar');
+            Route::patch('/alterar/{agendamento}', 'alterar')->name('alterar');
         });
     });
 });
