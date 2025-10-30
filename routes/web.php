@@ -10,10 +10,20 @@ use App\Http\Controllers\PerfilProfissionalController;
 use App\Http\Controllers\ProfissionalController;
 use App\Http\Controllers\ProfissionalLoginController;
 use App\Http\Controllers\UsuarioController;
+use App\Models\Usuario;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return redirect()->route('home');
+});
+
+// rota para buscar usuário
+Route::get('api/usuarios/buscar', function (Request $request) {
+    $termo = $request->get('termo');
+    return Usuario::where('nome', 'like', "%{$termo}%")
+        ->limit(10)
+        ->get(['id', 'nome']);
 });
 
 Route::get('login', function(){
@@ -98,11 +108,11 @@ Route::prefix('conta/profissional')->name('perfil.profissional.')->group(functio
         //agendamentos
         Route::prefix('/agendamento')->name('agendamento.')->controller(AgendamentoController::class)->group(function (){
             Route::get('/', 'index')->name('index');
-            Route::post('/', 'store')->name('store');
-            Route::put('/{agendamento}', 'update')->name('update');
-            Route::delete('/{agendamento}', 'destroy')->name('destroy');
+            Route::delete('destroy/{agendamento}', 'destroy')->name('destroy');
             Route::get('configurar-disponibilidade', 'configurarDisponibilidade')->name('configurar.disponibilidade');
             Route::post('definir-disponibilidade', 'definirDisponibilidade')->name('definir.disponibilidade');
+            Route::get('/edit/{agendamento}', 'edit')->name('edit');
+            Route::put('/store/{agendamento}', 'update')->name('update');
         });
     });
 });
@@ -138,3 +148,4 @@ Route::prefix('usuario')->name('usuario.')->group(function(){
         Route::delete('destroy/{usuario}', [UsuarioController::class, 'destroy'])->name('destroy');
     });
 });
+

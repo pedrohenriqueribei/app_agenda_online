@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Enums\EspecieAgendamento;
+use App\Enums\ModalidadeAgendamento;
+use App\Enums\StatusAgendamento;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,18 +29,18 @@ class Agendamento extends Model
         'data' => 'date',
         'hora_inicio' => 'datetime:H:i',
         'hora_fim' => 'datetime:H:i',
-        'modalidade' => \App\Enums\ModalidadeAgendamento::class,
-        'especie' => \App\Enums\EspecieAgendamento::class,
-
+        'modalidade' => ModalidadeAgendamento::class,
+        'especie' => EspecieAgendamento::class,
+        'status' => StatusAgendamento::class,
     ];
 
     public function profissional()
     {
-        return $this->belongsTo(Profissional::class);
+        return $this->belongsTo(Profissional::class, 'profissional_id');
     }
 
     public function paciente()
     {
-        return $this->belongsTo(Usuario::class);
+        return $this->belongsTo(Usuario::class, 'usuario_id');
     }
 }

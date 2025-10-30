@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\StatusAgendamento;
 use App\Http\Requests\AgendamentoRequest;
 use App\Http\Requests\DisponibilidadeRequest;
 use App\Models\Agendamento;
@@ -35,23 +36,18 @@ class AgendamentoController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Agendamento $agendamento)
     {
         //
+        
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(AgendamentoRequest $request): RedirectResponse
+    public function store(AgendamentoRequest $request)
     {
-        //validar
-        $dados = $request->validated();
-        $dados['profissional_id'] = Auth::guard('profissional')->id();
-
-        $this->service->salvar($dados);
-
-        return back()->with('success', 'Agendamento criado com sucesso!');
+        
     }
 
     /**
@@ -67,7 +63,8 @@ class AgendamentoController extends Controller
      */
     public function edit(Agendamento $agendamento)
     {
-        //
+        //atualizar
+        return view ('perfil.profissional.agendamento.update', compact('agendamento'));
     }
 
     /**
@@ -75,12 +72,17 @@ class AgendamentoController extends Controller
      */
     public function update(AgendamentoRequest $request, Agendamento $agendamento)
     {
-        //
+        
         $this->autorizar($agendamento);
 
-        $this->service->atualizar($agendamento, $request->validated());
+        //alterar para status pendente
+        $agendamento->status = StatusAgendamento::PENDENTE;
 
-        return back()->with('success', 'Agendamento atualizado!');
+        $this->service->atualizar_usuario_status_pendente($agendamento, $request->validated());
+
+        return redirect()->route('perfil.profissional.agenda.dia')->with('success', 'Agendamento atualizado!');
+
+        
     }
 
     /**

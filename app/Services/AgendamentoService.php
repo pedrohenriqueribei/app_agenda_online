@@ -17,6 +17,13 @@ class AgendamentoService
         return $agendamento;
     }
 
+    //quando precisar atualizar o agendamento com o usuário e status pendente
+    public function atualizar_usuario_status_pendente(Agendamento $agendamento, array $dados): Agendamento
+    {
+        $agendamento->update($dados);
+        return $agendamento;
+    }
+
     public function excluir(Agendamento $agendamento): bool
     {
         return $agendamento->delete();
