@@ -69,7 +69,13 @@
 
                     <!-- Modalidade -->
                     <div class="flex items-center gap-2 shrink-0">
-                        <x-heroicon-o-academic-cap class="w-5 h-5 text-indigo-500" />
+                        @if($agendamento->modalidade === \App\Enums\ModalidadeAgendamento::ONLINE)
+                            <x-heroicon-o-device-phone-mobile class="w-5 h-5 text-indigo-500" />
+                        @endif
+
+                        @if($agendamento->modalidade === \App\Enums\ModalidadeAgendamento::PRESENCIAL)
+                            <x-heroicon-o-building-office class="w-5 h-5 text-indigo-500" />
+                        @endif
                         <p class="font-medium text-gray-700 whitespace-nowrap">{{ $agendamento->modalidade->label() }}</p>
                     </div>
 

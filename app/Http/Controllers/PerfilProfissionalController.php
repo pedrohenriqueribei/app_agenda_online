@@ -98,25 +98,49 @@ class PerfilProfissionalController extends Controller
     }
 
     //agendamento semanal
-    public function agendaSemana (Request $request) : View
+    public function agendaSemana(Request $request, ?string $data = null)
     {
+        // Define a data base (início da semana) — padrão: hoje
+        $inicioSemana = $data
+            ? Carbon::parse($data)->startOfWeek(Carbon::MONDAY)
+            : Carbon::now()->startOfWeek(Carbon::MONDAY);
 
+        $fimSemana = $inicioSemana->copy()->endOfWeek(Carbon::SUNDAY);
+
+        // Obtém o profissional autenticado
         $profissional = auth('profissional')->user();
 
-        $referencia = $request->query('semana')
-            ? Carbon::parse($request->query('semana'))
-            : now();
+        // Busca os agendamentos do período da semana
+        $agendamentos = Agendamento::where('profissional_id', $profissional->id)
+            ->whereBetween('data', [$inicioSemana, $fimSemana])
+            ->orderBy('data')
+            ->orderBy('hora_inicio')
+            ->get()
+            ->groupBy(fn($ag) => Carbon::parse($ag->data)->format('Y-m-d'));
 
-        $inicioSemana = $referencia->copy()->startOfWeek();
-        $fimSemana = $referencia->copy()->endOfWeek();
+        // Gera os dias da semana (segunda → domingo)
+        $diasDaSemana = collect();
+        $dia = $inicioSemana->copy();
+        while ($dia->lte($fimSemana)) {
+            $diasDaSemana->push($dia->copy());
+            $dia->addDay();
+        }
 
-        $diasSemana = collect(CarbonPeriod::create($inicioSemana, $fimSemana))->map(fn($dia) => $dia->format('l'));
+        // Define semana anterior e próxima
+        $semanaAnterior = $inicioSemana->copy()->subWeek();
+        $proximaSemana = $inicioSemana->copy()->addWeek();
 
-        $agendamentos = []; // Aqui você deve buscar os agendamentos por dia
-
-        return view('perfil.profissional.agendamento.semana', compact('profissional','agendamentos', 'inicioSemana', 'fimSemana'));
-
+        return view('perfil.profissional.agendamento.semana', [
+            'profissional' => $profissional,
+            'diasDaSemana' => $diasDaSemana,
+            'agendamentos' => $agendamentos,
+            'inicioSemana' => $inicioSemana,
+            'fimSemana' => $fimSemana,
+            'semanaAnterior' => $semanaAnterior,
+            'proximaSemana' => $proximaSemana,
+        ]);
     }
+
 
     /**
      * Agendamento por dia
@@ -145,12 +169,14 @@ class PerfilProfissionalController extends Controller
     }
 
     /**
-     * Agendamento por mês
+     * Exibe a agenda mensal do profissional.
      */
-    public function agendaMes(Request $request, $mes = null)
+    public function agendaMes(Request $request, ?string $mes = null)
     {
         // Define o mês atual ou o mês passado via URL
-        $mesAtual = $mes ? Carbon::createFromFormat('Y-m', $mes)->startOfMonth() : Carbon::now()->startOfMonth();
+        $mesAtual = $mes
+            ? Carbon::createFromFormat('Y-m', $mes)->startOfMonth()
+            : Carbon::now()->startOfMonth();
 
         // Obtém o profissional autenticado
         $profissional = auth('profissional')->user();
@@ -163,27 +189,30 @@ class PerfilProfissionalController extends Controller
             $dia->addDay();
         }
 
-        // Busca todos os agendamentos do mês para o profissional
-        $agendamentosBrutos = Agendamento::where('profissional_id', $profissional->id)
-            ->whereBetween('data', [$mesAtual->copy()->startOfMonth(), $mesAtual->copy()->endOfMonth()])
+        // Busca todos os agendamentos do mês
+        $agendamentos = Agendamento::where('profissional_id', $profissional->id)
+            ->whereBetween('data', [
+                $mesAtual->copy()->startOfMonth(),
+                $mesAtual->copy()->endOfMonth()
+            ])
             ->orderBy('data')
             ->orderBy('hora_inicio')
-            ->get();
+            ->get()
+            ->groupBy(fn($ag) => Carbon::parse($ag->data)->format('Y-m-d'));
 
-        // Agrupa os agendamentos por data (Y-m-d)
-        $agendamentos = [];
-        foreach ($agendamentosBrutos as $agendamento) {
-            $dataKey = Carbon::parse($agendamento->data)->format('Y-m-d');
-            $agendamentos[$dataKey][] = $agendamento;
-        }
-        
+        // Define os meses de navegação
+        $mesAnterior = $mesAtual->copy()->subMonth();
+        $proximoMes = $mesAtual->copy()->addMonth();
+
         return view('perfil.profissional.agendamento.mes', [
             'profissional' => $profissional,
             'mesAtual' => $mesAtual,
             'diasDoMes' => $diasDoMes,
             'agendamentos' => $agendamentos,
+            'mesAnterior' => $mesAnterior,
+            'proximoMes' => $proximoMes,
         ]);
-        
     }
+
 
 }

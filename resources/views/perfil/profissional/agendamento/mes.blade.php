@@ -72,11 +72,11 @@
                         @foreach ($agendamentosDoDia as $agendamento)
                             <li class="flex justify-between items-center bg-gray-50 p-2 rounded hover:bg-gray-100">
                                 <div>
-                                    <p class="font-medium text-gray-700">{{ $agendamento->cliente }}</p>
-                                    <p class="text-xs text-gray-500">{{ $agendamento->servico }}</p>
+                                    <p class="font-medium text-gray-700">{{ $agendamento->paciente?->primeiro_nome }}</p>
+                                    
                                 </div>
                                 <span class="text-xs bg-gray-200 text-gray-700 px-2 py-1 rounded-full">
-                                    {{ \Carbon\Carbon::parse($agendamento->hora)->format('H:i') }}
+                                    {{ $agendamento->hora_inicio_formatada }}
                                 </span>
                             </li>
                         @endforeach

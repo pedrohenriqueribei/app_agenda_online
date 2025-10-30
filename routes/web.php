@@ -102,7 +102,7 @@ Route::prefix('conta/profissional')->name('perfil.profissional.')->group(functio
         Route::delete('destroy/{profissional}', [PerfilProfissionalController::class, 'destroy'])->name('destroy');
 
         Route::get('agenda/dia/{dia?}', [PerfilProfissionalController::class, 'agendaDia'])->name('agenda.dia');
-        Route::get('agenda/semanal/{semana?}', [PerfilProfissionalController::class, 'agendaSemana'])->name('agenda.semana');
+        Route::get('agenda/semana/{data?}', [PerfilProfissionalController::class, 'agendaSemana'])->name('agenda.semana');
         Route::get('agenda/mes/{mes?}', [PerfilProfissionalController::class, 'agendaMes'])->name('agenda.mes');
         
         //agendamentos
