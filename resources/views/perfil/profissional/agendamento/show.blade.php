@@ -49,6 +49,65 @@
         @endif
     </div>
 
+    <div class="bg-white shadow rounded-lg p-6 space-y-4 mt-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            
+            <div>
+                <span class="text-sm text-gray-500">Nome:</span>
+                <p class="text-lg text-gray-700 font-medium">{{ $agendamento->paciente->nome }}</p>
+            </div>
+
+            <div>
+                <span class="text-sm text-gray-500">Email:</span>
+                <p class="text-lg text-gray-700 font-medium">{{ $agendamento->paciente->email }}</p>
+            </div>
+            <div>
+                <span class="text-sm text-gray-500">CPF:</span>
+                <p class="text-lg text-gray-700 font-medium">{{ $agendamento->paciente->cpf }}</p>
+            </div>
+            <div>
+                <span class="text-sm text-gray-500">Telefone:</span>
+                <p class="text-lg text-gray-700 font-medium">{{ $agendamento->paciente->telefone }}</p>
+            </div>
+            <div>
+                <span class="text-sm text-gray-500">Data de Nascimento:</span>
+                <p class="text-lg text-gray-700 font-medium">{{ $agendamento->paciente->data_nascimento->format('d/m/Y') }}</p>
+            </div>
+            <div>
+                <span class="text-sm text-gray-500">Idade:</span>
+                <p class="text-lg text-gray-700 font-medium">{{ $agendamento->paciente->idade }} anos</p>
+            </div>
+            <div>
+                <span class="text-sm text-gray-500">Sexo:</span>
+                <p class="text-lg text-gray-700 font-medium">{{ $agendamento->paciente->sexo->label() }}</p>
+            </div>
+            <div>
+                <span class="text-sm text-gray-500">Estado Civil:</span>
+                <p class="text-lg text-gray-700 font-medium">{{ $agendamento->paciente->estado_civil->label() }}</p>
+            </div>
+        </div>
+    </div>
+
+   
+    {{-- Endereço --}}
+    @if ($agendamento->paciente->endereco)
+        <div class="border-t pt-6">
+            <h3 class="text-lg text-gray-700 mb-4">Endereço</h3>
+
+            <div class="mb-4 border rounded p-4 bg-gray-50">
+                <p class="text-gray-700"><span class="text-sm text-gray-500">Logradouro:</span> {{ $agendamento->paciente->endereco->logradouro }}</p>
+                <p class="text-gray-700"><span class="text-sm text-gray-500">Número:</span> {{ $agendamento->paciente->endereco->numero }}</p>
+                <p class="text-gray-700"><span class="text-sm text-gray-500">Complemento:</span> {{ $agendamento->paciente->endereco->complemento }}</p>
+                <p class="text-gray-700"><span class="text-sm text-gray-500">CEP:</span> {{ $agendamento->paciente->endereco->cep }}</p>
+                <p class="text-gray-700"><span class="text-sm text-gray-500">Bairro:</span> {{ $agendamento->paciente->endereco->bairro ?? '-' }}</p>
+                <p class="text-gray-700"><span class="text-sm text-gray-500">Cidade:</span> {{ $agendamento->paciente->endereco->cidade }}</p>
+                <p class="text-gray-700"><span class="text-sm text-gray-500">Estado:</span> {{ $agendamento->paciente->endereco->estado }}</p>
+                <p class="text-gray-700"><span class="text-sm text-gray-500">País:</span> {{ $agendamento->paciente->endereco->pais }}</p>
+            </div>
+        </div>
+    @endif
+        
+
     <div class="mt-8 flex gap-4">
         <a href="{{ route('perfil.profissional.agendamento.alterar', $agendamento) }}"
            class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
