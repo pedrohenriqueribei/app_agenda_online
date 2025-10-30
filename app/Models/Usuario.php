@@ -25,6 +25,7 @@ class Usuario extends Authenticatable
         'endereco',
         'sexo',
         'estado_civil',
+        'password',
     ];
 
     protected $hidden = [

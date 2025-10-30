@@ -94,6 +94,12 @@ class UsuarioRequest extends FormRequest
             'password.string' => 'A senha deve ser um texto.',
             'password.min' => 'A senha deve ter no mínimo 8 caracteres.',
             'password.confirmed' => 'A confirmação da senha não corresponde.',
+
+            'logradouro.required' => 'O campo senha é obrigatório.',
+            'numero.required' => 'O campo senha é obrigatório.',
+            'bairro.required' => 'O campo senha é obrigatório.',
+            'cidade.required' => 'O campo senha é obrigatório.',
+            'estado.required' => 'O campo senha é obrigatório.',
         ];
     }
 }

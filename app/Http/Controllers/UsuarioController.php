@@ -67,7 +67,7 @@ class UsuarioController extends Controller
 
         //redirecionar
         return redirect()
-            ->route('perfil.usuario.show', $usuario)
+            ->route('home')
             ->with('success', 'Usuário cadastrado com sucesso!');
 
     }

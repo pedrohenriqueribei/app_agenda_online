@@ -1,8 +1,10 @@
 @extends('layouts.app')
 
+@section('title', 'Cadastrar Paciente')
+
 @section('content')
 <div class="max-w-4xl mx-auto mt-10 px-4">
-    <h2 class="text-2xl font-bold mb-6">Cadastrar Usuário</h2>
+    <h2 class="text-2xl font-bold mb-6">Cadastrar Paciente</h2>
 
     {{-- Erros de validação --}}
     @if ($errors->any())
@@ -19,7 +21,7 @@
     <form action="{{ route('usuario.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
         @csrf
 
-        @component('components.usuario.create_edit', ['usuario' => null])
+        @component('components.usuario.create_edit', ['usuario' => new \App\Models\Usuario() ])
         @endcomponent
 
         <div class="pt-6">
@@ -33,34 +35,39 @@
 
 @push('scripts')
 <script>
-document.getElementById('cep').addEventListener('blur', function () {
-    const cep = this.value.replace(/\D/g, '');
+document.addEventListener('DOMContentLoaded', function () {
+    const cepInput = document.getElementById('cep');
+    if (!cepInput) return;
 
-    if (cep.length === 8) {
-        fetch(`https://viacep.com.br/ws/${cep}/json/`)
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Resposta inválida do servidor');
+    cepInput.addEventListener('blur', function () {
+        const cep = this.value.replace(/\D/g, '');
+
+        if (cep.length === 8) {
+            fetch(`https://viacep.com.br/ws/${cep}/json/`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Resposta inválida do servidor');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (!data.erro) {
+                        document.getElementById('logradouro').value = data.logradouro || '';
+                        document.getElementById('complemento').value = data.complemento || '';
+                        document.getElementById('bairro').value = data.bairro || '';
+                        document.getElementById('cidade').value = data.localidade || '';
+                        document.getElementById('estado').value = data.uf || '';
+                        document.getElementById('pais').value = 'Brasil';
+                    } else {
+                        alert('CEP não encontrado.');
+                    }
+                })
+                .catch((error) => {
+                    console.error('Erro ao buscar o CEP:', error);
+                    alert('Erro ao buscar o CEP. Verifique sua conexão ou tente novamente.');
+                });
         }
-        return response.json();
-    })
-    .then(data => {
-        if (!data.erro) {
-            document.getElementById('logradouro').value = data.logradouro || '';
-            document.getElementById('complemento').value = data.complemento || '';
-            document.getElementById('bairro').value = data.bairro || '';
-            document.getElementById('cidade').value = data.localidade || '';
-            document.getElementById('estado').value = data.uf || '';
-            document.getElementById('pais').value = data.pais || 'Brasil';
-        } else {
-            alert('CEP não encontrado.');
-        }
-    })
-    .catch((error) => {
-        console.error('Erro ao buscar o CEP:', error);
-        alert('Erro ao buscar o CEP. Verifique sua conexão ou tente novamente.');
     });
-    }
 });
 </script>
 @endpush

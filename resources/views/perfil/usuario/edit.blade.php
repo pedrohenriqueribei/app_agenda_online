@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+
+@section('title', 'Atualizar Paciente')
+
 @section('content')
 <div class="max-w-4xl mx-auto mt-10 px-4">
     <h2 class="text-2xl font-bold mb-6">Atualizaçãr Cadastro Usuário</h2>

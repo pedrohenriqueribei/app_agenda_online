@@ -44,7 +44,7 @@
             <input type="date" name="data_nascimento" id="data_nascimento"
                 value="{{ old('data_nascimento') ?? (isset($usuario) && $usuario->data_nascimento ? \Carbon\Carbon::parse($usuario->data_nascimento)->format('Y-m-d') : '') }}"
                 class="w-full border border-gray-300 rounded px-3 py-2">
-            @error('nome')
+            @error('data_nascimento')
                 <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
             @enderror
         </div>
@@ -64,7 +64,8 @@
             <select name="sexo" id="sexo" class="w-full border border-gray-300 rounded px-3 py-2">
                 <option value="">Selecione</option>
                 @foreach(App\Enums\Sexo::cases() as $sexo)
-                    <option value="{{ $sexo->value }}" {{ old('sexo', $usuario->sexo?->value ?? $usuario->sexo) === $sexo->value ? 'selected' : '' }}>
+                    <option value="{{ $sexo->value }}"
+                        {{ old('sexo', optional($usuario)->sexo?->value ?? optional($usuario)->sexo) === $sexo->value ? 'selected' : '' }}>
                         {{ $sexo->label() }}
                     </option>
                 @endforeach
@@ -79,7 +80,7 @@
                 <option value="">Selecione</option>
                 @foreach(App\Enums\EstadoCivil::cases() as $estado)
                     <option value="{{ $estado->value }}" 
-                        {{ old('estado_civil', $usuario->estado_civil?->value ?? $usuario->estado_civil) === $estado->value ? 'selected' : '' }}>
+                        {{ old('estado_civil', optional($usuario)->estado_civil?->value ?? optional($usuario)->estado_civil) === $estado->value ? 'selected' : '' }}>
                         {{ $estado->label() }}
                     </option>
                 @endforeach
