@@ -30,7 +30,7 @@ class AgendamentoRequest extends FormRequest
             'data' =>        ['required', 'date', 'after_or_equal:today'],
             'hora_inicio' => ['required', 'date_format:H:i'],
             'hora_fim' =>    ['required', 'date_format:H:i', 'after:hora_inicio'],
-            'usuario_id' =>  ['nullable', 'exists:usuarios,id'],
+            'usuario_id' =>  ['required', 'exists:usuarios,id'],
             'observacoes' => ['nullable', 'string'],
 
             // novos campos com enum
@@ -99,8 +99,8 @@ class AgendamentoRequest extends FormRequest
             'profissional_id.required' => 'O campo profissional é obrigatório.',
             'profissional_id.exists' => 'O profissional selecionado é inválido.',
 
-            'paciente_id.required' => 'O campo paciente é obrigatório.',
-            'paciente_id.exists' => 'O paciente selecionado é inválido.',
+            'usuario_id.required' => 'O campo paciente é obrigatório.',
+            'usuario_id.exists' => 'O paciente selecionado é inválido.',
 
             'data.required' => 'O campo data é obrigatório.',
             'data.date' => 'O campo data não contém uma data válida.',
