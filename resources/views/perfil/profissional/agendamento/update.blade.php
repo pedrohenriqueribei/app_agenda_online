@@ -95,7 +95,7 @@
                     name="data"
                     id="data"
                     class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
-                    value="{{ $agendamento->hora_inicio->format('Y-m-d') }}">
+                    value="{{ $agendamento->data->format('Y-m-d') }}">
             </div>
 
             <!-- Hora de Início -->
