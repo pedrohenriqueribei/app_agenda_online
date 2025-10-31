@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Enums\EspecieAgendamento;
 use App\Enums\ModalidadeAgendamento;
+use App\Models\Agendamento;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
 
@@ -67,6 +68,26 @@ class AgendamentoRequest extends FormRequest
                 $validator->errors()->add('hora_fim', 'A duração mínima da consulta é de 50 minutos.');
             }
         });
+
+        $validator->after(function ($validator) {
+            $profissionalId = $this->input('profissional_id');
+            $data = $this->input('data');
+            $horaInicio = $this->input('hora_inicio');
+
+            $existe = Agendamento::where('profissional_id', $profissionalId)
+                ->whereDate('data', $data)
+                ->whereTime('hora_inicio', $horaInicio)
+                ->when($this->agendamento, function ($query) {
+                    // Ignora o próprio registro em caso de edição
+                    $query->where('id', '!=', $this->agendamento->id);
+                })
+                ->exists();
+
+            if ($existe) {
+                $validator->errors()->add('hora_inicio', 'Já existe um agendamento para este profissional nesta data e horário.');
+            }
+        });
+
     }
 
     /**
