@@ -54,42 +54,43 @@
             
             <div>
                 <span class="text-sm text-gray-500">Nome:</span>
-                <p class="text-lg text-gray-700 font-medium">{{ $agendamento->paciente->nome }}</p>
+                <p class="text-lg text-gray-700 font-medium">{{ $agendamento->paciente->nome ?? '-' }}</p>
             </div>
 
             <div>
                 <span class="text-sm text-gray-500">Email:</span>
-                <p class="text-lg text-gray-700 font-medium">{{ $agendamento->paciente->email }}</p>
+                <p class="text-lg text-gray-700 font-medium">{{ $agendamento->paciente->email  ?? '-' }}</p>
             </div>
             <div>
                 <span class="text-sm text-gray-500">CPF:</span>
-                <p class="text-lg text-gray-700 font-medium">{{ $agendamento->paciente->cpf }}</p>
+                <p class="text-lg text-gray-700 font-medium">{{ $agendamento->paciente->cpf  ?? '-' }}</p>
             </div>
             <div>
                 <span class="text-sm text-gray-500">Telefone:</span>
-                <p class="text-lg text-gray-700 font-medium">{{ $agendamento->paciente->telefone }}</p>
+                <p class="text-lg text-gray-700 font-medium">{{ $agendamento->paciente->telefone  ?? '-' }}</p>
             </div>
             <div>
                 <span class="text-sm text-gray-500">Data de Nascimento:</span>
-                <p class="text-lg text-gray-700 font-medium">{{ $agendamento->paciente->data_nascimento->format('d/m/Y') }}</p>
+                <p class="text-lg text-gray-700 font-medium">@if($agendamento->paciente) {{ $agendamento->paciente->data_nascimento->format('d/m/Y')  }} @endif</p>
             </div>
             <div>
                 <span class="text-sm text-gray-500">Idade:</span>
-                <p class="text-lg text-gray-700 font-medium">{{ $agendamento->paciente->idade }} anos</p>
+                <p class="text-lg text-gray-700 font-medium">@if($agendamento->paciente) {{ $agendamento->paciente->idade }} anos @endif</p>
             </div>
             <div>
                 <span class="text-sm text-gray-500">Sexo:</span>
-                <p class="text-lg text-gray-700 font-medium">{{ $agendamento->paciente->sexo->label() }}</p>
+                <p class="text-lg text-gray-700 font-medium">@if($agendamento->paciente) {{ $agendamento->paciente->sexo->label() }} @endif</p>
             </div>
             <div>
                 <span class="text-sm text-gray-500">Estado Civil:</span>
-                <p class="text-lg text-gray-700 font-medium">{{ $agendamento->paciente->estado_civil->label() }}</p>
+                <p class="text-lg text-gray-700 font-medium">@if($agendamento->paciente) {{ $agendamento->paciente->estado_civil->label() }} @endif</p>
             </div>
         </div>
     </div>
 
    
     {{-- Endereço --}}
+    @if($agendamento->paciente)
     @if ($agendamento->paciente->endereco)
         <div class="border-t pt-6">
             <h3 class="text-lg text-gray-700 mb-4">Endereço</h3>
@@ -106,7 +107,7 @@
             </div>
         </div>
     @endif
-        
+    @endif   
 
     <div class="mt-8 flex gap-4">
         <a href="{{ route('perfil.profissional.agendamento.alterar', $agendamento) }}"

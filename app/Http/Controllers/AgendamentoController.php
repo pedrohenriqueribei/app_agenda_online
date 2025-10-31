@@ -99,7 +99,7 @@ class AgendamentoController extends Controller
 
         $this->service->atualizar($agendamento, $request->validated());
         
-        return redirect()->route('perfil.profissional.agenda.dia')->with('success', 'Agendamento atualizado!!');
+        return redirect()->route('perfil.profissional.agenda.dia', ['dia' => $agendamento->data])->with('success', 'Agendamento atualizado!!');
     }
 
     /**

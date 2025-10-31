@@ -44,7 +44,7 @@
                     @input.debounce.300ms="buscar"
                     class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
                     autocomplete="off"
-                    placeholder="{{ $agendamento->paciente->nome }}">
+                    placeholder="{{ $agendamento->paciente->nome ?? 'Digite o nome do paciente' }}">
                 <input type="hidden" name="usuario_id" :value="selecionado?.id">
 
                 <!-- Sugestões -->
