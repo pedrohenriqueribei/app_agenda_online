@@ -18,7 +18,8 @@
         <p><span class="font-semibold">Email:</span> {{ $usuario->email }}</p>
         <p><span class="font-semibold">Telefone:</span> {{ $usuario->telefone }}</p>
         <p><span class="font-semibold">CPF:</span> {{ $usuario->cpf }}</p>
-        <p><span class="font-semibold">Data de Nascimento:</span> {{ \Carbon\Carbon::parse($usuario->data_nascimento)->format('d/m/Y') }}</p>
+        <p><span class="font-semibold">Data de Nascimento:</span> {{ $usuario->data_nascimento_formatado }}</p>
+        <p><span class="font-semibold">Idade:</span> {{ $usuario->idade }} anos</p>
         <p><span class="font-semibold">Sexo:</span> {{ $usuario->sexo->label() ?? '-' }}</p>
         <p><span class="font-semibold">Estado Civil:</span> {{ $usuario->estado_civil->label() ?? '-' }}</p>
     </div>

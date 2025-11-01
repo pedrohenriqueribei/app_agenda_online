@@ -15,7 +15,7 @@
     @endif
 
     <div class="mb-4">
-        <a href="{{ route('usuario.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded">
+        <a href="{{ route('admin.usuario.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded">
             + Novo Usuário
         </a>
     </div>
@@ -25,7 +25,7 @@
             <thead class="bg-gray-100">
                 <tr>
                     <th class="px-4 py-2 text-left">Nome</th>
-                    <th class="px-4 py-2 text-left">Email</th>
+                    <th class="px-4 py-2 text-center">Idade</th>
                     <th class="px-4 py-2 text-left">Telefone</th>
                     
                     <th class="px-4 py-2 text-left">Sexo</th>
@@ -36,8 +36,8 @@
             <tbody>
                 @forelse ($usuarios as $usuario)
                     <tr class="border-t">
-                        <td class="px-4 py-2">{{ $usuario->nome }}</td>
-                        <td class="px-4 py-2">{{ $usuario->email }}</td>
+                        <td class="px-4 py-2 text-right">{{ $usuario->nome }}</td>
+                        <td class="px-4 py-2 text-center">{{ $usuario->idade }}</td>
                         <td class="px-4 py-2">{{ $usuario->telefone }}</td>
                         
                         <td class="px-4 py-2">{{ $usuario->sexo->label() ?? '-' }}</td>

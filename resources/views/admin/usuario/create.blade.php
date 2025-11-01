@@ -14,16 +14,15 @@
         </div>
     @endif
 
-    <form action="{{ route('admin.usuario.update', $usuario) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+    <form action="{{ route('admin.usuario.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
         @csrf
-        @method('PUT')
 
-        @component('components.usuario.create_edit', ['usuario' => $usuario ])
+        @component('components.usuario.create_edit', ['usuario' => new \App\Models\Usuario() ])
         @endcomponent
 
         <div class="pt-6">
             <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
-                Atualizar
+                Cadastrar
             </button>
         </div>
     </form>

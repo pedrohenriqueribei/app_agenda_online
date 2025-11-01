@@ -79,8 +79,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::prefix('/usuario')->name('usuario.')->group(function(){
             Route::get('/', [AdminUsuarioController::class, 'index'])->name('index');
+            Route::get('create', [AdminUsuarioController::class, 'create'])->name('create');
+            Route::post('store', [AdminUsuarioController::class,  'store'])->name('store');
             Route::get('/show/{usuario}', [AdminUsuarioController::class, 'show'])->name('show');
-             Route::get('/edit/{usuario}',  [AdminUsuarioController::class, 'edit'])->name('edit');
+            Route::get('/edit/{usuario}',  [AdminUsuarioController::class, 'edit'])->name('edit');
             Route::put('/update/{usuario}',  [AdminUsuarioController::class, 'update'])->name('update');
             Route::delete('/delete/{usuario}',  [AdminUsuarioController::class, 'destroy'])->name('destroy');
         });
