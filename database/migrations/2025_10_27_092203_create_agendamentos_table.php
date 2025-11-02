@@ -19,11 +19,18 @@ return new class extends Migration
                 ->constrained('profissionais')
                 ->cascadeOnDelete();
 
+            //paciente
             $table->foreignId('usuario_id')
                 ->nullable()
                 ->constrained('usuarios')
                 ->cascadeOnDelete();
             
+            //clinica
+            $table->foreignId('clinica_id')
+                ->constrained('clinicas')
+                ->cascadeOnDelete();
+
+            //atributos (colunas)
             $table->date('data');
             $table->time('hora_inicio');
             $table->time('hora_fim');
@@ -34,7 +41,7 @@ return new class extends Migration
 
             $table->timestamps();
 
-            $table->unique(['profissional_id', 'data', 'hora_inicio'], 'agendamento_unico');
+            $table->unique(['profissional_id', 'clinica_id',  'data', 'hora_inicio'], 'agendamento_unico');
         });
     }
 

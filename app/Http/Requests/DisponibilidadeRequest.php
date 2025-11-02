@@ -26,13 +26,14 @@ class DisponibilidadeRequest extends FormRequest
     {
     
             return [
+                'clinica_id' => ['required', 'exists:clinicas,id'],
                 'data_inicio' => ['required', 'date', 'after_or_equal:today'],
                 'data_fim' => ['required', 'date', 'after_or_equal:data_inicio'],
                 'hora_inicio' => ['required', 'date_format:H:i'],
                 'hora_fim' => ['required', 'date_format:H:i', 'after:hora_inicio'],
                 'modalidade' => ['nullable', new Enum(ModalidadeAgendamento::class)],
                 'especie' => ['nullable', new Enum(EspecieAgendamento::class)],
-                'observação' => ['nullable', 'string'],
+                'observacoes' => ['nullable', 'string'],
             ];
 
     }
@@ -58,6 +59,9 @@ class DisponibilidadeRequest extends FormRequest
     public function messages(): array
     {
         return [
+            'clinica_id.required' => 'Selecione uma clínica.',
+            'clinica_id.exists' => 'A clínica selecionada é inválida.',
+            
             'data_inicio.required' => 'A data de início é obrigatória.',
             'data_inicio.date' => 'A data de início deve ser uma data válida.',
             'data_inicio.after_or_equal' => 'A data de início deve ser hoje ou posterior.',

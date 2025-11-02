@@ -6,6 +6,7 @@ use App\Enums\StatusAgendamento;
 use App\Http\Requests\AgendamentoRequest;
 use App\Http\Requests\DisponibilidadeRequest;
 use App\Models\Agendamento;
+use App\Models\Profissional;
 use App\Services\AgendamentoService;
 use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
@@ -120,7 +121,24 @@ class AgendamentoController extends Controller
      */
     public function configurarDisponibilidade()
     {
-        return view('perfil.profissional.configurar_disponibilidade');
+        /**
+         * @var \App\Models\Profissional $profissional
+         */
+
+        //Obtém o profissional autenticado pelo guard 'profissional'
+        $profissional = Auth::guard('profissional')->user();
+
+        if (! $profissional) {
+            abort(403, 'Profissional não autenticado.');
+        }
+
+        $profissional->load('clinicas');
+
+        return view('perfil.profissional.configurar_disponibilidade', [
+            'profissional' => $profissional,
+            'clinicas' => $profissional->clinicas,
+        ]);
+
     }
 
     /**
@@ -147,6 +165,7 @@ class AgendamentoController extends Controller
 
                 // Salva a disponibilidade
                 $disponibilidadesCriadas[] = Agendamento::create([
+                    'clinica_id' => $dados['clinica_id'], 
                     'data' => $data->toDateString(),
                     'hora_inicio' => $horaAtual->format('H:i'),
                     'hora_fim' => $proximaHora->format('H:i'),
@@ -160,7 +179,7 @@ class AgendamentoController extends Controller
             }
         }
 
-        return redirect()->back()->with('success', count($disponibilidadesCriadas) . 'Disponibilidades criadas com sucesso.');
+        return redirect()->back()->with('success', count($disponibilidadesCriadas) . ' Disponibilidades criadas com sucesso.');
 
     }
 

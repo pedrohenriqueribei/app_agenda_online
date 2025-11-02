@@ -23,6 +23,13 @@
         </div>
     @endif
 
+    <!-- Mensagens de sucesso -->
+    @if (session('success'))
+        <div class="mb-6 p-4 bg-green-100 text-green-800 rounded-lg">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <form action="{{ route('perfil.profissional.agendamento.definir.disponibilidade') }}" method="POST" class="space-y-4">
         @csrf
 
@@ -81,6 +88,23 @@
             </select>
             @error('especie')
                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <!-- Escolher clínica -->
+        <div>
+            <label for="clinica_id" class="block text-sm font-semibold text-gray-700 mb-2">
+                Clínica
+            </label>
+            <select name="clinica_id" id="clinica_id" required
+                class="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500">
+                <option value="">Selecione uma clínica</option>
+                @foreach ($clinicas as $clinica)
+                    <option value="{{ $clinica->id }}">{{ $clinica->nome }}</option>
+                @endforeach
+            </select>
+            @error('clinica_id')
+                <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
             @enderror
         </div>
 
