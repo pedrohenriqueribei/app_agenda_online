@@ -65,8 +65,12 @@ class AgendamentoController extends Controller
      */
     public function edit(Agendamento $agendamento)
     {
+        $profissional = $this->getProfissional();
+
+        $profissional->load('clinicas');
+
         //atualizar
-        return view ('perfil.profissional.agendamento.update', compact('agendamento'));
+        return view ('perfil.profissional.agendamento.update', ['agendamento' => $agendamento, 'clinicas' => $profissional->clinicas]);
     }
 
     /**
@@ -90,7 +94,11 @@ class AgendamentoController extends Controller
     //form alterar
     public function alterarForm (Agendamento $agendamento)
     {
-        return view ('perfil.profissional.agendamento.alterar', compact('agendamento'));
+        $profissional = $this->getProfissional();
+
+        $profissional->load('clinicas');
+
+        return view ('perfil.profissional.agendamento.alterar', ['agendamento' => $agendamento, 'clinicas' => $profissional->clinicas]);
     }
 
     //modificar o agendamento
@@ -116,10 +124,7 @@ class AgendamentoController extends Controller
         return back()->with('success', 'Agendamento removido!');
     }
 
-    /**
-     * Profissional configurar disponibilidade é definir os dias e horários da semana que irá realizar atendimento
-     */
-    public function configurarDisponibilidade()
+    private function getProfissional() : Profissional
     {
         /**
          * @var \App\Models\Profissional $profissional
@@ -131,6 +136,16 @@ class AgendamentoController extends Controller
         if (! $profissional) {
             abort(403, 'Profissional não autenticado.');
         }
+
+        return $profissional;
+    }
+
+    /**
+     * Profissional configurar disponibilidade é definir os dias e horários da semana que irá realizar atendimento
+     */
+    public function configurarDisponibilidade()
+    {
+        $profissional = $this->getProfissional();
 
         $profissional->load('clinicas');
 

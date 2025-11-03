@@ -119,6 +119,25 @@
             </div>
         </div>
 
+        <!-- Escolher clínica -->
+        <div>
+            <label for="clinica_id" class="block text-sm font-semibold text-gray-700 mb-2">
+                Clínica
+            </label>
+            <select name="clinica_id" id="clinica_id" required
+                class="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500">
+                <option value="">Selecione uma clínica</option>
+                @foreach ($clinicas as $clinica)
+                    <option value="{{ $clinica->id }}" {{ $agendamento->clinica_id == $clinica->id ? 'selected' : '' }}>
+                        {{ $clinica->nome }}
+                    </option>
+                @endforeach
+            </select>
+            @error('clinica_id')
+                <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
+            @enderror
+        </div>
+
         <!-- 📄 Observação -->
         <div>
             <label for="observacoes" class="block text-sm font-medium text-gray-700">Observação</label>
