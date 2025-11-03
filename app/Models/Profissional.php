@@ -48,6 +48,12 @@ class Profissional extends Authenticatable
         return $this->belongsToMany(Clinica::class, 'clinica_profissional');
     }
 
+    //agendamentos
+    public function agendamentos()
+    {
+        return $this->hasMany(Agendamento::class);
+    }
+
     //idade
     public function getIdadeAttribute()
     {

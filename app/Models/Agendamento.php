@@ -45,6 +45,11 @@ class Agendamento extends Model
         return $this->belongsTo(Usuario::class, 'usuario_id');
     }
 
+    public function clinica()
+    {
+        return $this->belongsTo(Clinica::class);
+    }
+
     public function getDataFormatadaAttribute(): string
     {
         return $this->data ? $this->data->format('d/m/Y') : '—';

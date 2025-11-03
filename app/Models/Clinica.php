@@ -42,4 +42,10 @@ class Clinica extends Model
         return $this->hasMany(Gerente::class);
     }
 
+    //agendamentos
+    public function agendamentos()
+    {
+        return $this->hasMany(Agendamento::class);
+    }
+
 }

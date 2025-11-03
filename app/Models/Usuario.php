@@ -39,6 +39,12 @@ class Usuario extends Authenticatable
         'data_nascimento' => 'date',
     ];
 
+    //agendamentos
+    public function agendamentos()
+    {
+        return $this->hasMany(Agendamento::class);
+    }
+
     //endereço
     public function endereco()
     {

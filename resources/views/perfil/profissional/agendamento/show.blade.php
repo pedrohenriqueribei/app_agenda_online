@@ -9,35 +9,54 @@
 
     <div class="bg-white shadow rounded-lg p-6 space-y-4">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Nome do profissional -->
             <div>
                 <span class="text-sm text-gray-500">Profissional</span>
                 <p class="text-lg text-gray-700 font-medium">{{ $agendamento->profissional->nome ?? '—' }}</p>
             </div>
+
+            <!-- Nome do paciente -->
             <div>
                 <span class="text-sm text-gray-500">Paciente</span>
                 <p class="text-lg text-gray-700 font-medium">{{ $agendamento->paciente->nome ?? '—' }}</p>
             </div>
+
+            <!-- Data do atendimente -->
             <div>
                 <span class="text-sm text-gray-500">Data</span>
                 <p class="text-lg text-gray-700 font-medium">{{ $agendamento->data_formatada }}</p>
             </div>
+
+            <!-- Hora do atendimento -->
             <div>
                 <span class="text-sm text-gray-500">Horário</span>
                 <p class="text-lg text-gray-700 font-medium">
                     {{ $agendamento->hora_inicio_formatada }} - {{ $agendamento->hora_fim_formatada }}
                 </p>
             </div>
+
+            <!-- Modalidade -->
             <div>
                 <span class="text-sm text-gray-500">Modalidade</span>
                 <p class="text-lg text-gray-700 font-medium">{{ $agendamento->modalidade->label() ?? '—' }}</p>
             </div>
+
+            <!-- Espécie -->
             <div>
                 <span class="text-sm text-gray-500">Espécie</span>
                 <p class="text-lg text-gray-700 font-medium">{{ $agendamento->especie->label() ?? '—' }}</p>
             </div>
+
+            <!-- Status -->
             <div>
                 <span class="text-sm text-gray-500">Status</span>
                 <p class="text-lg text-gray-700 font-medium">{{ $agendamento->status->label() ?? '—' }}</p>
+            </div>
+
+            <!-- Clínica -->
+            <div>
+                <span class="text-sm text-gray-500">Clínica</span>
+                <p class="text-lg text-gray-700 font-medium">{{ $agendamento->clinica->nome ?? '—' }}</p>
             </div>
         </div>
 
@@ -90,10 +109,10 @@
 
    
     {{-- Endereço --}}
-    @if($agendamento->paciente)
+    
     @if ($agendamento->paciente->endereco)
         <div class="border-t pt-6">
-            <h3 class="text-lg text-gray-700 mb-4">Endereço</h3>
+            <h3 class="text-lg text-gray-700 mb-4">Endereço do Paciente</h3>
 
             <div class="mb-4 border rounded p-4 bg-gray-50">
                 <p class="text-gray-700"><span class="text-sm text-gray-500">Logradouro:</span> {{ $agendamento->paciente->endereco->logradouro }}</p>
@@ -107,7 +126,7 @@
             </div>
         </div>
     @endif
-    @endif   
+     
 
     <div class="mt-8 flex gap-4">
         <a href="{{ route('perfil.profissional.agendamento.alterar', $agendamento) }}"
