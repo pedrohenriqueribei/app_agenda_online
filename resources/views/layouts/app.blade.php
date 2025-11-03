@@ -18,6 +18,7 @@
 
         {{-- CONTEÚDO PRINCIPAL --}}
         <main class="flex-1 p-6">
+            @include('partials.alerts')
             @yield('content')
         </main>
     </div>

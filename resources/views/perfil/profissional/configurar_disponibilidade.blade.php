@@ -13,23 +13,6 @@
 <div class="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-md">
     <h2 class="titulo_2">Configurar Disponibilidade de Agendamento</h2>
 
-    @if($errors->any())
-        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-            <ul class="list-disc pl-5">
-                @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
-    <!-- Mensagens de sucesso -->
-    @if (session('success'))
-        <div class="mb-6 p-4 bg-green-100 text-green-800 rounded-lg">
-            {{ session('success') }}
-        </div>
-    @endif
-
     <form action="{{ route('perfil.profissional.agendamento.definir.disponibilidade') }}" method="POST" class="space-y-4">
         @csrf
 
