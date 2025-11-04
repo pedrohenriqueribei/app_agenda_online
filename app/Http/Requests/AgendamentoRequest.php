@@ -27,7 +27,7 @@ class AgendamentoRequest extends FormRequest
     {
         return [
             //
-            'data' =>        ['required', 'date', 'after_or_equal:today'],
+            'data' =>        ['required', 'date'], //removi a validação, 'after_or_equal:today' em desenvolvimento
             'hora_inicio' => ['required', 'date_format:H:i'],
             'hora_fim' =>    ['required', 'date_format:H:i', 'after:hora_inicio'],
             'usuario_id' =>  ['required', 'exists:usuarios,id'],
@@ -104,6 +104,7 @@ class AgendamentoRequest extends FormRequest
 
             'data.required' => 'O campo data é obrigatório.',
             'data.date' => 'O campo data não contém uma data válida.',
+            'data.after_or_equal' => 'Agendamento não pode ser feito nesta data.',
 
             'hora_inicio.required' => 'O campo hora de início é obrigatório.',
             'hora_inicio.date_format' => 'O formato da hora de início deve ser HH:MM (ex: 14:30).',
