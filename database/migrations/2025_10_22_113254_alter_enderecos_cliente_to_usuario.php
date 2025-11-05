@@ -21,7 +21,7 @@ return new class extends Migration
 
             // Define a chave estrangeira
             $table->foreign('usuario_id')
-                  ->references('id')->on('pacientes')
+                  ->references('id')->on('usuarios')
                   ->onDelete('cascade');
 
         });

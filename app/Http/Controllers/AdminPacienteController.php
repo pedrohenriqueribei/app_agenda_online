@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PacienteRequest;
 use App\Http\Requests\PacienteUpdateRequest;
-use App\Http\Requests\UsuarioUpdateRequest;
 use App\Models\Paciente;
 use App\Services\pacienteService;
 use Illuminate\Http\Request;
