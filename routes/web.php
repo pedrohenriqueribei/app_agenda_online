@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdministradorController;
-use App\Http\Controllers\AdminUsuarioController;
+use App\Http\Controllers\AdminPacienteController;
 use App\Http\Controllers\AgendamentoController;
 use App\Http\Controllers\ClinicaController;
 use App\Http\Controllers\GerenteController;
@@ -10,7 +10,7 @@ use App\Http\Controllers\PerfilProfissionalController;
 use App\Http\Controllers\ProfissionalController;
 use App\Http\Controllers\ProfissionalLoginController;
 use App\Http\Controllers\ProfissionalPacienteController;
-use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\PacienteController;
 use App\Models\Paciente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -79,13 +79,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
         });
 
         Route::prefix('/paciente')->name('paciente.')->group(function(){
-            Route::get('/', [AdminUsuarioController::class, 'index'])->name('index');
-            Route::get('create', [AdminUsuarioController::class, 'create'])->name('create');
-            Route::post('store', [AdminUsuarioController::class,  'store'])->name('store');
-            Route::get('/show/{paciente}', [AdminUsuarioController::class, 'show'])->name('show');
-            Route::get('/edit/{paciente}',  [AdminUsuarioController::class, 'edit'])->name('edit');
-            Route::put('/update/{paciente}',  [AdminUsuarioController::class, 'update'])->name('update');
-            Route::delete('/delete/{paciente}',  [AdminUsuarioController::class, 'destroy'])->name('destroy');
+            Route::get('/', [AdminPacienteController::class, 'index'])->name('index');
+            Route::get('create', [AdminPacienteController::class, 'create'])->name('create');
+            Route::post('store', [AdminPacienteController::class,  'store'])->name('store');
+            Route::get('/show/{paciente}', [AdminPacienteController::class, 'show'])->name('show');
+            Route::get('/edit/{paciente}',  [AdminPacienteController::class, 'edit'])->name('edit');
+            Route::put('/update/{paciente}',  [AdminPacienteController::class, 'update'])->name('update');
+            Route::delete('/delete/{paciente}',  [AdminPacienteController::class, 'destroy'])->name('destroy');
         });
     });
 });
@@ -149,18 +149,18 @@ Route::prefix('conta/gerente')->name('perfil.gerente.')->group(function (){
 
 //rotas para clientes
 Route::prefix('paciente')->name('paciente.')->group(function(){
-    Route::get('registrar', [UsuarioController::class, 'create'])->name('create');
-    Route::post('registrar', [UsuarioController::class, 'store'])->name('store');
-    Route::get('login', [UsuarioController::class, 'form'])->name('login');
-    Route::post('login', [UsuarioController::class, 'login'])->name('login.submit');
-    Route::get('logout', [UsuarioController::class, 'logout'])->name('logout');
+    Route::get('registrar', [PacienteController::class, 'create'])->name('create');
+    Route::post('registrar', [PacienteController::class, 'store'])->name('store');
+    Route::get('login', [PacienteController::class, 'form'])->name('login');
+    Route::post('login', [PacienteController::class, 'login'])->name('login.submit');
+    Route::get('logout', [PacienteController::class, 'logout'])->name('logout');
 
     //área autendicada
     Route::middleware('auth:paciente')->group(function(){
-        Route::get('/{paciente}', [UsuarioController::class, 'show'])->name('show');
-        Route::get('edit/{paciente}', [UsuarioController::class, 'edit'])->name('edit');
-        Route::put('update/{paciente}', [UsuarioController::class, 'update'])->name('update');
-        Route::delete('destroy/{paciente}', [UsuarioController::class, 'destroy'])->name('destroy');
+        Route::get('/{paciente}', [PacienteController::class, 'show'])->name('show');
+        Route::get('edit/{paciente}', [PacienteController::class, 'edit'])->name('edit');
+        Route::put('update/{paciente}', [PacienteController::class, 'update'])->name('update');
+        Route::delete('destroy/{paciente}', [PacienteController::class, 'destroy'])->name('destroy');
     });
 });
 

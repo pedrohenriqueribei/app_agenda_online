@@ -4,21 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Enums\EstadoCivil;
 use App\Enums\Sexo;
-use App\Http\Requests\UsuarioRequest;
+use App\Http\Requests\PacienteRequest;
+use App\Http\Requests\PacienteUpdateRequest;
 use App\Http\Requests\UsuarioUpdateRequest;
 use App\Models\Paciente;
+use App\Services\PacienteService;
 use App\Services\UsuarioService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Routing\Controller;
 
-class UsuarioController extends Controller
+class PacienteController extends Controller
 {
-    protected UsuarioService $usuarioService;
+    protected PacienteService $pacienteService;
 
-    public function __construct(UsuarioService $usuarioService)
+    public function __construct(PacienteService $pacienteService)
     {
-        $this->usuarioService = $usuarioService;
+        $this->pacienteService = $pacienteService;
 
         //verificar se é o mesmo paciente que está acessando é o que esta logado
         $this->middleware(function ($request, $next) {
@@ -53,7 +55,7 @@ class UsuarioController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(UsuarioRequest $request)
+    public function store(PacienteRequest $request)
     {
         //validar
         $dados = $request->validated();
@@ -63,7 +65,7 @@ class UsuarioController extends Controller
 
 
         //cadastrar
-        $paciente = $this->usuarioService->cadastrar($dados);
+        $paciente = $this->pacienteService->cadastrar($dados);
 
         //redirecionar
         return redirect()
@@ -141,7 +143,7 @@ class UsuarioController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UsuarioUpdateRequest $request, Paciente $paciente)
+    public function update(PacienteUpdateRequest $request, Paciente $paciente)
     {
         //
         //validar
@@ -164,7 +166,7 @@ class UsuarioController extends Controller
 
 
         //atualizar
-        $this->usuarioService->atualizar($paciente, $dados);
+        $this->pacienteService->atualizar($paciente, $dados);
 
         return redirect()
             ->route('paciente.show', ['paciente' => $paciente])
@@ -178,7 +180,7 @@ class UsuarioController extends Controller
     {
         //
          //softdeletes
-        $this->usuarioService->remover($paciente);
+        $this->pacienteService->remover($paciente);
 
         return redirect()
             ->route('home')
@@ -190,7 +192,7 @@ class UsuarioController extends Controller
      */
     public function restore(int $id)
     {
-        $paciente = $this->usuarioService->restaurar($id);
+        $paciente = $this->pacienteService->restaurar($id);
 
         if (!$paciente) {
             return redirect()

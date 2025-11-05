@@ -10,8 +10,10 @@
         <h2 class="text-xl font-semibold text-gray-800 mb-2">{{ $paciente->nome }}</h2>
         <p class="text-gray-600"><strong>Email:</strong> {{ $paciente->email }}</p>
         <p class="text-gray-600"><strong>Telefone:</strong> {{ $paciente->telefone }}</p>
-        <p class="text-gray-600"><strong>Data de nascimento:</strong> {{ \Carbon\Carbon::parse($paciente->data_nascimento)->format('d/m/Y') }}</p>
-        <p class="text-gray-600"><strong>Idade:</strong> {{ \Carbon\Carbon::parse($paciente->data_nascimento)->age }} anos</p>
+        <p class="text-gray-600"><strong>Data de nascimento:</strong> {{ $paciente->data_nascimento_formatado }}</p>
+        <p class="text-gray-600"><strong>Idade:</strong> {{ $paciente->idade }} anos</p>
+        <p class="text-gray-600"><strong>Sexo:</strong> {{ $paciente->sexo->label() }} </p>
+        <p class="text-gray-600"><strong>Estado Civil:</strong> {{ $paciente->estado_civil->label() }} </p>
     </div>
 
     {{-- Agendamentos --}}
@@ -30,19 +32,19 @@
                         <th class="px-4 py-2">Status</th>
                         <th class="px-4 py-2">Modalidade</th>
                         <th class="px-4 py-2">Espécie</th>
-                        <th class="px-4 py-2">Observações</th>
+                        <th class="px-4 py-2"></th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($paciente->agendamentos->sortByDesc('data') as $agendamento)
                         <tr class="border-b text-sm text-gray-700">
                             <td class="px-4 py-2">{{ $agendamento->data_formatada }}</td>
-                            <td class="px-4 py-2">{{ $agendamento->hora_inicio_formatada às $agendamento->hora_fim_formatada }}</td>
+                            <td class="px-4 py-2">{{ $agendamento->hora_inicio_formatada }} às {{ $agendamento->hora_fim_formatada }}</td>
                             <td class="px-4 py-2">{{ $agendamento->clinica->nome }}</td>
-                            <td class="px-4 py-2 capitalize">{{ $agendamento->status }}</td>
-                            <td class="px-4 py-2">{{ $agendamento->modalidade }}</td>
-                            <td class="px-4 py-2">{{ $agendamento->especie }}</td>
-                            <td class="px-4 py-2">{{ $agendamento->observacoes ?? '—' }}</td>
+                            <td class="px-4 py-2 capitalize">{{ $agendamento->status->label() }}</td>
+                            <td class="px-4 py-2">{{ $agendamento->modalidade->label() }}</td>
+                            <td class="px-4 py-2">{{ $agendamento->especie->label() }}</td>
+                            <td class="px-4 py-2"></td>
                         </tr>
                     @endforeach
                 </tbody>

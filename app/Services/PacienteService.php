@@ -5,7 +5,7 @@ namespace App\Services;
 use App\Models\Paciente;
 use Illuminate\Support\Facades\Storage;
 
-class UsuarioService
+class PacienteService
 {
     /**
      * Cadastrar Paciente

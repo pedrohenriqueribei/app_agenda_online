@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UsuarioRequest;
+use App\Http\Requests\PacienteRequest;
+use App\Http\Requests\PacienteUpdateRequest;
 use App\Http\Requests\UsuarioUpdateRequest;
 use App\Models\Paciente;
-use App\Services\UsuarioService;
+use App\Services\pacienteService;
 use Illuminate\Http\Request;
 
-class AdminUsuarioController extends Controller
+class AdminPacienteController extends Controller
 {
-    protected UsuarioService $usuarioService;
+    protected PacienteService $pacienteService;
 
-    public function __construct(UsuarioService $usuarioService)
+    public function __construct(pacienteService $pacienteService)
     {
-        $this->usuarioService = $usuarioService;
+        $this->pacienteService = $pacienteService;
     }
     
     public function create()
@@ -22,9 +23,9 @@ class AdminUsuarioController extends Controller
         return view('admin.paciente.create');
     }
 
-    public function store(UsuarioRequest $request)
+    public function store(PacienteRequest $request)
     {
-        $this->usuarioService->cadastrar($request->validated());
+        $this->pacienteService->cadastrar($request->validated());
 
         return redirect()->route('admin.paciente.index')->with('success', 'Paciente cadastrado com sucesso!!');
     }
@@ -47,9 +48,9 @@ class AdminUsuarioController extends Controller
         return view('admin.paciente.edit', compact('paciente'));
     }
 
-    public function update(UsuarioUpdateRequest $request, Paciente $paciente)
+    public function update(PacienteUpdateRequest $request, Paciente $paciente)
     {
-        $this->usuarioService->atualizar($paciente, $request->validated());
+        $this->pacienteService->atualizar($paciente, $request->validated());
 
         return redirect()->route('admin.paciente.index')->with('success', 'Paciente atualizado com sucesso!!');
     }
