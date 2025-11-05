@@ -7,7 +7,6 @@ use App\Models\Agendamento;
 use App\Models\Profissional;
 use App\Services\ProfissionalService;
 use Carbon\Carbon;
-use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Routing\Controller;
@@ -31,7 +30,7 @@ class PerfilProfissionalController extends Controller
             }
 
             return $next($request);
-        })->only(['show', 'edit', 'update', 'destroy', 'agendamentoSemanal',]); 
+        })->only(['show', 'edit', 'update', 'destroy', 'agendaMes', 'agendaSemana', 'agendaDia']); 
     }
 
     /**

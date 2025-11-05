@@ -1,7 +1,7 @@
 @auth('profissional')
 <aside class="w-64 bg-white border-r border-gray-200">
     <nav class="mt-4 space-y-2">
-        <a href="#" class="flex items-center gap-2 px-6 py-2 rounded hover:bg-blue-100">
+        <a href="{{ route('perfil.profissional.dashboard') }}" class="flex items-center gap-2 px-6 py-2 rounded hover:bg-blue-100">
             <x-heroicon-s-chart-bar class="w-5 h-5 text-blue-500" />
             <span>Dashboard</span>
         </a>
@@ -19,6 +19,10 @@
             </div>
         </details>
 
+        <a href="{{ route('perfil.profissional.paciente.index',  $profissional->id) }}" class="flex items-center gap-2 px-6 py-2 rounded hover:bg-blue-100">
+            <x-heroicon-s-users class="w-5 h-5 text-blue-500" />
+            <span>Meus pacientes</span>
+        </a>
     </nav>
 </aside>
 @endauth
