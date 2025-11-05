@@ -38,6 +38,7 @@
                     <tr class="bg-gray-100 text-left text-sm font-semibold text-gray-700">
                         <th class="px-4 py-2">Data</th>
                         <th class="px-4 py-2">Horário</th>
+                        <th class="px-4 py-2">Profissional</th>
                         <th class="px-4 py-2">Clínica</th>
                         <th class="px-4 py-2">Status</th>
                         <th class="px-4 py-2">Modalidade</th>
@@ -50,6 +51,7 @@
                         <tr class="border-b text-sm text-gray-700">
                             <td class="px-4 py-2">{{ $agendamento->data_formatada }}</td>
                             <td class="px-4 py-2">{{ $agendamento->hora_inicio_formatada }} às {{ $agendamento->hora_fim_formatada }}</td>
+                            <td class="px-4 py-2">{{ $agendamento->Profissional->primeiro_nome }} {{ $agendamento->Profissional->ultimo_nome }}</td>
                             <td class="px-4 py-2">{{ $agendamento->clinica->nome }}</td>
                             <td class="px-4 py-2 capitalize">{{ $agendamento->status->label() }}</td>
                             <td class="px-4 py-2">{{ $agendamento->modalidade->label() }}</td>
