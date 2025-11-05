@@ -11,7 +11,7 @@ use App\Http\Controllers\ProfissionalController;
 use App\Http\Controllers\ProfissionalLoginController;
 use App\Http\Controllers\ProfissionalPacienteController;
 use App\Http\Controllers\UsuarioController;
-use App\Models\Usuario;
+use App\Models\Paciente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,10 +19,10 @@ Route::get('/', function () {
     return redirect()->route('home');
 });
 
-// rota para buscar usuário
-Route::get('api/usuarios/buscar', function (Request $request) {
+// rota para buscar Paciente
+Route::get('api/pacientes/buscar', function (Request $request) {
     $termo = $request->get('termo');
-    return Usuario::where('nome', 'like', "%{$termo}%")
+    return Paciente::where('nome', 'like', "%{$termo}%")
         ->limit(10)
         ->get(['id', 'nome']);
 });
@@ -78,14 +78,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::delete('/delete/{gerente}', 'destroy')->name('destroy');
         });
 
-        Route::prefix('/usuario')->name('usuario.')->group(function(){
+        Route::prefix('/paciente')->name('paciente.')->group(function(){
             Route::get('/', [AdminUsuarioController::class, 'index'])->name('index');
             Route::get('create', [AdminUsuarioController::class, 'create'])->name('create');
             Route::post('store', [AdminUsuarioController::class,  'store'])->name('store');
-            Route::get('/show/{usuario}', [AdminUsuarioController::class, 'show'])->name('show');
-            Route::get('/edit/{usuario}',  [AdminUsuarioController::class, 'edit'])->name('edit');
-            Route::put('/update/{usuario}',  [AdminUsuarioController::class, 'update'])->name('update');
-            Route::delete('/delete/{usuario}',  [AdminUsuarioController::class, 'destroy'])->name('destroy');
+            Route::get('/show/{paciente}', [AdminUsuarioController::class, 'show'])->name('show');
+            Route::get('/edit/{paciente}',  [AdminUsuarioController::class, 'edit'])->name('edit');
+            Route::put('/update/{paciente}',  [AdminUsuarioController::class, 'update'])->name('update');
+            Route::delete('/delete/{paciente}',  [AdminUsuarioController::class, 'destroy'])->name('destroy');
         });
     });
 });
@@ -126,7 +126,7 @@ Route::prefix('conta/profissional')->name('perfil.profissional.')->group(functio
         //pacientes
         Route::prefix('/{profissional}/paciente')->name('paciente.')->controller(ProfissionalPacienteController::class)->group(function(){
             Route::get('/', 'index')->name('index');
-            Route::get('/show/{usuario}', 'show')->name('show');
+            Route::get('/show/{paciente}', 'show')->name('show');
         });
 
     });
@@ -148,7 +148,7 @@ Route::prefix('conta/gerente')->name('perfil.gerente.')->group(function (){
 });
 
 //rotas para clientes
-Route::prefix('usuario')->name('usuario.')->group(function(){
+Route::prefix('paciente')->name('paciente.')->group(function(){
     Route::get('registrar', [UsuarioController::class, 'create'])->name('create');
     Route::post('registrar', [UsuarioController::class, 'store'])->name('store');
     Route::get('login', [UsuarioController::class, 'form'])->name('login');
@@ -156,11 +156,11 @@ Route::prefix('usuario')->name('usuario.')->group(function(){
     Route::get('logout', [UsuarioController::class, 'logout'])->name('logout');
 
     //área autendicada
-    Route::middleware('auth:usuario')->group(function(){
-        Route::get('/{usuario}', [UsuarioController::class, 'show'])->name('show');
-        Route::get('edit/{usuario}', [UsuarioController::class, 'edit'])->name('edit');
-        Route::put('update/{usuario}', [UsuarioController::class, 'update'])->name('update');
-        Route::delete('destroy/{usuario}', [UsuarioController::class, 'destroy'])->name('destroy');
+    Route::middleware('auth:paciente')->group(function(){
+        Route::get('/{paciente}', [UsuarioController::class, 'show'])->name('show');
+        Route::get('edit/{paciente}', [UsuarioController::class, 'edit'])->name('edit');
+        Route::put('update/{paciente}', [UsuarioController::class, 'update'])->name('update');
+        Route::delete('destroy/{paciente}', [UsuarioController::class, 'destroy'])->name('destroy');
     });
 });
 

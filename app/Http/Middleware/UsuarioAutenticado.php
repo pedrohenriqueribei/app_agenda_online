@@ -16,11 +16,11 @@ class UsuarioAutenticado
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!Auth::guard('usuario')->check()) {
-            return redirect()->route('usuario.login');
+        if (!Auth::guard('paciente')->check()) {
+            return redirect()->route('paciente.login');
         }
 
-        view()->share('usuario', Auth::guard('usuario')->user());
+        view()->share('paciente', Auth::guard('paciente')->user());
         
         return $next($request);
     }

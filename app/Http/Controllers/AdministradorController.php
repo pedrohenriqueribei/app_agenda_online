@@ -61,7 +61,7 @@ class AdministradorController extends Controller
             $request->session()->regenerate();
             $administrador = Auth::guard('administrador')->user();
 
-            return redirect()->intended(route('admin.show', ['administrador' => $administrador]))->with('success', 'Usuário logado com sucesso!!!');
+            return redirect()->intended(route('admin.show', ['administrador' => $administrador]))->with('success', 'Paciente logado com sucesso!!!');
         }
 
         return back()->withErrors([

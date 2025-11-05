@@ -22,7 +22,7 @@ return new class extends Migration
             //paciente
             $table->foreignId('usuario_id')
                 ->nullable()
-                ->constrained('usuarios')
+                ->constrained('pacientes')
                 ->cascadeOnDelete();
             
             //clinica

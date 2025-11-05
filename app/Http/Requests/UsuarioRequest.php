@@ -28,8 +28,8 @@ class UsuarioRequest extends FormRequest
             //
             'nome' => 'required|string|max:255',
             'telefone' => 'required|string|max:20',
-            'cpf' => 'required|string|max:14|unique:usuarios,cpf',
-            'email' => 'required|email|max:255|unique:usuarios,email',
+            'cpf' => 'required|string|max:14|unique:pacientes,cpf',
+            'email' => 'required|email|max:255|unique:pacientes,email',
             'data_nascimento' => 'required|date',
             'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             'endereco' => 'nullable|string|max:1000',

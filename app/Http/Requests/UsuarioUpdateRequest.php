@@ -25,7 +25,7 @@ class UsuarioUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        $usuarioId = $this->route('usuario'); // ou $this->usuario
+        $usuarioId = $this->route('paciente'); // ou $this->paciente
 
         return [
             'nome' => 'required|string|max:255',
@@ -34,13 +34,13 @@ class UsuarioUpdateRequest extends FormRequest
                 'required',
                 'string',
                 'max:14',
-                Rule::unique('usuarios', 'cpf')->ignore($usuarioId),
+                Rule::unique('pacientes', 'cpf')->ignore($usuarioId),
             ],
             'email' => [
                 'required',
                 'email',
                 'max:255',
-                Rule::unique('usuarios', 'email')->ignore($usuarioId),
+                Rule::unique('pacientes', 'email')->ignore($usuarioId),
             ],
             'data_nascimento' => 'required|date',
             'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',

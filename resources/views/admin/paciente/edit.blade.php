@@ -1,12 +1,12 @@
 @extends('layouts.admin')
 
-@section('title', 'Usuários da plataforma')
+@section('title', 'Pacientes da plataforma')
 @section('page-title', 'Acesso Administrativo')
 
 @section('content')
 
 <div class="container mx-auto px-4 py-6">
-    <h1 class="text-2xl font-bold mb-6">Cadastrar Usuário</h1>
+    <h1 class="text-2xl font-bold mb-6">Cadastrar Paciente</h1>
 
     @if (session('success'))
         <div class="bg-green-100 text-green-800 px-4 py-2 rounded mb-4">
@@ -14,11 +14,11 @@
         </div>
     @endif
 
-    <form action="{{ route('admin.usuario.update', $usuario) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+    <form action="{{ route('admin.paciente.update', $paciente) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
         @csrf
         @method('PUT')
 
-        @component('components.usuario.create_edit', ['usuario' => $usuario ])
+        @component('components.paciente.create_edit', ['paciente' => $paciente ])
         @endcomponent
 
         <div class="pt-6">

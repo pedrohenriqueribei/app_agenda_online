@@ -1,6 +1,6 @@
 @extends('layouts.basic')
 
-@section('title', 'Login de Usuário')
+@section('title', 'Login de Paciente')
 @section('page-title', 'Acesso a Cliente')
 
 @section('content')
@@ -14,7 +14,7 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('usuario.login.submit') }}">
+        <form method="POST" action="{{ route('paciente.login.submit') }}">
             @csrf
 
             <div class="mb-4">

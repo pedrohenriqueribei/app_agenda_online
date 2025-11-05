@@ -23,11 +23,11 @@ class Endereco extends Model
     use HasFactory;
 
     /**
-     * Define o relacionamento inverso com o Usuário.
+     * Define o relacionamento inverso com o Paciente.
      */
-    public function usuario()
+    public function paciente()
     {
-        return $this->belongsTo(Usuario::class);
+        return $this->belongsTo(Paciente::class);
     }
 
 }

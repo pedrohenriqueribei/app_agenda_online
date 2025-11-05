@@ -16,7 +16,7 @@ class RedirectOnSessionTimeout
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // Se o usuário não estiver autenticado
+        // Se o Paciente não estiver autenticado
         if (!Auth::check()) {
             // Se a requisição for AJAX, retorna erro 401
             if ($request->ajax() || $request->wantsJson()) {

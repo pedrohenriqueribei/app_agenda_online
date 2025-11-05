@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Profissional;
-use App\Models\Usuario;
+use App\Models\Paciente;
 use App\Traits\ProfissionalAutenticadoTrait;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -33,7 +33,7 @@ class ProfissionalPacienteController extends Controller
         $profissional = $this->getProfissional();
 
         // Buscar todos os pacientes que têm agendamentos com o profissional
-        $pacientes = Usuario::whereHas('agendamentos', function ($query) use ($profissional) {
+        $pacientes = Paciente::whereHas('agendamentos', function ($query) use ($profissional) {
             $query->where('profissional_id', $profissional->id);
         })
         ->with(['agendamentos' => function ($query) use ($profissional) {
@@ -47,10 +47,10 @@ class ProfissionalPacienteController extends Controller
     }
 
     //exibir informações detalhadas do paciente
-    public function show(Profissional $profissional, Usuario $paciente)
+    public function show(Profissional $profissional, Paciente $paciente)
     {
 
-        $paciente = Usuario::with(['agendamentos.clinica'])->findOrFail($paciente->id);
+        $paciente = Paciente::with(['agendamentos.clinica'])->findOrFail($paciente->id);
         
         return view('perfil.profissional.paciente.show', compact('profissional','paciente'));
     }

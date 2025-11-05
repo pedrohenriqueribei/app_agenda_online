@@ -2,81 +2,81 @@
 
 namespace App\Services;
 
-use App\Models\Usuario;
+use App\Models\Paciente;
 use Illuminate\Support\Facades\Storage;
 
 class UsuarioService
 {
     /**
-     * Cadastrar usuário
+     * Cadastrar Paciente
      */
-    public function cadastrar(array $dados): Usuario
+    public function cadastrar(array $dados): Paciente
     {
         if (isset($dados['foto']) && $dados['foto']->isValid()) {
-            $dados['foto'] = $dados['foto']->store('usuarios/fotos', 'public');
+            $dados['foto'] = $dados['foto']->store('pacientes/fotos', 'public');
         }
 
-        //salvar usuário
-        $usuario = Usuario::create($dados);
+        //salvar Paciente
+        $paciente = Paciente::create($dados);
         
         //salvar endereço
-        $this->salvarEndereco($usuario, $dados);
+        $this->salvarEndereco($paciente, $dados);
 
-        return $usuario; 
+        return $paciente; 
     }
 
     /**
      * Atualizar cadastro
      */
-    public function atualizar(Usuario $usuario, array $dados): Usuario
+    public function atualizar(Paciente $paciente, array $dados): Paciente
     {
         if (isset($dados['foto']) && $dados['foto']->isValid()) {
             // Remove a foto antiga, se existir
-            if ($usuario->foto) {
-                Storage::disk('public')->delete($usuario->foto);
+            if ($paciente->foto) {
+                Storage::disk('public')->delete($paciente->foto);
             }
 
-            $dados['foto'] = $dados['foto']->store('usuarios/fotos', 'public');
+            $dados['foto'] = $dados['foto']->store('pacientes/fotos', 'public');
         }
 
-        //atualizar usuário
-        $usuario->update($dados);
+        //atualizar Paciente
+        $paciente->update($dados);
 
         //atualizar endereço
-        $this->salvarEndereco($usuario, $dados);
+        $this->salvarEndereco($paciente, $dados);
 
-        return $usuario;
+        return $paciente;
     }
 
     /**
-     * Deletar um cadastro de usuario com softdeletes
+     * Deletar um cadastro de paciente com softdeletes
      */
-    public function remover(usuario $usuario): void
+    public function remover(paciente $paciente): void
     {
         // Remove a foto do armazenamento, se existir
-        if ($usuario->foto) {
-            Storage::disk('public')->delete($usuario->foto);
+        if ($paciente->foto) {
+            Storage::disk('public')->delete($paciente->foto);
         }
 
         // Soft delete
-        $usuario->delete();
+        $paciente->delete();
     }
 
     /**
-     * Restaurar cadastro de usuario
+     * Restaurar cadastro de paciente
      */
-    public function restaurar(int $id): ?usuario
+    public function restaurar(int $id): ?paciente
     {
-        $usuario = usuario::withTrashed()->find($id);
+        $paciente = paciente::withTrashed()->find($id);
 
-        if ($usuario && $usuario->trashed()) {
-            $usuario->restore();
+        if ($paciente && $paciente->trashed()) {
+            $paciente->restore();
         }
 
-        return $usuario;
+        return $paciente;
     }
 
-    private function salvarEndereco(Usuario $usuario, array $dados): void
+    private function salvarEndereco(Paciente $paciente, array $dados): void
     {
         $endereco = [
             'cep' => $dados['cep'] ?? null,
@@ -89,6 +89,6 @@ class UsuarioService
             'pais' => $dados['pais'] ?? null,
         ];
 
-        $usuario->endereco()->updateOrCreate([], $endereco);
+        $paciente->endereco()->updateOrCreate([], $endereco);
     }
 }

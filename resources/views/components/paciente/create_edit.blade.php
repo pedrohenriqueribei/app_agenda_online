@@ -4,7 +4,7 @@
     {{-- Nome --}}
     <div>
         <label for="nome" class="block font-medium">Nome</label>
-        <input type="text" name="nome" id="nome" value="{{ old('nome', $usuario->nome ?? '') }}" class="w-full border border-gray-300 rounded px-3 py-2">
+        <input type="text" name="nome" id="nome" value="{{ old('nome', $paciente->nome ?? '') }}" class="w-full border border-gray-300 rounded px-3 py-2">
         @error('nome')
             <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
         @enderror
@@ -14,14 +14,14 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
             <label for="cpf" class="block font-medium">CPF</label>
-            <input type="text" name="cpf" id="cpf" value="{{ old('cpf', $usuario->cpf ?? '') }}" class="w-full border border-gray-300 rounded px-3 py-2">
+            <input type="text" name="cpf" id="cpf" value="{{ old('cpf', $paciente->cpf ?? '') }}" class="w-full border border-gray-300 rounded px-3 py-2">
             @error('cpf')
                 <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
             @enderror
         </div>
         <div>
             <label for="telefone" class="block font-medium">Telefone</label>
-            <input type="text" name="telefone" id="telefone" value="{{ old('telefone', $usuario->telefone ?? '') }}" class="w-full border border-gray-300 rounded px-3 py-2">
+            <input type="text" name="telefone" id="telefone" value="{{ old('telefone', $paciente->telefone ?? '') }}" class="w-full border border-gray-300 rounded px-3 py-2">
             @error('telefone')
                 <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
             @enderror
@@ -31,7 +31,7 @@
     {{-- Email --}}
     <div>
         <label for="email" class="block font-medium">Email</label>
-        <input type="email" name="email" id="email" value="{{ old('email', $usuario->email ?? '') }}" class="w-full border border-gray-300 rounded px-3 py-2">
+        <input type="email" name="email" id="email" value="{{ old('email', $paciente->email ?? '') }}" class="w-full border border-gray-300 rounded px-3 py-2">
         @error('email')
             <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
         @enderror
@@ -42,7 +42,7 @@
         <div>
             <label for="data_nascimento" class="block font-medium">Data de Nascimento</label>
             <input type="date" name="data_nascimento" id="data_nascimento"
-                value="{{ old('data_nascimento') ?? (isset($usuario) && $usuario->data_nascimento ? \Carbon\Carbon::parse($usuario->data_nascimento)->format('Y-m-d') : '') }}"
+                value="{{ old('data_nascimento') ?? (isset($paciente) && $paciente->data_nascimento ? \Carbon\Carbon::parse($paciente->data_nascimento)->format('Y-m-d') : '') }}"
                 class="w-full border border-gray-300 rounded px-3 py-2">
             @error('data_nascimento')
                 <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
@@ -65,7 +65,7 @@
                 <option value="">Selecione</option>
                 @foreach(App\Enums\Sexo::cases() as $sexo)
                     <option value="{{ $sexo->value }}"
-                        {{ old('sexo', optional($usuario)->sexo?->value ?? optional($usuario)->sexo) === $sexo->value ? 'selected' : '' }}>
+                        {{ old('sexo', optional($paciente)->sexo?->value ?? optional($paciente)->sexo) === $sexo->value ? 'selected' : '' }}>
                         {{ $sexo->label() }}
                     </option>
                 @endforeach
@@ -80,7 +80,7 @@
                 <option value="">Selecione</option>
                 @foreach(App\Enums\EstadoCivil::cases() as $estado)
                     <option value="{{ $estado->value }}" 
-                        {{ old('estado_civil', optional($usuario)->estado_civil?->value ?? optional($usuario)->estado_civil) === $estado->value ? 'selected' : '' }}>
+                        {{ old('estado_civil', optional($paciente)->estado_civil?->value ?? optional($paciente)->estado_civil) === $estado->value ? 'selected' : '' }}>
                         {{ $estado->label() }}
                     </option>
                 @endforeach
@@ -100,7 +100,7 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div>
             <label for="cep" class="block font-medium">CEP</label>
-            <input type="text" name="cep" id="cep" value="{{ old('cep', $usuario->endereco->cep ?? '') }}" class="w-full border border-gray-300 rounded px-3 py-2">
+            <input type="text" name="cep" id="cep" value="{{ old('cep', $paciente->endereco->cep ?? '') }}" class="w-full border border-gray-300 rounded px-3 py-2">
             @error('cep')
                 <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
             @enderror
@@ -108,7 +108,7 @@
     </div>
     <div class="mb-4">
         <label for="logradouro" class="block font-medium">Logradouro</label>
-        <input type="text" name="logradouro" id="logradouro" value="{{ old('logradouro', $usuario->endereco->logradouro ?? '') }}" class="w-full border border-gray-300 rounded px-3 py-2">
+        <input type="text" name="logradouro" id="logradouro" value="{{ old('logradouro', $paciente->endereco->logradouro ?? '') }}" class="w-full border border-gray-300 rounded px-3 py-2">
         @error('logradouro')
             <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
         @enderror
@@ -117,21 +117,21 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div>
             <label for="numero" class="block font-medium">Número</label>
-            <input type="text" name="numero" id="numero" value="{{ old('numero', $usuario->endereco->numero ?? '') }}" class="w-full border border-gray-300 rounded px-3 py-2">
+            <input type="text" name="numero" id="numero" value="{{ old('numero', $paciente->endereco->numero ?? '') }}" class="w-full border border-gray-300 rounded px-3 py-2">
             @error('numero')
                 <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
             @enderror
         </div>
         <div>
             <label for="complemento" class="block font-medium">Complemento</label>
-            <input type="text" name="complemento" id="complemento" value="{{ old('complemento', $usuario->endereco->complemento ?? '') }}" class="w-full border border-gray-300 rounded px-3 py-2">
+            <input type="text" name="complemento" id="complemento" value="{{ old('complemento', $paciente->endereco->complemento ?? '') }}" class="w-full border border-gray-300 rounded px-3 py-2">
             @error('complemento')
                 <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
             @enderror
         </div>
         <div>
             <label for="bairro" class="block font-medium">Bairro</label>
-            <input type="text" name="bairro" id="bairro" value="{{ old('bairro', $usuario->endereco->bairro ?? '') }}" class="w-full border border-gray-300 rounded px-3 py-2">
+            <input type="text" name="bairro" id="bairro" value="{{ old('bairro', $paciente->endereco->bairro ?? '') }}" class="w-full border border-gray-300 rounded px-3 py-2">
             @error('bairro')
                 <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
             @enderror
@@ -141,21 +141,21 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
         <div>
             <label for="cidade" class="block font-medium">Cidade</label>
-            <input type="text" name="cidade" id="cidade" value="{{ old('cidade', $usuario->endereco->cidade ?? '') }}" class="w-full border border-gray-300 rounded px-3 py-2">
+            <input type="text" name="cidade" id="cidade" value="{{ old('cidade', $paciente->endereco->cidade ?? '') }}" class="w-full border border-gray-300 rounded px-3 py-2">
             @error('cidade')
                 <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
             @enderror
         </div>
         <div>
             <label for="estado" class="block font-medium">Estado</label>
-            <input type="text" name="estado" id="estado" value="{{ old('estado', $usuario->endereco->estado ?? '') }}" class="w-full border border-gray-300 rounded px-3 py-2">
+            <input type="text" name="estado" id="estado" value="{{ old('estado', $paciente->endereco->estado ?? '') }}" class="w-full border border-gray-300 rounded px-3 py-2">
             @error('estado')
                 <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
             @enderror
         </div>
         <div>
             <label for="pais" class="block font-medium">País</label>
-            <input type="text" name="pais" id="pais" value="{{ old('pais', $usuario->endereco->pais ?? '') }}" class="w-full border border-gray-300 rounded px-3 py-2">
+            <input type="text" name="pais" id="pais" value="{{ old('pais', $paciente->endereco->pais ?? '') }}" class="w-full border border-gray-300 rounded px-3 py-2">
             @error('pais')
                 <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
             @enderror

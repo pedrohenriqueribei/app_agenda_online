@@ -276,7 +276,7 @@ return [
         'type'                     => 'tipo',
         'updated_at'               => 'atualizado em',
         'user'                     => 'do utilizador',
-        'username'                 => 'usuário',
+        'username'                 => 'Paciente',
         'value'                    => 'valor',
         'winner'                   => 'ganhador',
         'work'                     => 'trabalho',

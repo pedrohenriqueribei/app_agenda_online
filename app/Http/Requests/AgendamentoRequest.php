@@ -30,7 +30,7 @@ class AgendamentoRequest extends FormRequest
             'data' =>        ['required', 'date'], //removi a validação, 'after_or_equal:today' em desenvolvimento
             'hora_inicio' => ['required', 'date_format:H:i'],
             'hora_fim' =>    ['required', 'date_format:H:i', 'after:hora_inicio'],
-            'usuario_id' =>  ['required', 'exists:usuarios,id'],
+            'usuario_id' =>  ['required', 'exists:pacientes,id'],
             'observacoes' => ['nullable', 'string'],
 
             // novos campos com enum

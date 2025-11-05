@@ -14,7 +14,7 @@ class GerenteUpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        // Permite que qualquer usuário autorizado use esta request
+        // Permite que qualquer Paciente autorizado use esta request
         return true;
     }
 

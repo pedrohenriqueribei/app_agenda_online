@@ -16,7 +16,7 @@ class ProfissionalAutenticado
      */
     public function handle(Request $request, Closure $next): Response
     {
-        //disponibilizar usuário profissional em todas views
+        //disponibilizar Paciente profissional em todas views
         if (!Auth::guard('profissional')->check()) {
             return redirect()->route('perfil.profissional.login');
         }

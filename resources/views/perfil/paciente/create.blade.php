@@ -18,10 +18,10 @@
         </div>
     @endif
 
-    <form action="{{ route('usuario.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+    <form action="{{ route('paciente.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
         @csrf
 
-        @component('components.usuario.create_edit', ['usuario' => new \App\Models\Usuario() ])
+        @component('components.paciente.create_edit', ['paciente' => new \App\Models\Paciente() ])
         @endcomponent
 
         <div class="pt-6">

@@ -42,7 +42,7 @@ class Agendamento extends Model
 
     public function paciente()
     {
-        return $this->belongsTo(Usuario::class, 'usuario_id');
+        return $this->belongsTo(Paciente::class, 'usuario_id');
     }
 
     public function clinica()

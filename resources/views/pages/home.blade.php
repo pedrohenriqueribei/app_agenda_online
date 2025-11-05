@@ -10,7 +10,7 @@
         <div class="mx-auto max-w-2xl lg:mx-0">
             <h2 class="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl dark:text-white">
                 Tipos de acessos</h2>
-            <p class="mt-2 text-lg/8 text-gray-600 dark:text-gray-300">Cadastre-se de acordo com o seu perfil de usuário
+            <p class="mt-2 text-lg/8 text-gray-600 dark:text-gray-300">Cadastre-se de acordo com o seu perfil de Paciente
             </p>
         </div>
         <div class="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3 dark:border-gray-700">
@@ -40,7 +40,7 @@
                         class="mt-3 text-lg/6 font-semibold text-gray-900 group-hover:text-gray-600 dark:text-white dark:group-hover:text-gray-300">
                         <a href="#">
                             <span class="absolute inset-0"></span>
-                            Perfil de Usuário
+                            Perfil de Paciente
                         </a>
                     </h3>
                     <p class="mt-5 line-clamp-3 text-sm/6 text-gray-600 dark:text-gray-400">
@@ -48,9 +48,9 @@
                     </p>
                 </div>
                 <div class="relative mt-8 flex items-center gap-x-4 justify-self-end">
-                    <a href="{{ route('usuario.create') }}" class="btn btn-success">Quero me
+                    <a href="{{ route('paciente.create') }}" class="btn btn-success">Quero me
                         registrar</a>
-                    <a href="{{ route('usuario.login') }}" class="btn btn-dark">Login</a>
+                    <a href="{{ route('paciente.login') }}" class="btn btn-dark">Login</a>
                 </div>
             </article>
 

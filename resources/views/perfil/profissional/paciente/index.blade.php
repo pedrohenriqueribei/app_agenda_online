@@ -17,7 +17,7 @@
                     <p class="text-sm text-gray-600"><strong>Idade:</strong> {{ $paciente->idade }} anos</p>
 
                     <div class="mt-4">
-                        <a href="{{ route('perfil.profissional.paciente.show', ['profissional' => $profissional->id, 'usuario' => $paciente->id ]) }}"
+                        <a href="{{ route('perfil.profissional.paciente.show', ['profissional' => $profissional->id, 'paciente' => $paciente->id ]) }}"
                            class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-sm">
                             Ver detalhes
                         </a>

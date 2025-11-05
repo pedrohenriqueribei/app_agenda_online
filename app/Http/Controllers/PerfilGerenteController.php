@@ -55,7 +55,7 @@ class PerfilGerenteController extends Controller
             $request->session()->regenerate();
             $gerente = Auth::guard('gerente')->user();
 
-            return redirect()->intended(route('perfil.gerente.show', ['gerente' => $gerente->id ]))->with('success', 'Usuário logado com sucesso!');
+            return redirect()->intended(route('perfil.gerente.show', ['gerente' => $gerente->id ]))->with('success', 'Paciente logado com sucesso!');
         }
 
         return back()->withErrors([

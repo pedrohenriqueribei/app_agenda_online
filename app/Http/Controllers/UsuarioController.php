@@ -6,7 +6,7 @@ use App\Enums\EstadoCivil;
 use App\Enums\Sexo;
 use App\Http\Requests\UsuarioRequest;
 use App\Http\Requests\UsuarioUpdateRequest;
-use App\Models\Usuario;
+use App\Models\Paciente;
 use App\Services\UsuarioService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,11 +20,11 @@ class UsuarioController extends Controller
     {
         $this->usuarioService = $usuarioService;
 
-        //verificar se é o mesmo usuario que está acessando é o que esta logado
+        //verificar se é o mesmo paciente que está acessando é o que esta logado
         $this->middleware(function ($request, $next) {
-            $usuario = $request->route('usuario');
+            $paciente = $request->route('paciente');
 
-            if ($usuario && Auth::guard('usuario')->id() !== $usuario->id) {
+            if ($paciente && Auth::guard('paciente')->id() !== $paciente->id) {
                 abort(403, 'Acesso não autorizado.');
             }
 
@@ -46,7 +46,7 @@ class UsuarioController extends Controller
     public function create()
     {
         //
-        return view('perfil.usuario.create');
+        return view('perfil.paciente.create');
 
     }
 
@@ -63,12 +63,12 @@ class UsuarioController extends Controller
 
 
         //cadastrar
-        $usuario = $this->usuarioService->cadastrar($dados);
+        $paciente = $this->usuarioService->cadastrar($dados);
 
         //redirecionar
         return redirect()
             ->route('home')
-            ->with('success', 'Usuário cadastrado com sucesso!');
+            ->with('success', 'Paciente cadastrado com sucesso!');
 
     }
 
@@ -76,11 +76,11 @@ class UsuarioController extends Controller
      * login form
      */
     public function form() {
-        return view('perfil.usuario.login');
+        return view('perfil.paciente.login');
     }
 
     /**
-     * Autenticação de usuário
+     * Autenticação de Paciente
      */
     public function login(Request $request) {
         //validação
@@ -91,11 +91,11 @@ class UsuarioController extends Controller
 
         $credenciais = $request->only('email', 'password');
 
-        if(Auth::guard('usuario')->attempt($credenciais)) {
+        if(Auth::guard('paciente')->attempt($credenciais)) {
             $request->session()->regenerate();
-            $usuario = Auth::guard('usuario')->user();
+            $paciente = Auth::guard('paciente')->user();
 
-            return redirect()->intended(route('usuario.show', ['usuario' => $usuario->id ]))->with('success', 'Usuário logado com sucesso!');
+            return redirect()->intended(route('paciente.show', ['paciente' => $paciente->id ]))->with('success', 'Paciente logado com sucesso!');
         }
 
         return back()->withErrors([
@@ -108,7 +108,7 @@ class UsuarioController extends Controller
      */
     public function logout(Request $request)
     {
-        Auth::guard('usuario')->logout();
+        Auth::guard('paciente')->logout();
         
         $request->session()->invalidate();
 
@@ -120,28 +120,28 @@ class UsuarioController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Usuario $usuario)
+    public function show(Paciente $paciente)
     {
         //
-        return view('perfil.usuario.show', compact('usuario'));
+        return view('perfil.paciente.show', compact('paciente'));
 
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Usuario $usuario)
+    public function edit(Paciente $paciente)
     {
         //carregar endereço
-        $usuario->load('endereco');
+        $paciente->load('endereco');
 
-        return view('perfil.usuario.edit', compact('usuario'));
+        return view('perfil.paciente.edit', compact('paciente'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UsuarioUpdateRequest $request, Usuario $usuario)
+    public function update(UsuarioUpdateRequest $request, Paciente $paciente)
     {
         //
         //validar
@@ -164,43 +164,43 @@ class UsuarioController extends Controller
 
 
         //atualizar
-        $this->usuarioService->atualizar($usuario, $dados);
+        $this->usuarioService->atualizar($paciente, $dados);
 
         return redirect()
-            ->route('usuario.show', ['usuario' => $usuario])
-            ->with('success', 'usuario atualizado com sucesso!');
+            ->route('paciente.show', ['paciente' => $paciente])
+            ->with('success', 'paciente atualizado com sucesso!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Usuario $usuario)
+    public function destroy(Paciente $paciente)
     {
         //
          //softdeletes
-        $this->usuarioService->remover($usuario);
+        $this->usuarioService->remover($paciente);
 
         return redirect()
             ->route('home')
-            ->with('success', 'usuario removido com sucesso!');
+            ->with('success', 'paciente removido com sucesso!');
     }
 
     /**
-     * Restaurar cadastro de usuario
+     * Restaurar cadastro de paciente
      */
     public function restore(int $id)
     {
-        $usuario = $this->usuarioService->restaurar($id);
+        $paciente = $this->usuarioService->restaurar($id);
 
-        if (!$usuario) {
+        if (!$paciente) {
             return redirect()
                 ->back()
-                ->withErrors('usuario não encontrado ou já está ativo.');
+                ->withErrors('paciente não encontrado ou já está ativo.');
             }
 
         return redirect()
             ->route('home')
-            ->with('success', 'usuario restaurado com sucesso!');
+            ->with('success', 'paciente restaurado com sucesso!');
 
     }
 }

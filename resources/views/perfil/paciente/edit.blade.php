@@ -5,7 +5,7 @@
 
 @section('content')
 <div class="max-w-4xl mx-auto mt-10 px-4">
-    <h2 class="text-2xl font-bold mb-6">Atualizaçãr Cadastro Usuário</h2>
+    <h2 class="text-2xl font-bold mb-6">Atualizaçãr Cadastro Paciente</h2>
 
     {{-- Erros de validação --}}
     @if ($errors->any())
@@ -19,11 +19,11 @@
         </div>
     @endif
 
-    <form action="{{ route('usuario.update', ['usuario' => $usuario]) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+    <form action="{{ route('paciente.update', ['paciente' => $paciente]) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
         @csrf
         @method('PUT')
 
-        @component('components.usuario.create_edit', ['usuario' => $usuario])
+        @component('components.paciente.create_edit', ['paciente' => $paciente])
         @endcomponent
 
         <div class="pt-6">

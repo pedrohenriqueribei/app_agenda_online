@@ -10,10 +10,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Hash;
 
-class Usuario extends Authenticatable
+class Paciente extends Authenticatable
 {
     //
     use HasFactory, SoftDeletes;
+
+    protected $table = 'pacientes';
 
     protected $fillable = [
         'nome',

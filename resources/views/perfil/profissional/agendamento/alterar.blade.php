@@ -27,19 +27,19 @@
                         this.resultados = [];
                         return;
                     }
-                    fetch(`/api/usuarios/buscar?termo=${encodeURIComponent(this.termo)}`)
+                    fetch(`/api/pacientes/buscar?termo=${encodeURIComponent(this.termo)}`)
                         .then(res => res.json())
                         .then(data => this.resultados = data);
                 },
-                selecionar(usuario) {
-                    this.selecionado = usuario;
-                    this.termo = usuario.nome;
+                selecionar(paciente) {
+                    this.selecionado = paciente;
+                    this.termo = paciente.nome;
                     this.resultados = [];
                 }
             }" class="relative">
-                <label for="usuario" class="block text-sm font-medium text-gray-700">Paciente</label>
+                <label for="paciente" class="block text-sm font-medium text-gray-700">Paciente</label>
                 <input type="text"
-                    id="usuario"
+                    id="paciente"
                     x-model="termo"
                     @input.debounce.300ms="buscar"
                     class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
@@ -49,10 +49,10 @@
 
                 <!-- Sugestões -->
                 <ul x-show="resultados.length > 0" class="absolute z-10 bg-white border border-gray-300 rounded-md mt-1 w-full shadow-md">
-                    <template x-for="usuario in resultados" :key="usuario.id">
-                        <li @click="selecionar(usuario)"
+                    <template x-for="paciente in resultados" :key="paciente.id">
+                        <li @click="selecionar(paciente)"
                             class="px-4 py-2 hover:bg-gray-100 cursor-pointer">
-                            <span x-text="usuario.nome"></span>
+                            <span x-text="paciente.nome"></span>
                         </li>
                     </template>
                 </ul>
