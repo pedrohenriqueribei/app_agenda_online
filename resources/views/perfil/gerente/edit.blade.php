@@ -123,7 +123,7 @@
                     <p class="text-sm text-gray-600 mb-2">Foto atual:</p>
                     <img src="{{ asset('storage/' . $gerente->foto) }}"
                         alt="Foto do gerente"
-                        class="w-32 h-32 object-cover rounded-full border border-gray-300">
+                        class="w-32 h-32 object-cover  border border-gray-300">
                 </div>
             @endif
         </div>

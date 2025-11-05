@@ -12,23 +12,8 @@ class ProfissionalPacienteController extends Controller
 {
     use ProfissionalAutenticadoTrait;
 
-    public function __construct()
-    {
-
-        //verificar se é o mesmo profissional que está acessando é o que esta logado
-        $this->middleware(function ($request, $next) {
-            $profissional = $request->route('profissional');
-
-            if ($profissional && Auth::guard('profissional')->id() !== $profissional->id) {
-                abort(403, 'Acesso não autorizado.');
-            }
-
-            return $next($request);
-        })->only(['index', 'show']); 
-    }
-
     //exibir todos os pacientes do profissional
-    public function index (Profissional $profissional) 
+    public function index () 
     {
         $profissional = $this->getProfissional();
 

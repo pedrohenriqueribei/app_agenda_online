@@ -8,7 +8,7 @@
         {{-- Foto --}}
         @if ($paciente->foto)
             <div class="flex justify-center">
-                <img src="{{ asset('storage/' . $paciente->foto) }}" alt="Foto do Paciente" class="w-32 h-32 rounded-full object-cover">
+                <img src="{{ asset('storage/' . $paciente->foto) }}" alt="Foto do Paciente" class="w-32 h-32  object-cover">
             </div>
         @endif
 

@@ -15,7 +15,7 @@ class Agendamento extends Model
 
     protected $fillable = [
         'profissional_id',
-        'usuario_id',
+        'paciente_id',
         'clinica_id',
         'data',
         'hora_inicio',
@@ -42,7 +42,7 @@ class Agendamento extends Model
 
     public function paciente()
     {
-        return $this->belongsTo(Paciente::class, 'usuario_id');
+        return $this->belongsTo(Paciente::class, 'paciente_id');
     }
 
     public function clinica()

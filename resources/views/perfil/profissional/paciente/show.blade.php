@@ -6,14 +6,24 @@
     <h1 class="text-2xl font-bold mb-6">Informações do Paciente</h1>
 
     {{-- Informações pessoais --}}
-    <div class="bg-white shadow rounded-lg p-6 mb-6">
-        <h2 class="text-xl font-semibold text-gray-800 mb-2">{{ $paciente->nome }}</h2>
-        <p class="text-gray-600"><strong>Email:</strong> {{ $paciente->email }}</p>
-        <p class="text-gray-600"><strong>Telefone:</strong> {{ $paciente->telefone }}</p>
-        <p class="text-gray-600"><strong>Data de nascimento:</strong> {{ $paciente->data_nascimento_formatado }}</p>
-        <p class="text-gray-600"><strong>Idade:</strong> {{ $paciente->idade }} anos</p>
-        <p class="text-gray-600"><strong>Sexo:</strong> {{ $paciente->sexo->label() }} </p>
-        <p class="text-gray-600"><strong>Estado Civil:</strong> {{ $paciente->estado_civil->label() }} </p>
+    <div class="bg-white shadow rounded-lg p-6 mb-6 flex items-start justify-between gap-6">
+        <!-- Informações pessoais -->
+        <div class="flex-1">
+            <h2 class="text-xl font-semibold text-gray-800 mb-2">{{ $paciente->nome }}</h2>
+            <p class="text-gray-600"><strong>Email:</strong> {{ $paciente->email }}</p>
+            <p class="text-gray-600"><strong>Telefone:</strong> {{ $paciente->telefone }}</p>
+            <p class="text-gray-600"><strong>Data de nascimento:</strong> {{ $paciente->data_nascimento_formatado }}</p>
+            <p class="text-gray-600"><strong>Idade:</strong> {{ $paciente->idade }} anos</p>
+            <p class="text-gray-600"><strong>Sexo:</strong> {{ $paciente->sexo->label() }}</p>
+            <p class="text-gray-600"><strong>Estado Civil:</strong> {{ $paciente->estado_civil->label() }}</p>
+        </div>
+
+        {{-- Foto --}}
+        @if ($paciente->foto)
+            <div class="flex justify-center">
+                <img src="{{ asset('storage/' . $paciente->foto) }}" alt="Foto do Paciente" class="w-32 h-32  object-cover">
+            </div>
+        @endif
     </div>
 
     {{-- Agendamentos --}}

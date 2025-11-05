@@ -22,15 +22,17 @@ class PerfilProfissionalController extends Controller
         $this->profissionalService = $profissionalService;
 
         //verificar se é o mesmo profissional que está acessando é o que esta logado
+        /*
         $this->middleware(function ($request, $next) {
             $profissional = $request->route('profissional');
 
-            if ($profissional && Auth::guard('profissional')->id() !== $profissional->id) {
+            if ($profissional && Auth::guard('profissional') !== $profissional) {
                 abort(403, 'Acesso não autorizado.');
             }
 
             return $next($request);
         })->only(['show', 'edit', 'update', 'destroy', 'agendaMes', 'agendaSemana', 'agendaDia']); 
+        */
     }
 
     /**

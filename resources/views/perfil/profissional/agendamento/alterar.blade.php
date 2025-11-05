@@ -45,7 +45,7 @@
                     class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
                     autocomplete="off"
                     placeholder="{{ $agendamento->paciente->nome ?? 'Digite o nome do paciente' }}">
-                <input type="hidden" name="usuario_id" :value="selecionado?.id">
+                <input type="hidden" name="paciente_id" :value="selecionado?.id">
 
                 <!-- Sugestões -->
                 <ul x-show="resultados.length > 0" class="absolute z-10 bg-white border border-gray-300 rounded-md mt-1 w-full shadow-md">
