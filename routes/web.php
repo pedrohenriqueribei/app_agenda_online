@@ -100,7 +100,15 @@ Route::prefix('conta/profissional')->name('perfil.profissional.')->group(functio
     //area autenticada
     Route::middleware(['auth:profissional', 'profissional.auth'])->group(function () {
         
-        
+        Route::get('/{profissional}', [PerfilProfissionalController::class, 'show'])->name('show');
+        Route::get('edit/{profissional}', [PerfilProfissionalController::class, 'edit'])->name('edit');
+        Route::put('update/{profissional}', [PerfilProfissionalController::class, 'update'])->name('update');
+        Route::delete('destroy/{profissional}', [PerfilProfissionalController::class, 'destroy'])->name('destroy');
+
+        Route::get('agenda/dia/{dia?}', [PerfilProfissionalController::class, 'agendaDia'])->name('agenda.dia');
+        Route::get('agenda/semana/{data?}', [PerfilProfissionalController::class, 'agendaSemana'])->name('agenda.semana');
+        Route::get('agenda/mes/{mes?}', [PerfilProfissionalController::class, 'agendaMes'])->name('agenda.mes');
+        Route::get('/dashboard')->name('dashboard');
         
         //agendamentos
         Route::prefix('/agendamento')->name('agendamento.')->controller(AgendamentoController::class)->group(function (){
@@ -121,15 +129,6 @@ Route::prefix('conta/profissional')->name('perfil.profissional.')->group(functio
             Route::get('/show/{usuario}', 'show')->name('show');
         });
 
-        Route::get('/{profissional}', [PerfilProfissionalController::class, 'show'])->name('show');
-        Route::get('edit/{profissional}', [PerfilProfissionalController::class, 'edit'])->name('edit');
-        Route::put('update/{profissional}', [PerfilProfissionalController::class, 'update'])->name('update');
-        Route::delete('destroy/{profissional}', [PerfilProfissionalController::class, 'destroy'])->name('destroy');
-
-        Route::get('agenda/dia/{dia?}', [PerfilProfissionalController::class, 'agendaDia'])->name('agenda.dia');
-        Route::get('agenda/semana/{data?}', [PerfilProfissionalController::class, 'agendaSemana'])->name('agenda.semana');
-        Route::get('agenda/mes/{mes?}', [PerfilProfissionalController::class, 'agendaMes'])->name('agenda.mes');
-        Route::get('/dashboard')->name('dashboard');
     });
 });
 
