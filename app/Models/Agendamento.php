@@ -55,6 +55,11 @@ class Agendamento extends Model
         return $this->data ? $this->data->format('d/m/Y') : '—';
     }
 
+    public function getDataExtendidaAttribute(): string
+    {
+        return $this->data ? ucfirst($this->data->translatedFormat('l, d/m/Y')) : '—';
+    }
+
     public function getHoraInicioFormatadaAttribute(): string
     {
         return $this->hora_inicio ? $this->hora_inicio->format('H:i') : '—';

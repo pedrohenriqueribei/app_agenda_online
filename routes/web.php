@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminPacienteController;
 use App\Http\Controllers\AgendamentoController;
 use App\Http\Controllers\ClinicaController;
 use App\Http\Controllers\GerenteController;
+use App\Http\Controllers\PacienteAgendamentoController;
 use App\Http\Controllers\PerfilGerenteController;
 use App\Http\Controllers\PerfilProfissionalController;
 use App\Http\Controllers\ProfissionalController;
@@ -147,7 +148,7 @@ Route::prefix('conta/gerente')->name('perfil.gerente.')->group(function (){
     });
 });
 
-//rotas para clientes
+//rotas para pacientes
 Route::prefix('paciente')->name('paciente.')->group(function(){
     Route::get('registrar', [PacienteController::class, 'create'])->name('create');
     Route::post('registrar', [PacienteController::class, 'store'])->name('store');
@@ -161,6 +162,10 @@ Route::prefix('paciente')->name('paciente.')->group(function(){
         Route::get('edit/{paciente}', [PacienteController::class, 'edit'])->name('edit');
         Route::put('update/{paciente}', [PacienteController::class, 'update'])->name('update');
         Route::delete('destroy/{paciente}', [PacienteController::class, 'destroy'])->name('destroy');
+
+        Route::get('confirmar/agendamento/{agendamento}', [PacienteAgendamentoController::class, 'confirmar'])->name('agendamento.confirmar');
+        Route::get('nao-confirmar/agendamento/{agendamento}', [PacienteAgendamentoController::class, 'naoConfirmar'])->name('agendamento.nao.confirmar');
+        Route::get('cancelar/agendamento/{agendamento}', [PacienteAgendamentoController::class, 'cancelar'])->name('agendamento.cancelar');
     });
 });
 

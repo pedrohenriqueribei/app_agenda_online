@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Enums\StatusAgendamento;
 use App\Models\Agendamento;
 
 class AgendamentoService
@@ -35,5 +36,57 @@ class AgendamentoService
             ->orderBy('data')
             ->orderBy('hora_inicio')
             ->get();
+    }
+
+    public function confirmarAgendamento(Agendamento $agendamento)
+    {
+        return Agendamento::where('id', $agendamento->id)
+            ->where(['status' => StatusAgendamento::PENDENTE])
+            ->update(['status' => StatusAgendamento::CONFIRMADO]) > 0;
+    }
+
+    public function naoConfirmarAgendamento(Agendamento $agendamento)
+    {
+        return Agendamento::where('id', $agendamento->id)
+            ->whereIn('status', [StatusAgendamento::PENDENTE, StatusAgendamento::CONFIRMADO])
+            ->update(['status' => StatusAgendamento::NAO_CONFIRMADO]) > 0;
+    }
+
+    public function cancelarPeloPaciente(Agendamento $agendamento): bool
+    {
+        return Agendamento::where('id', $agendamento->id)
+            ->whereIn('status', [StatusAgendamento::PENDENTE, StatusAgendamento::CONFIRMADO, StatusAgendamento::NAO_CONFIRMADO])
+            ->update(['status' => StatusAgendamento::CANCELADO_PACIENTE]) > 0;
+    }
+
+    public function cancelarPelaClinica(Agendamento $agendamento): bool
+    {
+        return Agendamento::where('id', $agendamento->id)
+            ->whereIn('status', [StatusAgendamento::PENDENTE, StatusAgendamento::CONFIRMADO, StatusAgendamento::NAO_CONFIRMADO])
+            ->update(['status' => StatusAgendamento::CANCELADO_CLINICA]) > 0;
+    }
+
+    public function fecharAgendamento(Agendamento $agendamento): bool
+    {
+        return Agendamento::where('id', $agendamento->id)
+            ->update(['status' => StatusAgendamento::FECHADO]) > 0;
+    }
+
+    public function reabrirAgendamento(Agendamento $agendamento): bool
+    {
+        return Agendamento::where('id', $agendamento->id)
+            ->whereIn('status', [
+                StatusAgendamento::CANCELADO_PACIENTE,
+                StatusAgendamento::CANCELADO_CLINICA,
+                StatusAgendamento::NAO_COMPARECEU,
+                StatusAgendamento::FECHADO,
+            ])
+            ->update(['status' => StatusAgendamento::PENDENTE]) > 0;
+    }
+
+    public function AtendimentoRealizado(Agendamento $agendamento): bool
+    {
+        return Agendamento::where('id', $agendamento->id)
+            ->update(['status' => StatusAgendamento::ATENDIDO]) > 0;
     }
 }

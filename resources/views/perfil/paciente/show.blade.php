@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+@section('title', 'Paciente')
+
+@php
+    use App\Enums\StatusAgendamento;
+@endphp
+
 @section('content')
 <div class="max-w-4xl mx-auto mt-10 px-4">
     <h2 class="text-2xl font-bold mb-6">Detalhes do Paciente</h2>
@@ -35,6 +41,10 @@
                 <p>{{ $paciente->data_nascimento->format('d/m/Y') }}</p>
             </div>
             <div>
+                <span class="font-semibold">Idade</span>
+                <p> {{ $paciente->idade }} anos</p>
+            </div>
+            <div>
                 <span class="font-semibold">Sexo:</span>
                 <p>{{ $paciente->sexo->label() }}</p>
             </div>
@@ -65,12 +75,12 @@
         {{-- Agendamentos --}}
         @if ($paciente->agendamentos && $paciente->agendamentos->count())
             <div class="border-t pt-6">
-                <h3 class="text-lg font-semibold mb-4">Agendamentos</h3>
+                <h3 class="text-lg font-semibold mb-4">Meus Agendamentos</h3>
 
                 <div class="space-y-4">
                     @foreach ($paciente->agendamentos as $agendamento)
                         <div class="border rounded p-4 bg-gray-50">
-                            <p><span class="font-semibold">Data:</span> {{ $agendamento->data_formatada }}</p>
+                            <p><span class="font-semibold">Data:</span> {{ $agendamento->data_extendida }}</p>
                             <p><span class="font-semibold">Hora:</span> {{ $agendamento->hora_inicio_formatada }}</p>
                             <p><span class="font-semibold">Profissional:</span> {{ $agendamento->profissional->primeiro_nome ?? '—' }}</p>
                             <p><span class="font-semibold">Especialidade:</span> {{ $agendamento->profissional->especialidade ?? '—' }}</p>
@@ -78,8 +88,13 @@
                             <p><span class="font-semibold">Modalidade:</span> {{ $agendamento->modalidade->label() }}</p>
                             <p><span class="font-semibold">Clínica:</span> {{ $agendamento->clinica->nome }}</p>
 
-                            {{-- Botões de ação --}}
-                            
+                            {{-- Botões de ação --}} 
+                            <br>
+                            @if($agendamento->status === StatusAgendamento::PENDENTE)
+                                <a href="{{ route('paciente.agendamento.confirmar', ['agendamento' => $agendamento]) }}" class="btn btn-primary">Confirmar presença</a>
+                                <a href="{{ route('paciente.agendamento.nao.confirmar', ['agendamento' => $agendamento]) }}" class="btn btn-warning">Não posso ir</a>
+                                @endif
+                            <a href="{{ route('paciente.agendamento.cancelar', ['agendamento' => $agendamento]) }}" class="btn btn-danger">Cancelar</a>
                         </div>
                     @endforeach
                 </div>
