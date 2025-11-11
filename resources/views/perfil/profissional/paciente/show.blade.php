@@ -43,12 +43,12 @@
                         <th class="px-4 py-2">Status</th>
                         <th class="px-4 py-2">Modalidade</th>
                         <th class="px-4 py-2">Espécie</th>
-                        <th class="px-4 py-2"></th>
+                        <th class="px-4 py-2">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($paciente->agendamentos->sortByDesc('data') as $agendamento)
-                        <tr class="border-b text-sm text-gray-700">
+                        <tr class="border-b text-sm text-gray-700 hover:bg-slate-100">
                             <td class="px-4 py-2">{{ $agendamento->data_formatada }}</td>
                             <td class="px-4 py-2">{{ $agendamento->hora_inicio_formatada }} às {{ $agendamento->hora_fim_formatada }}</td>
                             <td class="px-4 py-2">{{ $agendamento->Profissional->primeiro_nome }} {{ $agendamento->Profissional->ultimo_nome }}</td>
@@ -56,7 +56,14 @@
                             <td class="px-4 py-2 capitalize">{{ $agendamento->status->label() }}</td>
                             <td class="px-4 py-2">{{ $agendamento->modalidade->label() }}</td>
                             <td class="px-4 py-2">{{ $agendamento->especie->label() }}</td>
-                            <td class="px-4 py-2"></td>
+                            <td class="px-4 py-2">
+                                <div class="flex flex-wrap gap-2 ">
+                                    <a href="{{ route('perfil.profissional.paciente.agendamento.confirmar', ['profissional' => $profissional, 'agendamento' => $agendamento]) }}" class="btn btn-primary">Confirmar</a>
+                                    <a href="{{ route('perfil.profissional.paciente.agendamento.realizado', ['profissional' => $profissional, 'agendamento' => $agendamento]) }}" class="btn btn-success">Atendido</a>
+                                    <a href="{{ route('perfil.profissional.paciente.agendamento.nao.confirmar', ['profissional' => $profissional, 'agendamento' => $agendamento]) }}"  class="btn btn-dark">Não Confirmar</a>
+                                    <a href="{{ route('perfil.profissional.paciente.agendamento.cancelar', ['profissional' => $profissional, 'agendamento' => $agendamento]) }}" class="btn btn-danger">Cancelar</a>
+                                </div>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

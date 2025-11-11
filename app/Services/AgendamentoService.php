@@ -84,7 +84,7 @@ class AgendamentoService
             ->update(['status' => StatusAgendamento::PENDENTE]) > 0;
     }
 
-    public function AtendimentoRealizado(Agendamento $agendamento): bool
+    public function atendimentoRealizado(Agendamento $agendamento): bool
     {
         return Agendamento::where('id', $agendamento->id)
             ->update(['status' => StatusAgendamento::ATENDIDO]) > 0;

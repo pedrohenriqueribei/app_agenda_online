@@ -15,6 +15,7 @@ use App\Http\Controllers\PacienteController;
 use App\Models\Paciente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Monolog\Handler\RotatingFileHandler;
 
 Route::get('/', function () {
     return redirect()->route('home');
@@ -128,6 +129,10 @@ Route::prefix('conta/profissional')->name('perfil.profissional.')->group(functio
         Route::prefix('/{profissional}/paciente')->name('paciente.')->controller(ProfissionalPacienteController::class)->group(function(){
             Route::get('/', 'index')->name('index');
             Route::get('/show/{paciente}', 'show')->name('show');
+            Route::get('confirmar/agendamento/{agendamento}', 'confirmar')->name('agendamento.confirmar');
+            Route::get('nao-confirmar/agendamento/{agendamento}', 'naoConfirmar')->name('agendamento.nao.confirmar');
+            Route::get('cancelar/agendamento/{agendamento}', 'cancelar')->name('agendamento.cancelar');
+            Route::get('realizado/agendamento/{agendamento}', 'realizado')->name('agendamento.realizado');
         });
 
     });
