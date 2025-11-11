@@ -38,7 +38,7 @@ class ProfissionalLoginController extends Controller
             $request->session()->regenerate();
             $profissional = Auth::guard('profissional')->user();
 
-            return redirect()->intended(route('perfil.profissional.show', ['profissional' => $profissional->id ]))->with('success', 'Paciente logado com sucesso!');
+            return redirect()->intended(route('perfil.profissional.show', ['profissional' => $profissional->id ]))->with('success', 'Você foi logado(a) com sucesso!');
         }
 
         return back()->withErrors([
