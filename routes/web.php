@@ -12,7 +12,9 @@ use App\Http\Controllers\ProfissionalController;
 use App\Http\Controllers\ProfissionalLoginController;
 use App\Http\Controllers\ProfissionalPacienteController;
 use App\Http\Controllers\PacienteController;
+use App\Http\Controllers\ProntuarioPsicologicoController;
 use App\Models\Paciente;
+use App\Models\ProntuarioPsicologico;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Monolog\Handler\RotatingFileHandler;
@@ -126,13 +128,21 @@ Route::prefix('conta/profissional')->name('perfil.profissional.')->group(functio
         });
 
         //pacientes
-        Route::prefix('/{profissional}/paciente')->name('paciente.')->controller(ProfissionalPacienteController::class)->group(function(){
-            Route::get('/', 'index')->name('index');
-            Route::get('/show/{paciente}', 'show')->name('show');
-            Route::get('confirmar/agendamento/{agendamento}', 'confirmar')->name('agendamento.confirmar');
-            Route::get('nao-confirmar/agendamento/{agendamento}', 'naoConfirmar')->name('agendamento.nao.confirmar');
-            Route::get('cancelar/agendamento/{agendamento}', 'cancelar')->name('agendamento.cancelar');
-            Route::get('realizado/agendamento/{agendamento}', 'realizado')->name('agendamento.realizado');
+        Route::prefix('/{profissional}/paciente')->name('paciente.')->group(function(){
+            Route::get('/', [ProfissionalPacienteController::class,'index'])->name('index');
+            Route::get('/show/{paciente}', [ProfissionalPacienteController::class,'show'])->name('show');
+            Route::get('confirmar/agendamento/{agendamento}', [ProfissionalPacienteController::class,'confirmar'])->name('agendamento.confirmar');
+            Route::get('nao-confirmar/agendamento/{agendamento}', [ProfissionalPacienteController::class,'naoConfirmar'])->name('agendamento.nao.confirmar');
+            Route::get('cancelar/agendamento/{agendamento}', [ProfissionalPacienteController::class,'cancelar'])->name('agendamento.cancelar');
+            Route::get('realizado/agendamento/{agendamento}', [ProfissionalPacienteController::class,'realizado'])->name('agendamento.realizado');
+
+            //prontuário psicológico
+            Route::prefix('/{paciente}/prontuario/psicologico')->name('prontuario.psicologico.')->controller(ProntuarioPsicologicoController::class)->group(function(){
+                Route::get('novo', 'create')->name('create');
+                Route::post('salvar', 'store')->name('store');
+                Route::get('show/{prontuario_psicologico}', 'show')->name('show');
+
+            });
         });
 
     });

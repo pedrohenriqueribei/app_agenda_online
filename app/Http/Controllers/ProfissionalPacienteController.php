@@ -44,7 +44,12 @@ class ProfissionalPacienteController extends Controller
     public function show(Profissional $profissional, Paciente $paciente)
     {
 
-        $paciente = Paciente::with(['agendamentos.clinica'])->findOrFail($paciente->id);
+        $paciente = Paciente::with([
+            'agendamentos.clinica',
+            'prontuarios_psicologicos' => function ($query) use ($profissional) {
+                $query->where('profissional_id', $profissional->id);
+            }
+        ])->findOrFail($paciente->id);
         
         return view('perfil.profissional.paciente.show', compact('profissional','paciente'));
     }
@@ -79,5 +84,13 @@ class ProfissionalPacienteController extends Controller
         $this->agendamentoService->atendimentoRealizado($agendamento);
 
         return redirect()->back()->with('success', 'Atendimento realizado!!');
+    }
+
+    //prontuário psicológico
+    public function prontuario (Profissional $profissional, Paciente $paciente)
+    {
+        $paciente->load('prontuarios');
+
+        return view('perfil.profissional.paciente.prontuario', compact('profissional','paciente'));
     }
 }

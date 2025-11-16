@@ -26,6 +26,44 @@
         @endif
     </div>
 
+    <div class="bg-white shadow rounded-lg p-6 mb-5">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">Prontuários Psicológicos</h2>
+        @if($paciente->prontuarios_psicologicos->isEmpty())
+            <p class="text-gray-500 mb-4">Paciente ainda não tem um prontuário Psicológico.</p>
+            <div class="mb-5">
+                <a href="{{ route('perfil.profissional.paciente.prontuario.psicologico.create', [$profissional,  $paciente]) }}" 
+                    class="btn btn-primary mt-3">Criar Prontuário</a>
+            </div>
+        @else
+            <table class="w-full table-auto border-collapse">
+                <thead>
+                    <tr class="bg-gray-100 text-left text-sm font-semibold text-gray-700">
+                        <th class="px-4 py-2">Psicólogo</th>
+                        <th class="px-4 py-2">Paciente</th>
+                        <th class="px-4 py-2">Criado em</th>
+                        <th class="px-4 py-2">Atualizado em</th>
+                        <th class="px-4 py-2">Status</th>
+                        <th class="px-4 py-2">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($paciente->prontuarios_psicologicos->sortByDesc('created_at') as $prontuario)
+                        <tr class="border-b text-sm text-gray-700 hover:bg-slate-100">
+                            <td class="px-4 py-2">{{ $prontuario->profissional->nome }}</td>
+                            <td class="px-4 py-2">{{ $prontuario->paciente->nome }}</td>
+                            <td class="px-4 py-2">{{ $prontuario->data_criacao }}</td>
+                            <td class="px-4 py-2">{{ $prontuario->data_atualizacao }}</td>
+                            <td class="px-4 py-2">{{ $prontuario->status }}</td>
+                            <td class="px-4 py-2">
+                                <a href="{{ route('perfil.profissional.paciente.prontuario.psicologico.show', [$profissional, $paciente, 'prontuario_psicologico' => $prontuario]) }}" class="btn btn-success">Abrir</a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        @endif
+    </div>
+
     {{-- Agendamentos --}}
     <div class="bg-white shadow rounded-lg p-6">
         <h2 class="text-xl font-semibold text-gray-800 mb-4">Agendamentos</h2>

@@ -41,6 +41,11 @@ class Paciente extends Authenticatable
         'data_nascimento' => 'date',
     ];
 
+    //prontuário
+    public function prontuarios_psicologicos(){
+        return $this->hasMany(ProntuarioPsicologico::class, 'paciente_id');
+    }
+
     //agendamentos
     public function agendamentos()
     {

@@ -19,10 +19,21 @@
             </div>
         </details>
 
+        @if(isset($profissional))
         <a href="{{ route('perfil.profissional.paciente.index', ['profissional' => $profissional ]) }}" class="flex items-center gap-2 px-6 py-2 rounded hover:bg-blue-100">
             <x-heroicon-s-users class="w-5 h-5 text-blue-500" />
             <span>Meus pacientes</span>
         </a>
+        @endif
+
+        {{-- 
+        @if(isset($profissional) && isset($paciente))
+            <a href="{{ route('perfil.profissional.paciente.prontuario.psicologico.show', ['profissional' => $profissional, 'paciente' => $paciente ]) }}" class="flex items-center gap-2 px-6 py-2 rounded hover:bg-blue-100">
+                <x-heroicon-s-document-text class="w-5 h-5 text-blue-500" />
+                <span>Prontuário Psicológico</span>
+            </a>
+        @endif
+        --}}
     </nav>
 </aside>
 @endauth
