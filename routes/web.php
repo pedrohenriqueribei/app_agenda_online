@@ -13,8 +13,10 @@ use App\Http\Controllers\ProfissionalLoginController;
 use App\Http\Controllers\ProfissionalPacienteController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\ProntuarioPsicologicoController;
+use App\Http\Controllers\RegistroEvolucaoController;
 use App\Models\Paciente;
 use App\Models\ProntuarioPsicologico;
+use App\Models\RegistroEvolucao;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Monolog\Handler\RotatingFileHandler;
@@ -142,6 +144,11 @@ Route::prefix('conta/profissional')->name('perfil.profissional.')->group(functio
                 Route::post('salvar', 'store')->name('store');
                 Route::get('show/{prontuario_psicologico}', 'show')->name('show');
 
+            });
+
+            Route::prefix('/{paciente}/prontuario/psicologico/{prontuario_psicologico}/evolucao')->name('prontuario.psicologico.evolucao.')->controller(RegistroEvolucaoController::class)->group(function(){
+                Route::get('registrar', 'create')->name('create');
+                Route::post('registrar', 'store')->name('store');
             });
         });
 

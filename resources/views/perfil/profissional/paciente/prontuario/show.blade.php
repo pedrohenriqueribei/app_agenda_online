@@ -51,9 +51,39 @@
     </div>
 
     {{-- REGISTRO DA EVOLUÇÃO DO TRABALHO --}}
-    <div class="bg-white shadow rounded-lg p-6 mb-6 flex flex-col gap-2">
-        <h2 class="font-bold mb-6">Registro da Evolução do trabalho</h2>
+    <div class="bg-white shadow rounded-lg p-6 mb-6 gap-2">
+        <div class="mb-4 flex justify-between">
+            <h2 class="font-bold">Registro da Evolução do trabalho</h2>
         
+            <a href="{{ route('perfil.profissional.paciente.prontuario.psicologico.evolucao.create', 
+            [$profissional, $paciente, $prontuario_psicologico]) }}" 
+            class="btn btn-primary">Registrar Evolução</a>
+        </div>
+
+        @if($prontuario_psicologico->registrosEvolucao->isEmpty())
+            <p class="font-thin text-gray-700">Não há registro de evolução.</p>
+        @else
+            <table class="w-full table-auto border-collapse">
+                <thead>
+                    <tr class="bg-gray-100 text-left text-sm font-semibold text-gray-700">
+                        <th class="px-4 py-2">Data</th>
+                        <th class="px-4 py-2">Registro</th>
+                        <th class="px-4 py-2">Profissional</th>
+                        
+                        <th class="px-4 py-2">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                     @foreach ($prontuario_psicologico->registrosEvolucao as $evolucao)
+                     <tr class="border-b text-sm text-gray-700 hover:bg-slate-100">
+                            <td class="px-4 py-2">{{ $evolucao->data_criacao }}</td>
+                            <td class="px-4 py-2">{{ $evolucao->descricao }}</td>
+                            <td class="px-4 py-2">{{ $evolucao->prontuario->profissional->nome }}</td>
+                     </tr>
+                     @endforeach
+                </tbody>
+            </table>
+        @endif
     </div>
 
     {{-- REGISTRO DE ENCAMINHAMENTO OU ENCERRAMENTO --}}

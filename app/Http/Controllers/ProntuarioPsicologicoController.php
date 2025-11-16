@@ -46,6 +46,10 @@ class ProntuarioPsicologicoController extends Controller
     public function show(Profissional $profissional, Paciente $paciente, ProntuarioPsicologico $prontuarioPsicologico)
     {
         //
+        $prontuarioPsicologico->load('registrosEvolucao');
+
+        //dd($prontuarioPsicologico->registrosEvolucao());
+
         return view('perfil.profissional.paciente.prontuario.show', [ 'profissional' => $profissional , 'paciente' => $paciente, 'prontuario_psicologico' => $prontuarioPsicologico ]);
     }
 
