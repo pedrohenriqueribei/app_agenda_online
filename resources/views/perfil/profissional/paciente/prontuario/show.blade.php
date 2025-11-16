@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <h1 class="titulo_1">Prontuário Psicológico {{ $prontuario_psicologico->data_criacao }} </h1>
+    <h1 class="titulo_1">Prontuário Psicológico</h1>
     
     {{-- Informações pessoais --}}
     <h2 class="font-bold mb-6">Informações do Paciente</h2>
