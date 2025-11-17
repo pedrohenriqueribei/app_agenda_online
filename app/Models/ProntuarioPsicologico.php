@@ -46,7 +46,7 @@ class ProntuarioPsicologico extends Model
     }
 
     //REGISTRO ENCAMINHAMENTO
-    public function registroEncaminhamento ()
+    public function registrosEncaminhamento ()
     {
         return $this->hasMany(RegistroEncaminhamento::class, 'prontuario_psicologico_id');
     }

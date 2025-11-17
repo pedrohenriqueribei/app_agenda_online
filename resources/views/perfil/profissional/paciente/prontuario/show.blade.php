@@ -87,8 +87,40 @@
     </div>
 
     {{-- REGISTRO DE ENCAMINHAMENTO OU ENCERRAMENTO --}}
-    <div class="bg-white shadow rounded-lg p-6 mb-6 flex flex-col gap-2">
-        <h2 class="font-bold mb-6">Registro de encaminhando ou encerramento</h2>
+    <div class="bg-white shadow rounded-lg p-6 mb-6 gap-2">
+        <div class="mb-4 flex justify-between">
+            <h2 class="font-bold">Registro de Encaminhamento</h2>
+        
+            <a href="{{ route('perfil.profissional.paciente.prontuario.psicologico.encaminhamento.create', 
+            [$profissional, $paciente, $prontuario_psicologico]) }}" 
+            class="btn btn-primary">Registrar Encaminhamento</a>
+        </div>
+
+        @if($prontuario_psicologico->registrosEncaminhamento->isEmpty())
+            <p class="font-thin text-gray-700">Não há registro de encaminhamento.</p>
+        @else
+            <table class="w-full table-auto border-collapse">
+                <thead>
+                    <tr class="bg-gray-100 text-left text-sm font-semibold text-gray-700">
+                        <th class="px-4 py-2">Data</th>
+                        <th class="px-4 py-2">Registro</th>
+                        <th class="px-4 py-2">Tipo</th>
+                        <th class="px-4 py-2">Profissional</th>
+                        <th class="px-4 py-2">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                     @foreach ($prontuario_psicologico->registrosEncaminhamento as $encaminhamento)
+                     <tr class="border-b text-sm text-gray-700 hover:bg-slate-100">
+                            <td class="px-4 py-2">{{ $encaminhamento->data_criacao }}</td>
+                            <td class="px-4 py-2">{{ $encaminhamento->descricao }}</td>
+                            <td class="px-4 py-2">{{ ucfirst($encaminhamento->tipo) }}</td>
+                            <td class="px-4 py-2">{{ $encaminhamento->prontuario->profissional->nome }}</td>
+                     </tr>
+                     @endforeach
+                </tbody>
+            </table>
+        @endif
     </div>
 
     {{-- CÓPIAS DE OUTROS DOCUMENTOS PRODUZIDOS PELO PSICÓLOGO PARA USUÁRIO/INSTITUIÇÃO DO SERVIÇO DE PSICOLOGIA PRESTADO --}}
