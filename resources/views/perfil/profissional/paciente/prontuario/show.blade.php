@@ -12,7 +12,7 @@
         <!-- Informações pessoais -->
         
         <div class="flex-1">
-            <h2 class="text-xl font-semibold text-gray-800 mb-2">{{ $prontuario_psicologico->paciente->nome }}</h2>
+            <h2 class="text-xl font-semibold text-gray-800 mb-2">{{ $prontuario_psicologico->paciente->primeiro_nome. ' ' .$prontuario_psicologico->paciente->ultimo_nome }}</h2>
             <p class="text-gray-600"><strong>Email:</strong> {{ $prontuario_psicologico->paciente->email }}</p>
             <p class="text-gray-600"><strong>Telefone:</strong> {{ $prontuario_psicologico->paciente->telefone }}</p>
             <p class="text-gray-600"><strong>Data de nascimento:</strong> {{ $prontuario_psicologico->paciente->data_nascimento_formatado }}</p>
@@ -78,7 +78,7 @@
                      <tr class="border-b text-sm text-gray-700 hover:bg-slate-100">
                             <td class="px-4 py-2">{{ $evolucao->data_criacao }}</td>
                             <td class="px-4 py-2">{{ $evolucao->descricao }}</td>
-                            <td class="px-4 py-2">{{ $evolucao->prontuario->profissional->nome }}</td>
+                            <td class="px-4 py-2">{{ $evolucao->prontuario->profissional->primeiro_nome }}</td>
                      </tr>
                      @endforeach
                 </tbody>
@@ -115,7 +115,7 @@
                             <td class="px-4 py-2">{{ $encaminhamento->data_criacao }}</td>
                             <td class="px-4 py-2">{{ $encaminhamento->descricao }}</td>
                             <td class="px-4 py-2">{{ ucfirst($encaminhamento->tipo) }}</td>
-                            <td class="px-4 py-2">{{ $encaminhamento->prontuario->profissional->nome }}</td>
+                            <td class="px-4 py-2">{{ $encaminhamento->prontuario->profissional->primeiro_nome }}</td>
                      </tr>
                      @endforeach
                 </tbody>
@@ -125,7 +125,40 @@
 
     {{-- CÓPIAS DE OUTROS DOCUMENTOS PRODUZIDOS PELO PSICÓLOGO PARA USUÁRIO/INSTITUIÇÃO DO SERVIÇO DE PSICOLOGIA PRESTADO --}}
     <div class="bg-white shadow rounded-lg p-6 mb-6 flex flex-col gap-2">
-        <h2 class="font-bold mb-6">Registro de documentos produzidos</h2>
+        
+        <div class="mb-4 flex justify-between">
+            <h2 class="font-bold mb-6">Registro de documentos produzidos</h2>
+        
+            <a href="{{ route('perfil.profissional.paciente.prontuario.psicologico.documentos.create', 
+            [$profissional, $paciente, $prontuario_psicologico]) }}" 
+            class="btn btn-primary">Registrar Documentos</a>
+        </div>
+
+        @if($prontuario_psicologico->registrosDocumentos->isEmpty())
+            <p class="font-thin text-gray-700">Não há registro de documentos.</p>
+        @else
+            <table class="w-full table-auto border-collapse">
+                <thead>
+                    <tr class="bg-gray-100 text-left text-sm font-semibold text-gray-700">
+                        <th class="px-4 py-2">Data da Emissão</th>
+                        <th class="px-4 py-2">Finalidade</th>
+                        <th class="px-4 py-2">Destinatário</th>
+                        <th class="px-4 py-2">Profissional</th>
+                        <th class="px-4 py-2">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                     @foreach ($prontuario_psicologico->registrosDocumentos as $documento)
+                     <tr class="border-b text-sm text-gray-700 hover:bg-slate-100">
+                            <td class="px-4 py-2">{{ $documento->data_criacao }}</td>
+                            <td class="px-4 py-2">{{ $documento->finalidade }}</td>
+                            <td class="px-4 py-2">{{ ucfirst($documento->destinatario) }}</td>
+                            <td class="px-4 py-2">{{ $documento->prontuario->profissional->primeiro_nome }}</td>
+                     </tr>
+                     @endforeach
+                </tbody>
+            </table>
+        @endif
     </div>
 
     {{-- DOCUMENTOS RESULTANTES DA APLICAÇÃO DE INSTRUMENTOS DE AVALIAÇÃO PSICOLÓGICA --}}
