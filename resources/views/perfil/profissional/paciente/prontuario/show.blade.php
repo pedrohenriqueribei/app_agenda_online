@@ -163,7 +163,37 @@
 
     {{-- DOCUMENTOS RESULTANTES DA APLICAÇÃO DE INSTRUMENTOS DE AVALIAÇÃO PSICOLÓGICA --}}
     <div class="bg-white shadow rounded-lg p-6 mb-6 flex flex-col gap-2">
-        <h2 class="font-bold mb-6">Registro de Instrumentos de Avaliação Psicológica</h2>
+        <div class="mb-4 flex justify-between">
+            <h2 class="font-bold mb-6">Registro de Instrumentos de Avaliação Psicológica</h2>
+        
+            <a href="{{ route('perfil.profissional.paciente.prontuario.psicologico.instrumentos.create', 
+            [$profissional, $paciente, $prontuario_psicologico]) }}" 
+            class="btn btn-primary">Registrar Instrumentos</a>
+        </div>
+
+        @if($prontuario_psicologico->registrosInstrumentos->isEmpty())
+            <p class="font-thin text-gray-700">Não há registro de instrumentos.</p>
+        @else
+            <table class="w-full table-auto border-collapse">
+                <thead>
+                    <tr class="bg-gray-100 text-left text-sm font-semibold text-gray-700">
+                        <th class="px-4 py-2">Data do Registro</th>
+                        <th class="px-4 py-2">Instrumento</th>
+                        <th class="px-4 py-2">Profissional</th>
+                        <th class="px-4 py-2">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                     @foreach ($prontuario_psicologico->registrosInstrumentos as $instrumento)
+                     <tr class="border-b text-sm text-gray-700 hover:bg-slate-100">
+                            <td class="px-4 py-2">{{ $instrumento->data_criacao }}</td>
+                            <td class="px-4 py-2">{{ $instrumento->instrumento_avaliacao_psi }}</td>
+                            <td class="px-4 py-2">{{ $instrumento->prontuario->profissional->primeiro_nome }}</td>
+                     </tr>
+                     @endforeach
+                </tbody>
+            </table>
+        @endif
     </div>
 @endsection
 

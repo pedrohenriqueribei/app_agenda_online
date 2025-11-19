@@ -16,6 +16,7 @@ use App\Http\Controllers\ProntuarioPsicologicoController;
 use App\Http\Controllers\RegistroDocumentosController;
 use App\Http\Controllers\RegistroEncaminhamentoController;
 use App\Http\Controllers\RegistroEvolucaoController;
+use App\Http\Controllers\RegistroInstrumentosController;
 use App\Models\Paciente;
 use App\Models\ProntuarioPsicologico;
 use App\Models\RegistroEvolucao;
@@ -161,6 +162,11 @@ Route::prefix('conta/profissional')->name('perfil.profissional.')->group(functio
             Route::prefix('/{paciente}/prontuario/psicologico/{prontuario_psicologico}/documentos')->name('prontuario.psicologico.documentos.')->controller(RegistroDocumentosController::class)->group(function(){
                 Route::get('registrar/documentos', 'create')->name('create');
                 Route::post('registrar/documentos', 'store')->name('store');
+            });
+
+            Route::prefix('/{paciente}/prontuario/psicologico/{prontuario_psicologico}/instrumentos')->name('prontuario.psicologico.instrumentos.')->controller(RegistroInstrumentosController::class)->group(function(){
+                Route::get('registrar/instrumentos', 'create')->name('create');
+                Route::post('registrar/instrumentos', 'store')->name('store');
             });
         });
 
