@@ -35,9 +35,9 @@ class ProntuarioPsicologicoController extends Controller
     public function store(ProntuarioPsicologicoRequest $request, Profissional $profissional, Paciente $paciente)
     {
         //validação
-        $prontuarioPsicologico = ProntuarioPsicologico::create($request->validated());
+        $prontuario_psicologico = ProntuarioPsicologico::create($request->validated());
 
-        return redirect()->route('perfil.profissional.paciente.prontuario.show', compact('profissional', 'paciente'));
+        return redirect()->route('perfil.profissional.paciente.prontuario.psicologico.show', compact('profissional', 'paciente', 'prontuario_psicologico'));
     }
 
     /**

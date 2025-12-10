@@ -29,7 +29,9 @@ class RegistroInstrumento extends Model
     //data de criação completo
     public function getDataCriacaoCompletaAttribute()
     {
-        return Carbon::parse($this->created_at)->format('d \d\e F \d\e Y \à\s H:i');
+        return Carbon::parse($this->created_at)
+        ->locale('pt_BR')
+        ->translatedFormat('d \d\e F \d\e Y \à\s H:i');
     }
 
     //data de atualização formatado
@@ -40,6 +42,8 @@ class RegistroInstrumento extends Model
     //data atualização completa
     public function getDataAtualizacaoCompletaAttribute()
     {
-        return Carbon::parse($this->updated_at)->format('d \d\e F \d\e Y \à\s H:i');
+        return Carbon::parse($this->updated_at)
+            ->locale('pt_BR')
+            ->translatedFormat('d \d\e F \d\e Y \à\s H:i');
     }
 }

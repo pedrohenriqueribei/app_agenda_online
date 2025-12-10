@@ -124,8 +124,7 @@
     </div>
 
     {{-- CÓPIAS DE OUTROS DOCUMENTOS PRODUZIDOS PELO PSICÓLOGO PARA USUÁRIO/INSTITUIÇÃO DO SERVIÇO DE PSICOLOGIA PRESTADO --}}
-    <div class="bg-white shadow rounded-lg p-6 mb-6 flex flex-col gap-2">
-        
+    <div class="bg-white shadow rounded-lg p-6 mb-6 gap-2">
         <div class="mb-4 flex justify-between">
             <h2 class="font-bold mb-6">Registro de documentos produzidos</h2>
         
