@@ -7,6 +7,7 @@ use App\Models\Paciente;
 use App\Models\Profissional;
 use App\Models\ProntuarioPsicologico;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class ProntuarioPsicologicoController extends Controller
 {
@@ -56,17 +57,21 @@ class ProntuarioPsicologicoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ProntuarioPsicologico $prontuarioPsicologico)
+    public function edit(Profissional $profissional, Paciente $paciente, ProntuarioPsicologico $prontuario_psicologico)
     {
         //
+        return view('perfil.profissional.paciente.prontuario.edit', [ 'profissional' => $profissional , 'paciente' => $paciente, 'prontuario_psicologico' => $prontuario_psicologico ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ProntuarioPsicologico $prontuarioPsicologico)
+    public function update(ProntuarioPsicologicoRequest $request,  Profissional $profissional, Paciente $paciente, ProntuarioPsicologico $prontuario_psicologico)
     {
-        //
+        //atualizar
+        $prontuario_psicologico->update($request->validated());
+
+        return redirect()->route('perfil.profissional.paciente.prontuario.psicologico.show', [ 'profissional' => $profissional , 'paciente' => $paciente, 'prontuario_psicologico' => $prontuario_psicologico ])->with('success', 'Atualizado com sucesso!');
     }
 
     /**

@@ -42,12 +42,16 @@
 
         <textarea rows="5">{{ $prontuario_psicologico->avaliacao_demanda }}</textarea>
  
+        <a href="{{ route('perfil.profissional.paciente.prontuario.psicologico.edit', [$profissional, $paciente, $prontuario_psicologico]) }}" class="btn btn-warning">Editar informações</a>
     </div>
 
     {{-- DEFINIÇÃO DOS OBJETIVOS DO TRABALHO --}}
     <div class="bg-white shadow rounded-lg p-6 mb-6 flex flex-col gap-2">
         <h2 class="font-bold mb-6">Definição dos Objetivos do trabalho</h2>
         <p>{{ $prontuario_psicologico->definicao_objetivos }}</p>
+
+        <br>
+        <a href="{{ route('perfil.profissional.paciente.prontuario.psicologico.edit', [$profissional, $paciente, $prontuario_psicologico]) }}" class="btn btn-warning">Editar informações</a>
     </div>
 
     {{-- REGISTRO DA EVOLUÇÃO DO TRABALHO --}}

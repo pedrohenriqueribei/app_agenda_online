@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <h1 class="titulo_1">Prontuário Psicológico</h1>
+    <h1 class="titulo_1">Atualizar Prontuário Psicológico</h1>
     
     {{-- Informações pessoais --}}
     <h2 class="font-bold mb-6">Informações do Paciente</h2>
@@ -29,23 +29,24 @@
         @endif
     </div>
 
-    <form action="{{ route('perfil.profissional.paciente.prontuario.psicologico.store', [$profissional, $paciente]) }}" method="POST" class="space-y-6">
+    <form action="{{ route('perfil.profissional.paciente.prontuario.psicologico.update', [ $prontuario_psicologico, $profissional, $paciente]) }}" method="POST" class="space-y-6">
         @csrf
+        @method('PUT')
 
         <!-- Avaliação de Demanda -->
         <div>
             <label for="avaliacao_demanda" class="block font-medium text-gray-700">Avaliação de Demanda</label>
-            <textarea name="avaliacao_demanda" id="avaliacao_demanda" rows="3"
+            <textarea name="avaliacao_demanda" id="avaliacao_demanda" rows="10"
                 class="mt-1 block w-full border-gray-300 rounded-lg shadow-sm 
-                    focus:ring-blue-500 focus:border-blue-500">{{ old('avaliacao_demanda') }}</textarea>
+                    focus:ring-blue-500 focus:border-blue-500">{{ old('avaliacao_demanda', $prontuario_psicologico->avaliacao_demanda) }}</textarea>
         </div>
 
         <!-- Objetivo do Trabalho -->
         <div>
             <label for="definicao_objetivos" class="block font-medium text-gray-700">Definição dos Objetivos de Trabalho</label>
-            <textarea name="definicao_objetivos" id="definicao_objetivos" rows="3"
+            <textarea name="definicao_objetivos" id="definicao_objetivos" rows="10"
                 class="mt-1 block w-full border-gray-300 rounded-lg shadow-sm 
-                    focus:ring-blue-500 focus:border-blue-500">{{ old('definicao_objetivos') }}</textarea>
+                    focus:ring-blue-500 focus:border-blue-500">{{ old('definicao_objetivos', $prontuario_psicologico->definicao_objetivos) }}</textarea>
         </div>
 
         <input type="hidden" name="profissional_id" value="{{ $profissional->id }}">
@@ -53,7 +54,7 @@
         
         <!-- ✅ Botão -->
         <div class="flex justify-center">
-            <button type="submit" class="btn btn-primary">Salvar Prontuário</button>
+            <button type="submit" class="btn btn-warning">Atualizar Prontuário</button>
         </div>
     </form>
 
