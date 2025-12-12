@@ -31,4 +31,30 @@ class RegistroEvolucaoController extends Controller
             ])
             ->with('success', 'Evolução registrada com sucesso.');
     }
+
+    public function edit (
+        Profissional $profissional, 
+        Paciente $paciente, 
+        ProntuarioPsicologico $prontuario_psicologico, 
+        RegistroEvolucao $registro_evolucao)
+    {
+        return view('perfil.profissional.paciente.prontuario.evolucao.edit', ['profissional'=>$profissional, 'paciente'=>$paciente, 'prontuario_psicologico'=>$prontuario_psicologico, 'registro_evolucao' => $registro_evolucao]);
+    }
+
+    public function update (
+        RegistroEvolucaoRequest $request, 
+        Profissional $profissional, 
+        Paciente $paciente, 
+        ProntuarioPsicologico $prontuario_psicologico,
+        RegistroEvolucao $registro_evolucao)
+    {
+        // ✅ Atualização do registro
+        $registro_evolucao->update($request->validated());
+
+        // ✅ Redirecionamento com mensagem de sucesso
+        return redirect()
+            ->route('perfil.profissional.paciente.prontuario.psicologico.show', [$profissional, $paciente, $prontuario_psicologico])
+            ->with('success', 'Evolução atualizada com sucesso!');
+
+    }
 }

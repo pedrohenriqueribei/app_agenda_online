@@ -154,8 +154,8 @@ Route::prefix('conta/profissional')->name('perfil.profissional.')->group(functio
             Route::prefix('/{paciente}/prontuario/psicologico/{prontuario_psicologico}/evolucao')->name('prontuario.psicologico.evolucao.')->controller(RegistroEvolucaoController::class)->group(function(){
                 Route::get('registrar/evolucao', 'create')->name('create');
                 Route::post('registrar/evolucao', 'store')->name('store');
-                Route::get('editar/evolucao', 'edit')->name('edit');
-                Route::put('editar/evolucao', 'update')->name('update');
+                Route::get('editar/evolucao/{registro_evolucao}', 'edit')->name('edit');
+                Route::put('update/evolucao/{registro_evolucao}', 'update')->name('update');
             });
 
             Route::prefix('/{paciente}/prontuario/psicologico/{prontuario_psicologico}/encaminhamento')->name('prontuario.psicologico.encaminhamento.')->controller(RegistroEncaminhamentoController::class)->group(function(){

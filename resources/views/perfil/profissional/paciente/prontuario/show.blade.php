@@ -80,15 +80,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                     @foreach ($prontuario_psicologico->registrosEvolucao as $evolucao)
+                     @foreach ($prontuario_psicologico->registrosEvolucao as $registro_evolucao)
                      <tr class="border-b text-sm text-gray-700 hover:bg-slate-100">
-                            <td class="px-4 py-2">{{ $evolucao->data_criacao }}</td>
-                            <td class="px-4 py-2">{{ $evolucao->descricao }}</td>
-                            <td class="px-4 py-2">{{ $evolucao->prontuario->profissional->primeiro_nome }}</td>
+                            <td class="px-4 py-2">{{ $registro_evolucao->data_criacao }}</td>
+                            <td class="px-4 py-2">{{ $registro_evolucao->descricao }}</td>
+                            <td class="px-4 py-2">{{ $registro_evolucao->prontuario->profissional->primeiro_nome }}</td>
                             <td class="px-4 py-2">
                                 <a href="{{ route('perfil.profissional.paciente.prontuario.psicologico.evolucao.edit', 
-                                    [$profissional, $paciente, $prontuario_psicologico]) }}" 
-                                    class="btn btn-primary"> Editar</a>
+                                    [$profissional, $paciente, $prontuario_psicologico, $registro_evolucao]) }}" 
+                                    class="btn btn-warning"> Editar</a>
                             </td>
                      </tr>
                      @endforeach
