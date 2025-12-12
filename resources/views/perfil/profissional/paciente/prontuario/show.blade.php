@@ -60,8 +60,10 @@
             <h2 class="font-bold">Registro da Evolução do trabalho</h2>
         
             <a href="{{ route('perfil.profissional.paciente.prontuario.psicologico.evolucao.create', 
-            [$profissional, $paciente, $prontuario_psicologico]) }}" 
-            class="btn btn-primary">Registrar Evolução</a>
+                [$profissional, $paciente, $prontuario_psicologico]) }}" 
+                class="btn btn-primary">
+                Registrar Evolução
+            </a>
         </div>
 
         @if($prontuario_psicologico->registrosEvolucao->isEmpty())
@@ -83,6 +85,11 @@
                             <td class="px-4 py-2">{{ $evolucao->data_criacao }}</td>
                             <td class="px-4 py-2">{{ $evolucao->descricao }}</td>
                             <td class="px-4 py-2">{{ $evolucao->prontuario->profissional->primeiro_nome }}</td>
+                            <td class="px-4 py-2">
+                                <a href="{{ route('perfil.profissional.paciente.prontuario.psicologico.evolucao.edit', 
+                                    [$profissional, $paciente, $prontuario_psicologico]) }}" 
+                                    class="btn btn-primary"> Editar</a>
+                            </td>
                      </tr>
                      @endforeach
                 </tbody>

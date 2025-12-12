@@ -7,7 +7,7 @@
         </a>
         <details class="group">
             <summary class="flex items-center gap-2 px-6 py-2 rounded cursor-pointer hover:bg-blue-100 list-none">
-                <x-heroicon-s-calendar class="w-5 h-5 text-blue-500" />
+                <x-heroicon-s-calendar-days class="w-5 h-5 text-blue-500" />
                 <span>Agendamento</span>
                 <x-heroicon-s-chevron-down class="w-4 h-4 ml-auto text-gray-400 group-open:rotate-180 transition-transform" />
             </summary>
