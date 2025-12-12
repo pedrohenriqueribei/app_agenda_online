@@ -46,4 +46,9 @@ class RegistroInstrumento extends Model
             ->locale('pt_BR')
             ->translatedFormat('d \d\e F \d\e Y \à\s H:i');
     }
+
+    //data registro
+    public function getDataRegistroFormatadoAttribute() {
+        return Carbon::parse($this->attributes['data_registro'])->format('d/m/Y \à\s H:i');
+    }
 }

@@ -228,7 +228,7 @@
                 <tbody>
                      @foreach ($prontuario_psicologico->registrosInstrumentos as $registro_instrumento)
                      <tr class="border-b text-sm text-gray-700 hover:bg-slate-100">
-                            <td class="px-4 py-2">{{ $registro_instrumento->data_criacao }}</td>
+                            <td class="px-4 py-2">{{ $registro_instrumento->data_registro_formatado }}</td>
                             <td class="px-4 py-2">{{ $registro_instrumento->instrumento_avaliacao_psi }}</td>
                             <td class="px-4 py-2">{{ $registro_instrumento->prontuario->profissional->primeiro_nome }}</td>
                             <td class="px-4 py-2">

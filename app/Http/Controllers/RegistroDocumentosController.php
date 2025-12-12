@@ -52,6 +52,6 @@ class RegistroDocumentosController extends Controller
                 $request->paciente_id,
                 $request->prontuario_psicologico_id
             ])
-            ->with('success', 'Docuemento Atualizado com sucesso.');
+            ->with('success', 'Documento Atualizado com sucesso.');
     }
 }
