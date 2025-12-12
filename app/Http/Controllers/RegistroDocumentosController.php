@@ -31,4 +31,27 @@ class RegistroDocumentosController extends Controller
             ])
             ->with('success', 'Documento registrada com sucesso.');
     }
+
+    public function edit (Profissional $profissional, Paciente $paciente, ProntuarioPsicologico $prontuario_psicologico, RegistroDocumento $registro_documento)
+    {
+        return view('perfil.profissional.paciente.prontuario.documentos.edit', ['profissional'=>$profissional, 'paciente'=>$paciente, 'prontuario_psicologico'=>$prontuario_psicologico, 'registro_documento' => $registro_documento]);
+    }
+
+    public function update (
+        RegistroDocumentosRequest $request,
+        Profissional $profissional, 
+        Paciente $paciente, 
+        ProntuarioPsicologico $prontuario_psicologico, 
+        RegistroDocumento $registro_documento)
+    {
+        $registro_documento->update($request->validated());
+
+        return redirect()
+            ->route('perfil.profissional.paciente.prontuario.psicologico.show', [
+                $request->profissional_id,
+                $request->paciente_id,
+                $request->prontuario_psicologico_id
+            ])
+            ->with('success', 'Docuemento Atualizado com sucesso.');
+    }
 }

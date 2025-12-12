@@ -166,14 +166,20 @@ Route::prefix('conta/profissional')->name('perfil.profissional.')->group(functio
                 Route::put('update/encaminhamento/{registro_encaminhamento}', 'update')->name('update');
             });
 
+            //Registro de documentos produzidos 
             Route::prefix('/{paciente}/prontuario/psicologico/{prontuario_psicologico}/documentos')->name('prontuario.psicologico.documentos.')->controller(RegistroDocumentosController::class)->group(function(){
                 Route::get('registrar/documentos', 'create')->name('create');
                 Route::post('registrar/documentos', 'store')->name('store');
+                Route::get('editar/documentos/{registro_documento}', 'edit')->name('edit');
+                Route::put('update/documentos/{registro_documento}', 'update')->name('update');
             });
 
+            //Registro de instrumentos utilizados
             Route::prefix('/{paciente}/prontuario/psicologico/{prontuario_psicologico}/instrumentos')->name('prontuario.psicologico.instrumentos.')->controller(RegistroInstrumentosController::class)->group(function(){
                 Route::get('registrar/instrumentos', 'create')->name('create');
                 Route::post('registrar/instrumentos', 'store')->name('store');
+                Route::get('editar/instrumentos/{registro_instrumentos}', 'edit')->name('edit');
+                Route::put('update/instrumentos/{registro_instrumentos}', 'update')->name('update');
             });
         });
 

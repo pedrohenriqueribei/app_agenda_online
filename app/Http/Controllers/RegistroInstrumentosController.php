@@ -31,4 +31,9 @@ class RegistroInstrumentosController extends Controller
             ])
             ->with('success', 'Instrumento registrado com sucesso.');
     }
+
+    public function edit (Profissional $profissional, Paciente $paciente, ProntuarioPsicologico $prontuario_psicologico, RegistroInstrumento $registro_instrumento)
+    {
+        return view('perfil.profissional.paciente.prontuario.instrumentos.edit', ['profissional'=>$profissional, 'paciente'=>$paciente, 'prontuario_psicologico'=>$prontuario_psicologico, $registro_instrumento]);
+    }
 }

@@ -181,15 +181,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                     @foreach ($prontuario_psicologico->registrosDocumentos as $documento)
+                     @foreach ($prontuario_psicologico->registrosDocumentos as $registro_documento)
                      <tr class="border-b text-sm text-gray-700 hover:bg-slate-100">
-                            <td class="px-4 py-2">{{ $documento->data_criacao }}</td>
-                            <td class="px-4 py-2">{{ $documento->finalidade }}</td>
-                            <td class="px-4 py-2">{{ ucfirst($documento->destinatario) }}</td>
-                            <td class="px-4 py-2">{{ $documento->prontuario->profissional->primeiro_nome }}</td>
+                            <td class="px-4 py-2">{{ $registro_documento->data_emissao_formatado }}</td>
+                            <td class="px-4 py-2">{{ $registro_documento->finalidade }}</td>
+                            <td class="px-4 py-2">{{ ucfirst($registro_documento->destinatario) }}</td>
+                            <td class="px-4 py-2">{{ $registro_documento->prontuario->profissional->primeiro_nome }}</td>
                             <td class="px-4 py-2">
-                                <a href="{{ route('perfil.profissional.paciente.prontuario.psicologico.encaminhamento.edit', 
-                                        [$profissional, $paciente, $prontuario_psicologico, $registro_encaminhamento]) }}" 
+                                <a href="{{ route('perfil.profissional.paciente.prontuario.psicologico.documentos.edit', 
+                                        [$profissional, $paciente, $prontuario_psicologico, $registro_documento]) }}" 
                                         class="btn btn-warning  inline-flex items-center justify-center p-2 rounded-md text-yellow-600 hover:text-yellow-800 hover:bg-yellow-100 transition">
                                     <div class="flex items-center gap-x-2">
                                         <x-heroicon-s-pencil class="w-4 h-4" />
@@ -226,14 +226,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                     @foreach ($prontuario_psicologico->registrosInstrumentos as $instrumento)
+                     @foreach ($prontuario_psicologico->registrosInstrumentos as $registro_instrumento)
                      <tr class="border-b text-sm text-gray-700 hover:bg-slate-100">
-                            <td class="px-4 py-2">{{ $instrumento->data_criacao }}</td>
-                            <td class="px-4 py-2">{{ $instrumento->instrumento_avaliacao_psi }}</td>
-                            <td class="px-4 py-2">{{ $instrumento->prontuario->profissional->primeiro_nome }}</td>
+                            <td class="px-4 py-2">{{ $registro_instrumento->data_criacao }}</td>
+                            <td class="px-4 py-2">{{ $registro_instrumento->instrumento_avaliacao_psi }}</td>
+                            <td class="px-4 py-2">{{ $registro_instrumento->prontuario->profissional->primeiro_nome }}</td>
                             <td class="px-4 py-2">
-                                <a href="{{ route('perfil.profissional.paciente.prontuario.psicologico.encaminhamento.edit', 
-                                        [$profissional, $paciente, $prontuario_psicologico, $registro_encaminhamento]) }}" 
+                                <a href="{{ route('perfil.profissional.paciente.prontuario.psicologico.instrumentos.edit', 
+                                        [$profissional, $paciente, $prontuario_psicologico, $registro_instrumento]) }}" 
                                         class="btn btn-warning  inline-flex items-center justify-center p-2 rounded-md text-yellow-600 hover:text-yellow-800 hover:bg-yellow-100 transition">
                                     <div class="flex items-center gap-x-2">
                                         <x-heroicon-s-pencil class="w-4 h-4" />

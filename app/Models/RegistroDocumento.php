@@ -10,7 +10,9 @@ class RegistroDocumento extends Model
 {
     //
     use HasFactory;
+    
     protected $table = 'registros_documentos';
+    
     protected $fillable = [
         'prontuario_psicologico_id',
         'finalidade',
@@ -24,8 +26,19 @@ class RegistroDocumento extends Model
         return $this->belongsTo(ProntuarioPsicologico::class, 'prontuario_psicologico_id');
     }
 
+    //created_at
     public function getDataCriacaoAttribute() {
         return Carbon::parse($this->created_at)->format('d/m/Y');
+    }
+
+    //data registro
+    public function getDataRegistroFormatadoAttribute() {
+        return Carbon::parse($this->attributes['data_registro'])->format('d/m/Y');
+    }
+
+    //data emissão
+    public function getDataEmissaoFormatadoAttribute() {
+        return Carbon::parse($this->attributes['data_emissao'])->format('d/m/Y');
     }
 
     //data de criação completo
