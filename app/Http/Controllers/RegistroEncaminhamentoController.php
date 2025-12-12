@@ -31,4 +31,37 @@ class RegistroEncaminhamentoController extends Controller
             ])
             ->with('success', 'Encaminhamento registrada com sucesso.');
     }
+
+    public function edit (
+        Profissional $profissional, 
+        Paciente $paciente, 
+        ProntuarioPsicologico $prontuario_psicologico, 
+        RegistroEncaminhamento $registro_encaminhamento)
+    {
+        return view('perfil.profissional.paciente.prontuario.encaminhamento.edit', 
+            [
+                'profissional'=>$profissional, 
+                'paciente'=>$paciente, 
+                'prontuario_psicologico' => $prontuario_psicologico,
+                'registro_encaminhamento' => $registro_encaminhamento
+            ]);
+    }
+
+    public function update (
+        RegistroEncaminhamentoRequest $request,
+        Profissional $profissional, 
+        Paciente $paciente, 
+        ProntuarioPsicologico $prontuario_psicologico, 
+        RegistroEncaminhamento $registro_encaminhamento)
+    {
+        $registro_encaminhamento->update($request->validated());
+
+        return redirect()
+            ->route('perfil.profissional.paciente.prontuario.psicologico.show', [
+                $request->profissional_id,
+                $request->paciente_id,
+                $request->prontuario_psicologico_id
+            ])
+            ->with('success', 'Encaminhamento Atualizado com sucesso.');
+    }
 }

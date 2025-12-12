@@ -62,7 +62,9 @@
             <a href="{{ route('perfil.profissional.paciente.prontuario.psicologico.evolucao.create', 
                 [$profissional, $paciente, $prontuario_psicologico]) }}" 
                 class="btn btn-primary">
-                Registrar Evolução
+                <div class="flex items-center gap-x-2">
+                    <x-heroicon-s-arrow-up-on-square-stack class="w-4 h-4" />Registrar Evolução
+                </div>
             </a>
         </div>
 
@@ -88,7 +90,11 @@
                             <td class="px-4 py-2">
                                 <a href="{{ route('perfil.profissional.paciente.prontuario.psicologico.evolucao.edit', 
                                     [$profissional, $paciente, $prontuario_psicologico, $registro_evolucao]) }}" 
-                                    class="btn btn-warning"> Editar</a>
+                                    class="btn btn-warning inline-flex items-center justify-center p-2 rounded-md text-yellow-600 hover:text-yellow-800 hover:bg-yellow-100 transition">
+                                    <div class="flex items-center gap-x-2">
+                                        <x-heroicon-s-pencil class="w-4 h-4" />
+                                    </div>
+                                </a>
                             </td>
                      </tr>
                      @endforeach
@@ -104,7 +110,11 @@
         
             <a href="{{ route('perfil.profissional.paciente.prontuario.psicologico.encaminhamento.create', 
             [$profissional, $paciente, $prontuario_psicologico]) }}" 
-            class="btn btn-primary">Registrar Encaminhamento</a>
+            class="btn btn-primary">
+                <div class="flex items-center gap-x-2">
+                    <x-heroicon-s-arrow-top-right-on-square class="w-4 h-4" />Registrar Encaminhamento
+                </div>
+            </a>
         </div>
 
         @if($prontuario_psicologico->registrosEncaminhamento->isEmpty())
@@ -121,12 +131,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                     @foreach ($prontuario_psicologico->registrosEncaminhamento as $encaminhamento)
+                     @foreach ($prontuario_psicologico->registrosEncaminhamento as $registro_encaminhamento)
                      <tr class="border-b text-sm text-gray-700 hover:bg-slate-100">
-                            <td class="px-4 py-2">{{ $encaminhamento->data_criacao }}</td>
-                            <td class="px-4 py-2">{{ $encaminhamento->descricao }}</td>
-                            <td class="px-4 py-2">{{ ucfirst($encaminhamento->tipo) }}</td>
-                            <td class="px-4 py-2">{{ $encaminhamento->prontuario->profissional->primeiro_nome }}</td>
+                            <td class="px-4 py-2">{{ $registro_encaminhamento->data_criacao }}</td>
+                            <td class="px-4 py-2">{{ $registro_encaminhamento->descricao }}</td>
+                            <td class="px-4 py-2">{{ ucfirst($registro_encaminhamento->tipo) }}</td>
+                            <td class="px-4 py-2">{{ $registro_encaminhamento->prontuario->profissional->primeiro_nome }}</td>
+                            <td class="px-4 py-2">
+                                <a href="{{ route('perfil.profissional.paciente.prontuario.psicologico.encaminhamento.edit', 
+                                        [$profissional, $paciente, $prontuario_psicologico, $registro_encaminhamento]) }}" 
+                                        class="btn btn-warning  inline-flex items-center justify-center p-2 rounded-md text-yellow-600 hover:text-yellow-800 hover:bg-yellow-100 transition">
+                                    <div class="flex items-center gap-x-2">
+                                        <x-heroicon-s-pencil class="w-4 h-4" />
+                                    </div>
+                                </a>
+                            </td>
                      </tr>
                      @endforeach
                 </tbody>
@@ -141,7 +160,11 @@
         
             <a href="{{ route('perfil.profissional.paciente.prontuario.psicologico.documentos.create', 
             [$profissional, $paciente, $prontuario_psicologico]) }}" 
-            class="btn btn-primary">Registrar Documentos</a>
+            class="btn btn-primary">
+                <div class="flex items-center gap-x-2">
+                    <x-heroicon-s-document class="w-4 h-4" />Registrar Documentos
+                </div>
+            </a>
         </div>
 
         @if($prontuario_psicologico->registrosDocumentos->isEmpty())
@@ -164,6 +187,15 @@
                             <td class="px-4 py-2">{{ $documento->finalidade }}</td>
                             <td class="px-4 py-2">{{ ucfirst($documento->destinatario) }}</td>
                             <td class="px-4 py-2">{{ $documento->prontuario->profissional->primeiro_nome }}</td>
+                            <td class="px-4 py-2">
+                                <a href="{{ route('perfil.profissional.paciente.prontuario.psicologico.encaminhamento.edit', 
+                                        [$profissional, $paciente, $prontuario_psicologico, $registro_encaminhamento]) }}" 
+                                        class="btn btn-warning  inline-flex items-center justify-center p-2 rounded-md text-yellow-600 hover:text-yellow-800 hover:bg-yellow-100 transition">
+                                    <div class="flex items-center gap-x-2">
+                                        <x-heroicon-s-pencil class="w-4 h-4" />
+                                    </div>
+                                </a>
+                            </td>
                      </tr>
                      @endforeach
                 </tbody>
@@ -199,6 +231,15 @@
                             <td class="px-4 py-2">{{ $instrumento->data_criacao }}</td>
                             <td class="px-4 py-2">{{ $instrumento->instrumento_avaliacao_psi }}</td>
                             <td class="px-4 py-2">{{ $instrumento->prontuario->profissional->primeiro_nome }}</td>
+                            <td class="px-4 py-2">
+                                <a href="{{ route('perfil.profissional.paciente.prontuario.psicologico.encaminhamento.edit', 
+                                        [$profissional, $paciente, $prontuario_psicologico, $registro_encaminhamento]) }}" 
+                                        class="btn btn-warning  inline-flex items-center justify-center p-2 rounded-md text-yellow-600 hover:text-yellow-800 hover:bg-yellow-100 transition">
+                                    <div class="flex items-center gap-x-2">
+                                        <x-heroicon-s-pencil class="w-4 h-4" />
+                                    </div>
+                                </a>
+                            </td>
                      </tr>
                      @endforeach
                 </tbody>
