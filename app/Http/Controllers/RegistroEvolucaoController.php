@@ -57,4 +57,16 @@ class RegistroEvolucaoController extends Controller
             ->with('success', 'Evolução atualizada com sucesso!');
 
     }
+
+    public function destroy(
+        Profissional $profissional, 
+        Paciente $paciente, 
+        ProntuarioPsicologico $prontuario_psicologico,
+        RegistroEvolucao $registro_evolucao
+    )
+    {
+        $registro_evolucao->delete();
+
+        return redirect()->route('perfil.profissional.paciente.prontuario.psicologico.show', [$profissional, $paciente, $prontuario_psicologico])->with('success', 'Registro excluído com sucesso!!');
+    }
 }

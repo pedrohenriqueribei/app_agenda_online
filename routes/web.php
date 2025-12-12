@@ -156,6 +156,7 @@ Route::prefix('conta/profissional')->name('perfil.profissional.')->group(functio
                 Route::post('registrar/evolucao', 'store')->name('store');
                 Route::get('editar/evolucao/{registro_evolucao}', 'edit')->name('edit');
                 Route::put('update/evolucao/{registro_evolucao}', 'update')->name('update');
+                Route::delete('delete/evolucao/{registro_evolucao}', 'destroy')->name('destroy');
             });
 
             //Registro Encaminhamento
