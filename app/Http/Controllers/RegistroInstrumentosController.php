@@ -64,4 +64,16 @@ class RegistroInstrumentosController extends Controller
             ])
             ->with('success', 'Instrumento Atualizado com sucesso.');
     }
+
+    public function destroy(
+        Profissional $profissional, 
+        Paciente $paciente, 
+        ProntuarioPsicologico $prontuario_psicologico,
+        RegistroInstrumento $registro_instrumento
+    )
+    {
+        $registro_instrumento->delete();
+
+        return redirect()->route('perfil.profissional.paciente.prontuario.psicologico.show', [$profissional, $paciente, $prontuario_psicologico])->with('success', 'Registro excluído com sucesso!!');
+    }
 }

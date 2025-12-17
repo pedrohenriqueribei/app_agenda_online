@@ -54,4 +54,16 @@ class RegistroDocumentosController extends Controller
             ])
             ->with('success', 'Documento Atualizado com sucesso.');
     }
+
+    public function destroy(
+        Profissional $profissional, 
+        Paciente $paciente, 
+        ProntuarioPsicologico $prontuario_psicologico,
+        RegistroDocumento $registro_documento
+    )
+    {
+        $registro_documento->delete();
+
+        return redirect()->route('perfil.profissional.paciente.prontuario.psicologico.show', [$profissional, $paciente, $prontuario_psicologico])->with('success', 'Registro excluído com sucesso!!');
+    }
 }

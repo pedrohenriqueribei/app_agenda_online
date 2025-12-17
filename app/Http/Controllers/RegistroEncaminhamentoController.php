@@ -64,4 +64,16 @@ class RegistroEncaminhamentoController extends Controller
             ])
             ->with('success', 'Encaminhamento Atualizado com sucesso.');
     }
+
+    public function destroy(
+        Profissional $profissional, 
+        Paciente $paciente, 
+        ProntuarioPsicologico $prontuario_psicologico,
+        RegistroEncaminhamento $registro_encaminhamento
+    )
+    {
+        $registro_encaminhamento->delete();
+
+        return redirect()->back()->with('success', 'Registro excluído com sucesso!!');
+    }
 }

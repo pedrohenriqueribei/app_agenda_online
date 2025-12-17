@@ -165,6 +165,7 @@ Route::prefix('conta/profissional')->name('perfil.profissional.')->group(functio
                 Route::post('registrar/encaminhamento', 'store')->name('store');
                 Route::get('editar/encaminhamento/{registro_encaminhamento}', 'edit')->name('edit');
                 Route::put('update/encaminhamento/{registro_encaminhamento}', 'update')->name('update');
+                Route::delete('delete/encaminhamento/{registro_encaminhamento}', 'destroy')->name('destroy');
             });
 
             //Registro de documentos produzidos 
@@ -173,6 +174,7 @@ Route::prefix('conta/profissional')->name('perfil.profissional.')->group(functio
                 Route::post('registrar/documentos', 'store')->name('store');
                 Route::get('editar/documentos/{registro_documento}', 'edit')->name('edit');
                 Route::put('update/documentos/{registro_documento}', 'update')->name('update');
+                Route::delete('delete/documentos/{registro_documento}', 'destroy')->name('destroy');
             });
 
             //Registro de instrumentos utilizados
@@ -181,6 +183,7 @@ Route::prefix('conta/profissional')->name('perfil.profissional.')->group(functio
                 Route::post('registrar/instrumentos', 'store')->name('store');
                 Route::get('editar/instrumentos/{registro_instrumento}', 'edit')->name('edit');
                 Route::put('update/instrumentos/{registro_instrumento}', 'update')->name('update');
+                Route::delete('delete/instrumentos/{registro_instrumento}', 'destroy')->name('destroy');
             });
         });
 

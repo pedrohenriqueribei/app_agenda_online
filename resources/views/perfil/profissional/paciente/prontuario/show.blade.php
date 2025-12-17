@@ -151,6 +151,11 @@
                                         <x-heroicon-s-pencil class="w-4 h-4" />
                                     </div>
                                 </a>
+                                <form action="{{ route('perfil.profissional.paciente.prontuario.psicologico.encaminhamento.destroy', [$profissional, $paciente, $prontuario_psicologico, $registro_evolucao ]) }}" method="POST" class="inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-red-600 hover:underline" onclick="return confirm('Deseja realmente excluir registro?')">Excluir</button>
+                                </form>
                             </td>
                      </tr>
                      @endforeach
@@ -201,6 +206,12 @@
                                         <x-heroicon-s-pencil class="w-4 h-4" />
                                     </div>
                                 </a>
+
+                                <form action="{{ route('perfil.profissional.paciente.prontuario.psicologico.documentos.destroy', [$profissional, $paciente, $prontuario_psicologico, $registro_evolucao ]) }}" method="POST" class="inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-red-600 hover:underline" onclick="return confirm('Deseja realmente excluir registro?')">Excluir</button>
+                                </form>
                             </td>
                      </tr>
                      @endforeach
@@ -245,6 +256,12 @@
                                         <x-heroicon-s-pencil class="w-4 h-4" />
                                     </div>
                                 </a>
+
+                                <form action="{{ route('perfil.profissional.paciente.prontuario.psicologico.instrumentos.destroy', [$profissional, $paciente, $prontuario_psicologico, $registro_evolucao ]) }}" method="POST" class="inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-red-600 hover:underline" onclick="return confirm('Deseja realmente excluir registro?')">Excluir</button>
+                                </form>
                             </td>
                      </tr>
                      @endforeach
